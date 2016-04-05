@@ -5,38 +5,38 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>추천</title>
-<link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet"	href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="js/index.js"></script>
+<script src="../js/index.js"></script>
 <script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-	<script>
-		$(function() {
-			$( "[data-role='navbar']" ).navbar();
-			$( "[data-role='header'], [data-role='footer']" ).toolbar();
+<script>
+	$(function() {
+		$("[data-role='navbar']").navbar();
+		$("[data-role='header'], [data-role='footer']").toolbar();
+	});
+	// Update the contents of the toolbars
+	$(document).on("pagecontainerchange", function() {
+		// Each of the four pages in this demo has a data-title attribute
+		// which value is equal to the text of the nav button
+		// For example, on first page: <div data-role="page" data-title="Info">
+		var current = $(".ui-page-active").jqmData("title");
+		// Change the heading
+		$("[data-role='header'] h1").text(current);
+		// Remove active class from nav buttons
+		$("[data-role='navbar'] a.ui-btn-active").removeClass("ui-btn-active");
+		// Add active class to current nav button
+		$("[data-role='navbar'] a").each(function() {
+			if ($(this).text() === current) {
+				$(this).addClass("ui-btn-active");
+			}
 		});
-		// Update the contents of the toolbars
-		$( document ).on( "pagecontainerchange", function() {
-			// Each of the four pages in this demo has a data-title attribute
-			// which value is equal to the text of the nav button
-			// For example, on first page: <div data-role="page" data-title="Info">
-			var current = $( ".ui-page-active" ).jqmData( "title" );
-			// Change the heading
-			$( "[data-role='header'] h1" ).text( current );
-			// Remove active class from nav buttons
-			$( "[data-role='navbar'] a.ui-btn-active" ).removeClass( "ui-btn-active" );
-			// Add active class to current nav button
-			$( "[data-role='navbar'] a" ).each(function() {
-				if ( $( this ).text() === current ) {
-					$( this ).addClass( "ui-btn-active" );
-				}
-			});
-		});
-	</script>
+	});
+</script> 
 
 </head>
 <body>
 
-	<div data-role="page">
+	<div data-role="page" data-title="추천">
 		<div role="main" class="ui-content">
 			<div data-role="tabs" id="tabs">
 				<div data-role="navbar">
@@ -46,7 +46,8 @@
 					</ul>
 				</div>
 				<div id="one" class="ui-body-d ui-content" style="padding: 0em">
-					<div data-role="collapsibleset" data-content-theme="a" data-iconpos="right" id="set">
+					<div data-role="collapsibleset" data-content-theme="a"
+						data-iconpos="right" id="set">
 						<div data-role="collapsible" data-collapsed="true">
 							<h3>Section 1</h3>
 							<p>I'm the collapsible content.</p>
@@ -54,7 +55,8 @@
 					</div>
 				</div>
 				<div id="two" class="ui-body-d ui-content" style="padding: 0em">
-					<div data-role="collapsibleset" data-content-theme="a" data-iconpos="right" id="set">
+					<div data-role="collapsibleset" data-content-theme="a"
+						data-iconpos="right" id="set">
 						<div data-role="collapsible" data-collapsed="true">
 							<h3>Section 2</h3>
 							<p>I'm the collapsible content.</p>
@@ -64,20 +66,20 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div data-role="footer" data-position="fixed" data-theme="a">
-      <div data-role="navbar">
-         <ul>
-            <li><a href="#" data-prefetch="true" data-transition="slide"><img alt="thumb_up" src="images/home/thumb_up.png"><br>추천</a></li>
-            <li><a href="record.html" data-prefetch="true" data-transition="slide"><img alt="record" src="images/home/record.png"><br>기록</a></li>
-            <li><a href="mainPage.html" data-prefetch="true" data-transition="slide"><img alt="home" src="images/home/home.png"><br>홈</a></li>
-            <li><a href="signUp.html" data-prefetch="true" data-transition="slide"><img alt="my" src="images/home/my.png"><br>마이</a></li>
-            <li><a href="login.html" data-prefetch="true" data-transition="slide"><img alt="more" src="images/home/more.png"><br>더보기</a></li>
-         </ul>
-      </div>
-      <!-- /navbar -->
-   </div>
-   <!-- /footer -->
+		<div data-role="navbar">
+			<ul>
+				<li><a href="recommend.html" data-prefetch="true" data-transition="slide">추천</a></li>
+				<li><a href="record.html" data-prefetch="true" data-transition="slide">기록</a></li>
+				<li><a href="home.html" data-prefetch="true" data-transition="slide">홈</a></li>
+				<li><a href="#" data-prefetch="true" data-transition="slide">마이</a></li>
+				<li><a href="#" data-prefetch="true" data-transition="slide">더보기</a></li>
+			</ul>
+		</div>
+		<!-- /navbar -->
+	</div>
+	<!-- /footer -->
 	
 </body>
 </html>

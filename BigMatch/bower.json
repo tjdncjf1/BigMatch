@@ -1,0 +1,33 @@
+{
+  "name": "BigMatch",
+  "homepage": "https://github.com/tjdncjf1/BigMatch",
+  "authors": [
+    "test <jinyoung.eom@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "jquery": "1.12.2",
+    "blueimp-file-upload": "jquery-file-upload#^9.11.2",
+    "jquery-mobile": "1.4.5"
+  },
+  "install": {
+    "path": "src/main/webapp/lib",
+    "sources": {
+      "bootstrap": "bower_components/bootstrap/dist/**",
+      "jquery": "bower_components/jquery/dist/**",
+      "blueimp-file-upload": "bower_components/blueimp-file-upload/**"
+      
+    }
+  }
+}
