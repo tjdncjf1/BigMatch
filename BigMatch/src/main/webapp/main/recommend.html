@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>대전기록</title>
+<title>추천</title>
 <link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/index.js"></script>
@@ -32,53 +32,34 @@
 			});
 		});
 	</script>
-<style type="text/css">
-.matchInfo {
-	float: right;
-	color: white;
-	font-size: larger;
-	font-weight: 100;
-}
-.infoMargin {
-	margin-bottom: 0px;
-	margin-top: 0px;
-}
-</style>
+
 </head>
 <body>
 
 	<div data-role="page">
 		<div role="main" class="ui-content">
 			<div data-role="tabs" id="tabs">
-				<!-- Header -->
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#matchRecord" data-ajax="false">대전기록</a></li>
-						<li><a href="#two" data-ajax="false">랭킹</a></li>
+						<li><a href="#one" data-ajax="false">one</a></li>
+						<li><a href="#two" data-ajax="false">two</a></li>
 					</ul>
 				</div>
-				
-				<!-- 대전기록 -->
-				<div id="matchRecord" class="ui-body-d ui-content" style="padding: 0em">
-					<!-- one of list -->		
-					<div class="ui-grid-a">
-						<div class="ui-grid-solo">
-							<div class="ui-block-a">
-								<div class="ui-bar ui-bar-a" style="height:110px; background-color: #3388CC;">
-									<p align="center" style="color: white; margin-top: 0; margin-bottom: 0; font-size: 140%;"><승리></p>
-									<span>
-										<img alt="thumb_up" src="images/home/3ball.png"	style="height:50%; margin-top: 2%" />
-									</span>
-									<!-- <input type="text" value="대전상대 : 	서우철" readonly="readonly"> -->
-									<div class="matchInfo">
-										<p class="infoMargin">대전상대 : 서우철</p>
-										<p class="infoMargin">장 소 : 관악구 신림동</p>
-										<p class="infoMargin">시 간 : 2016.03.30</p>
-									</div>
-								</div>
-							</div>
+				<div id="one" class="ui-body-d ui-content" style="padding: 0em">
+					<div data-role="collapsibleset" data-content-theme="a" data-iconpos="right" id="set">
+						<div data-role="collapsible" data-collapsed="true">
+							<h3>Section 1</h3>
+							<p>I'm the collapsible content.</p>
 						</div>
-					</div><!-- /grid-a -->
+					</div>
+				</div>
+				<div id="two" class="ui-body-d ui-content" style="padding: 0em">
+					<div data-role="collapsibleset" data-content-theme="a" data-iconpos="right" id="set">
+						<div data-role="collapsible" data-collapsed="true">
+							<h3>Section 2</h3>
+							<p>I'm the collapsible content.</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -87,7 +68,7 @@
 	<div data-role="footer" data-position="fixed" data-theme="a">
       <div data-role="navbar">
          <ul>
-            <li><a href="recommend.html" data-prefetch="true" data-transition="slide"><img alt="thumb_up" src="images/home/thumb_up.png"><br>추천</a></li>
+            <li><a href="#" data-prefetch="true" data-transition="slide"><img alt="thumb_up" src="images/home/thumb_up.png"><br>추천</a></li>
             <li><a href="record.html" data-prefetch="true" data-transition="slide"><img alt="record" src="images/home/record.png"><br>기록</a></li>
             <li><a href="mainPage.html" data-prefetch="true" data-transition="slide"><img alt="home" src="images/home/home.png"><br>홈</a></li>
             <li><a href="signUp.html" data-prefetch="true" data-transition="slide"><img alt="my" src="images/home/my.png"><br>마이</a></li>
