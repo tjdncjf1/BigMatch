@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대전기록</title>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="js/navigation.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+
+</head>
+<body>
+
+	<div data-role="tabs" id="tabs">
+		<!-- Header -->
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#one" data-ajax="false">대전기록</a></li>
+				<li><a href="#two" data-ajax="false">랭킹</a></li>
+			</ul>
+		</div>
+		<!-- Main -->
+		<div id="one" class="ui-body-d ui-content" style="padding: 0em">
+			<!-- one of list -->		
+			<div class="ui-grid-a">
+				<div class="ui-grid-solo">
+					<div class="ui-block-a">
+						<div class="ui-bar ui-bar-a" style="height:150px; background-color: #3388CC;">
+							<p align="center" style="color: white; margin-top: 0; margin-bottom: 0;"><승리></p>
+							<span>
+								<img alt="thumb_up" src="images/home/3ball.png"	style="height:50%; margin-top: 2%" />
+							</span>
+							<textarea style="width:40%; height:10%; display:inline; float: right;">ddd</textarea>
+						</div>
+					</div>
+				</div>
+			</div><!-- /grid-a -->
+		</div>
+		
+	</div>
+	
+	<div data-role="footer" data-position="fixed" data-theme="a">
+      <div data-role="navbar">
+         <ul>
+            <li><a href="recommand.html" data-prefetch="true" data-transition="slide"><img alt="thumb_up" src="images/home/thumb_up.png"><br>추천</a></li>
+            <li><a href="record.html" data-prefetch="true" data-transition="slide"><img alt="record" src="images/home/record.png"><br>기록</a></li>
+            <li><a href="mainpage/mainPage.html" data-prefetch="true" data-transition="slide"><img alt="home" src="images/home/home.png"><br>홈</a></li>
+            <li><a href="signUp.html" data-prefetch="true" data-transition="slide"><img alt="my" src="images/home/my.png"><br>마이</a></li>
+            <li><a href="login.html" data-prefetch="true" data-transition="slide"><img alt="more" src="images/home/more.png"><br>더보기</a></li>
+         </ul>
+      </div>
+      <!-- /navbar -->
+   </div>
+   <!-- /footer -->
+	
+</body>
+</html>

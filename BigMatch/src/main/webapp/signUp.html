@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>가입</title>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet"	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<style type="text/css">
+.form-group {
+	max-width: 400px;
+	padding: 10px;
+	margin: 0 auto;
+}
+</style>
+</head>
+
+<body>
+	<div align="center">
+		<h1>
+			환영합니다.<br> <small>가입해주세요♥</small>
+		</h1>
+	</div>
+	<br>
+	
+	<form>
+		<div class="form-group">
+			<label for="email">이메일</label> <input type="email"
+				class="form-control" id="email" placeholder="이메일을 입력하세요   예)example@bigmatch.com">
+		</div>
+		
+		<div class="form-group">
+			<label for="password">비밀번호</label> <input type="password"
+				class="form-control" id="password" placeholder="비밀번호를 입력하세요">
+		</div>
+		
+		<div class="form-group">
+			<label for="confirmPassword">비밀번호 확인</label> <input type="password"
+				class="form-control" id="confrimPassword" placeholder="비밀번호를 입력하세요">
+		</div>
+		
+		<div class="form-group">
+			<label for="nickName">닉네임</label> <input type="text"
+				class="form-control" id="nickName" placeholder="닉네임을 입력하세요">
+		</div>
+		
+		<div class="form-group">
+			<label for="gender">성별</label><br>
+			<table class="table">
+				<tr>
+					<td><label class="radio-inline"> <input type="radio"
+							name="gender" id="man" value="man"> 남성
+					</label></td>
+					<td><label class="radio-inline"> <input type="radio"
+							name="gender" id="woman" value="woman"> 여성
+					</label></td>
+				</tr>
+			</table>
+		</div>
+		<div class="form-group">
+			<button type="button" class="btn btn-primary btn-lg btn-block">가입하기!</button>
+		</div>
+	</form>
+
+</body>
+</html>
