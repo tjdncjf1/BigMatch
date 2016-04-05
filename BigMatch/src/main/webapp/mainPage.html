@@ -6,67 +6,27 @@
 
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="js/index.js"></script>
-	<script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-	<script>
-		$(function() {
-			$( "[data-role='navbar']" ).navbar();
-			$( "[data-role='header'], [data-role='footer']" ).toolbar();
-		});
-		// Update the contents of the toolbars
-		$( document ).on( "pagecontainerchange", function() {
-			// Each of the four pages in this demo has a data-title attribute
-			// which value is equal to the text of the nav button
-			// For example, on first page: <div data-role="page" data-title="Info">
-			var current = $( ".ui-page-active" ).jqmData( "title" );
-			// Change the heading
-			$( "[data-role='header'] h1" ).text( current );
-			// Remove active class from nav buttons
-			$( "[data-role='navbar'] a.ui-btn-active" ).removeClass( "ui-btn-active" );
-			// Add active class to current nav button
-			$( "[data-role='navbar'] a" ).each(function() {
-				if ( $( this ).text() === current ) {
-					$( this ).addClass( "ui-btn-active" );
-				}
-			});
-		});
-	</script>
+	<script	src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
 </head>
 <body>
-	<div data-role="header" data-position="fixed" data-theme="a">
-		<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
-        <h1>Info</h1>
-    </div><!-- /header -->
-	
-	<div data-role="page" data-title="Info"">	
-		<div role="main" class="ui-content">
-		
-			<div class="ui-grid-a">
-			    <div class="ui-block-a" ><a class="ui-shadow ui-btn ui-corner-all" href="#"><img alt="user" src="images/home/smile.png" width="30%"><br><font style="font-size:15pt"><br>닉네임은 김당구</font><br><font style="font-size:10pt">Level 2</font></a></div>
-			    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all" href="#"><img alt="rank" src="images/home/trophy.png" width="30%"><br><font style="font-size:21pt"><br>Rank<br></font></a></div>
-			</div>
-			
-		
-			<div class="ui-grid-b">
-			    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all" href="#"><img alt="3ball" src="images/home/3ball.png" width="80%"><br><font style="font-size:15pt">3구</font></a></div>
-			    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all" href="#"><img alt="4ball" src="images/home/4ball.png" width="80%"><br><font style="font-size:15pt">4구</font></a></div>
-			    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all" href="#"><img alt="pocketball" src="images/home/pocketball.png" width="80%"><br><font style="font-size:15pt">포켓볼</font></a></div>
-			</div>
-		
-			<a class="ui-btn ui-shadow" href="#"><font style="font-size:12pt">빠른 대전!</font></a>
-			<a class="ui-btn ui-shadow" href="#"><font style="font-size:12pt">대전 등록!</font></a>
-			
-		</div>
-	</div><!-- /page -->
-	
+
+	<div class="ui-grid-b">
+	    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all" href="#"><img alt="3ball" src="images/home/3ball.png" width="80%"><br><font style="font-size:15pt">3구</font></a></div>
+	    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all" href="#"><img alt="4ball" src="images/home/4ball.png" width="80%"><br><font style="font-size:15pt">4구</font></a></div>
+	    <div class="ui-block-c"><a class="ui-shadow ui-btn ui-corner-all" href="#"><img alt="pocketball" src="images/home/pocketball.png" width="80%"><br><font style="font-size:15pt">포켓볼</font></a></div>
+	</div>
+
+	<a class="ui-btn ui-shadow" href="#"><font style="font-size:12pt">빠른 대전!</font></a>
+	<a class="ui-btn ui-shadow" href="#"><font style="font-size:12pt">대전 등록!</font></a>
+
 	<div data-role="footer" data-position="fixed" data-theme="a">
 		<div data-role="navbar">
 	         <ul>
-	            <li><a href="recommend.html" data-prefetch="true" data-transition="slide" ><img alt="thumb_up" src="images/home/thumb_up.png"><br>추천</a></li>
+	            <li><a href="recommend.html" data-prefetch="true" data-transition="slide"><img alt="thumb_up" src="images/home/thumb_up.png"><br>추천</a></li>
 	            <li><a href="record.html" data-prefetch="true" data-transition="slide"><img alt="record" src="images/home/record.png"><br>기록</a></li>
 	            <li><a href="mainPage.html" data-prefetch="true" data-transition="slide"><img alt="home" src="images/home/home.png"><br>홈</a></li>
-	            <li><a href="signUp.html" data-prefetch="true" data-transition="slide"><img alt="my" src="images/home/my.png"><br>마이</a></li>
+	            <li><a href="signUp.html" data-prefetch="<!-- true" data-transition="slide"><img alt="my" src="images/home/my.png"><br> 마이</a></li>
 	            <li><a href="login.html" data-prefetch="true" data-transition="slide"><img alt="more" src="images/home/more.png"><br>더보기</a></li>
 	         </ul>
 		</div>
