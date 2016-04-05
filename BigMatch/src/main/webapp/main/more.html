@@ -2,30 +2,79 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>추천</title>
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<script src="js/index.js"></script>
-<script src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<script>
-	
-	
-	
-	<div data-role="footer" data-position="fixed" data-theme="a">
+<title>Big Match</title>
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+<style type="text/css">
+.ui-slider {
+   float: right;
+}
+
+/* #textBox {
+   margin-top: 15px;
+   padding-top: 15px;
+} */
+
+#textBar {
+   padding-top: 0px;
+   padding-bottom: 0px;
+}
+
+#titlebar {
+   margin-top: 20px;
+   margin-bottom: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+   <div style="background-color: #CDCDCD;"id="titleBar" align="center"><font style="font-size:25pt">더보기</font></div>
+   <div class="ui-content" role="main">
+      <ul data-role="listview" data-theme="a" data-dividertheme="e">
+         <li data-role="list-divider">설정</li>
+         <li><a href="#">로그인 정보</a></li>
+         
+         <li id="textBar">
+         <strong id="textBox">위치 제공 동의</strong>
+         <select name="locationAgreement" id="locationAgreement" data-role="slider" data-mini="true">
+               <option value="off">Off</option>
+             <option value="on">On</option>
+         </select>
+         </li>
+         
+         <li id="textBar"><strong id="textBox">알림 설정</strong>
+         <select name="alarmSetting" id="alarmSetting" data-role="slider" data-mini="true">
+               <option value="off">Off</option>
+             <option value="on">On</option>
+         </select>
+         </li>
+         <li data-role="list-divider">고객도움말</li>
+         <li><a href="#">문의사항 & 오류신고</a></li>
+         <li><a href="#">공지사항</a></li>
+         <li data-role="list-divider">정보</li>
+         <li><a href="#">프로그램 정보</a></li>
+         <li><a href="#">이용가이드</a></li>
+      </ul>
+   </div><!-- /content -->
+   
+   <div data-role="footer" data-position="fixed" data-theme="a">
       <div data-role="navbar">
-         <ul>
-            <li><a href="recommend.html" data-prefetch="true" data-transition="slide"><img alt="thumb_up" src="images/home/thumb_up.png"><br>추천</a></li>
-            <li><a href="record.html" data-prefetch="true" data-transition="slide"><img alt="record" src="images/home/record.png"><br>기록</a></li>
-            <li><a href="mainPage.html" data-prefetch="true" data-transition="slide"><img alt="home" src="images/home/home.png"><br>홈</a></li>
-            <li><a href="signUp.html" data-prefetch="true" data-transition="slide"><img alt="my" src="images/home/my.png"><br>마이</a></li>
-            <li><a href="login.html" data-prefetch="true" data-transition="slide"><img alt="more" src="images/home/more.png"><br>더보기</a></li>
-         </ul>
+            <ul>
+               <li><a href="recommend.html" data-prefetch="true" data-transition="slide"><img alt="thumb_up" src="../images/home/thumb_up.png"><br>추천</a></li>
+               <li><a href="record.html" data-prefetch="true" data-transition="slide"><img alt="record" src="../images/home/record.png"><br>기록</a></li>
+               <li><a href="home.html" data-prefetch="true" data-transition="slide"><img alt="home" src="../images/home/home.png"><br>홈</a></li>
+               <li><a href="signUp.html" data-prefetch="true" data-transition="slide"><img alt="my" src="../images/home/my.png"><br> 마이</a></li>
+               <li><a href="more.html" data-prefetch="true" data-transition="slide"><img alt="more" src="../images/home/more.png"><br>더보기</a></li>
+            </ul>
       </div>
       <!-- /navbar -->
    </div>
    <!-- /footer -->
-	
+
 </body>
 </html>
