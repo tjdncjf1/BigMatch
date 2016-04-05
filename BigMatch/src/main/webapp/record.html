@@ -10,8 +10,15 @@
 <script src="js/navigation.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 <style type="text/css">
-.txt {
+.matchInfo {
 	float: right;
+	color: white;
+	font-size: larger;
+	font-weight: 100;
+}
+.infoMargin {
+	margin-bottom: 0px;
+	margin-top: 0px;
 }
 </style>
 </head>
@@ -21,23 +28,28 @@
 		<!-- Header -->
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#one" data-ajax="false">대전기록</a></li>
+				<li><a href="#matchRecord" data-ajax="false">대전기록</a></li>
 				<li><a href="#two" data-ajax="false">랭킹</a></li>
 			</ul>
 		</div>
-		<!-- Main -->
-		<div id="one" class="ui-body-d ui-content" style="padding: 0em">
+		
+		<!-- 대전기록 -->
+		<div id="matchRecord" class="ui-body-d ui-content" style="padding: 0em">
 			<!-- one of list -->		
 			<div class="ui-grid-a">
 				<div class="ui-grid-solo">
 					<div class="ui-block-a">
-						<div class="ui-bar ui-bar-a" style="height:150px; background-color: #3388CC;">
-							<p align="center" style="color: white; margin-top: 0; margin-bottom: 0;"><승리></p>
+						<div class="ui-bar ui-bar-a" style="height:110px; background-color: #3388CC;">
+							<p align="center" style="color: white; margin-top: 0; margin-bottom: 0; font-size: 140%;"><승리></p>
 							<span>
 								<img alt="thumb_up" src="images/home/3ball.png"	style="height:50%; margin-top: 2%" />
 							</span>
-							<!-- <textarea style="width:40%; height:10%; display:inline; float: right;">ddd</textarea> -->
-							<input type="text" value="대전상대 : 	서우철" readonly="readonly">
+							<!-- <input type="text" value="대전상대 : 	서우철" readonly="readonly"> -->
+							<div class="matchInfo">
+								<p class="infoMargin">대전상대 : 서우철</p>
+								<p class="infoMargin">장 소 : 관악구 신림동</p>
+								<p class="infoMargin">시 간 : 2016.03.30</p>
+							</div>
 						</div>
 					</div>
 				</div>
