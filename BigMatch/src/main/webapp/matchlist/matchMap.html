@@ -8,9 +8,6 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-	
-	
 	
 </head>
 <body>
@@ -22,7 +19,7 @@
 
 	<div class="ui-grid-c">
     <div class="ui-block-a"><div class="ui-body ui-body-d">
-    	<label><input name="viewChoice" id="3ball" type="radio">3구</label>
+    	<label><input name="viewChoice" id="3ball" type="radio" onclick="javascript:3ballMap">3구</label>
     	</div>
     </div>
     <div class="ui-block-b"><div class="ui-body ui-body-d">
@@ -62,12 +59,6 @@
 
 		// 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
 		map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);	
-
-		// 지도에 확대 축소 컨트롤을 생성한다
-		var zoomControl = new daum.maps.ZoomControl();
-
-		// 지도의 우측에 확대 축소 컨트롤을 추가한다
-		map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 
 		// 지도 중심 좌표 변화 이벤트를 등록한다
 		daum.maps.event.addListener(map, 'center_changed', function () {
@@ -170,7 +161,76 @@
 		/* 경기리스트 뜨게하는 부분 */
 		
 		// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-		var iwContent = '<div style="padding:5px;"><img src="../images/home/smile.png" width="20px">김당구</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+		var iwContent = '<div style="padding:5px;">'+
+		'<table border=0 cellspacing=0 cellpadding=0 width=100% style="display:block; border:4px solid #E3E3E3;">'+
+		'   <tr>	'+
+		'      <td align=center valign=top width=20% height=50><br>'+
+		'         <img src="../images/home/my.png" />'+
+		'      </td>'+
+		'      <td align=left width=80%>'+
+		'         <br>'+
+		'         <table border=0 cellspacing=0 cellpadding=1>'+
+		'   '+
+		'            <tr>'+
+		'               <td width=1 rowspan=5></td>'+
+		'               <td align=left valign=middle>'+
+		'                        <img src="../images/home/my.png" width="20%"/>'+
+		'               </td>'+
+		'               <td align=left valign=middle>'+
+		'                  <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">'+
+		'                     이강민(nickname)'+
+		'                  </font>'+
+		'               </td>'+
+		'            </tr>'+
+		'   '+
+		'               <tr>'+
+		'               <td align=left valign=middle>'+
+		'                  '+
+		'                     <img src="../images/home/trophy.png" width="20%"/>'+
+		'               </td>'+
+		'               <td align=left valign=middle>'+
+		'                  <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">'+
+		'                     2200                '+ 
+		'                  </font>'+
+		'                        <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">'+
+		'                     (승률  50% : 승/무/패)'+
+		'                        </font>'+
+		'               </td>'+
+		'            </tr>'+
+		'                '+
+		'                '+
+		'                <tr>'+
+		'               <td align=left valign=middle>'+
+		'                  <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#3E3E3A; line-height:120%">'+
+		'                      <!--<img src="../images/home/credibility.png" width="20%"/>-->'+
+		'                  </font>'+
+		'               </td>'+
+		'               <td align=left valign=middle>'+
+		'                  <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">'+
+		'                     '+
+		'                  </font>'+
+		'               </td>'+
+		'            </tr>'+
+		'                '+
+		'                '+
+		'                '+
+		'            <tr>'+
+		'               <td align=left valign=middle>'+
+		'                  <img src="../images/home/pin.png" width="20%"/>'+
+		'               </td>'+
+		'               <td align=left valign=middle>'+
+		'                  <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">'+
+		'                     '+
+		'                          서울시 동작구 어딘가?'+
+		'                </font>'+
+		'               </td>'+
+		'            </tr>'+
+		''+
+		'         </table>'+
+		'         <br>'+
+		'      </td>'+
+		'   </tr>'+
+		'</table>'+'</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 		    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 
 		// 인포윈도우를 생성합니다
@@ -186,37 +246,6 @@
 		});
 		
 		
-		// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-		var iwContent = '<div style="padding:5px;"><img src="../images/home/smile.png" width="20px">김당구</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-		    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-
-		// 인포윈도우를 생성합니다
-		var infoWindow = new daum.maps.InfoWindow({
-		    content : iwContent,
-		    removable : iwRemoveable
-		});
-
-		// 마커에 클릭이벤트를 등록합니다
-		daum.maps.event.addListener(blueMarker, 'click', function() {
-		      // 마커 위에 인포윈도우를 표시합니다
-		      infoWindow.open(map, blueMarker);  
-		});
-		
-		// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-		var iwContent = '<div style="padding:5px;"><img src="../images/home/smile.png" width="20px">김당구</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-		    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-
-		// 인포윈도우를 생성합니다
-		var infoWindow = new daum.maps.InfoWindow({
-		    content : iwContent,
-		    removable : iwRemoveable
-		});
-
-		// 마커에 클릭이벤트를 등록합니다
-		daum.maps.event.addListener(greenMarker, 'click', function() {
-		      // 마커 위에 인포윈도우를 표시합니다
-		      infoWindow.open(map, greenMarker);  
-		});
 		
 	</script>
 	
