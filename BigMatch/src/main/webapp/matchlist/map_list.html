@@ -2,10 +2,14 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Matching List</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     
     <script>
       jQuery( document ).ready( function() 
@@ -18,10 +22,10 @@
   
   <body>
     
-<div id="head" data-role="header" data-position="fixed">
-    <img style="display:inline" src="../images/home/back_bt.jpg" width="5%"/>
-    <h1 style="display:inline" >page name</h1>
-</div>
+	<div data-role="header" data-position="fixed" data-theme="a">
+      <a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <h1>page name</h1>
+    </div>
       
     <div id="jb-tabs" style="float:right; width:100%">
       <ul>
