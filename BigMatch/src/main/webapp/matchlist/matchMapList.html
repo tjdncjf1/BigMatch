@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>표시</title>
+	
+	
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+	
+	
+	
+</head>
+<body>
+
+	<div data-role="header" data-position="fixed" data-theme="a">
+      <a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <h1>page name</h1>
+    </div>
+
+	<div class="ui-grid-c">
+    <div class="ui-block-a"><div class="ui-body ui-body-d">
+    	<label><input name="viewChoice" id="3ball" type="radio">3구</label>
+    	</div>
+    </div>
+    <div class="ui-block-b"><div class="ui-body ui-body-d">
+    	<label><input name="viewChoice" id="4ball" type="radio">4구</label>
+    	</div>
+    </div>
+    <div class="ui-block-c"><div class="ui-body ui-body-d">
+		<label><input name="viewChoice" id="pocketball" type="radio">포켓볼</label>
+    	</div>
+    </div>
+    <div class="ui-block-d"><div class="ui-body ui-body-d">
+		<label><input name="viewChoice" id="total" type="radio">전체</label>
+    	</div>
+    </div>
+	</div><!-- /grid-c -->
+	
+	
+	
+	<!-- //////////////////////////////////////////////////////////////////////////////////////////// -->
+	
+	<div id="map" style="width:100%;height:400px;"></div>
+
+	<script src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a"></script>
+	<script>
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = {
+		        center: new daum.maps.LatLng(37.56729, 126.98749), // 지도의 중심좌표
+		        level: 4, // 지도의 확대 레벨
+		        mapTypeId : daum.maps.MapTypeId.ROADMAP // 지도종류
+		    }; 
+
+		// 지도를 생성한다 
+		var map = new daum.maps.Map(mapContainer, mapOption); 
+
+		// 지도 타입 변경 컨트롤을 생성한다
+		var mapTypeControl = new daum.maps.MapTypeControl();
+
+		// 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
+		map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);	
+
+		// 지도에 확대 축소 컨트롤을 생성한다
+		var zoomControl = new daum.maps.ZoomControl();
+
+		// 지도의 우측에 확대 축소 컨트롤을 추가한다
+		map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+
+		// 지도 중심 좌표 변화 이벤트를 등록한다
+		daum.maps.event.addListener(map, 'center_changed', function () {
+			console.log('지도의 중심 좌표는 ' + map.getCenter().toString() +' 입니다.');
+		});
+
+		// 지도 확대 레벨 변화 이벤트를 등록한다
+		daum.maps.event.addListener(map, 'zoom_changed', function () {
+			console.log('지도의 현재 확대레벨은 ' + map.getLevel() +'레벨 입니다.');
+		});
+
+		// 지도 영역 변화 이벤트를 등록한다
+		daum.maps.event.addListener(map, 'bounds_changed', function () {
+			var mapBounds = map.getBounds(),
+				message = '지도의 남서쪽, 북동쪽 영역좌표는 ' +
+							mapBounds.toString() + '입니다.';
+
+			console.log(message);	
+		});
+
+		// 지도 시점 변화 완료 이벤트를 등록한다
+		daum.maps.event.addListener(map, 'idle', function () {
+			var message = '지도의 중심좌표는 ' + map.getCenter().toString() + ' 이고,' + 
+							'확대 레벨은 ' + map.getLevel() + ' 레벨 입니다.';
+			console.log(message);
+		});
+
+		// 지도 클릭 이벤트를 등록한다 (좌클릭 : click, 우클릭 : rightclick, 더블클릭 : dblclick)
+		daum.maps.event.addListener(map, 'click', function (mouseEvent) {
+			console.log('지도에서 클릭한 위치의 좌표는 ' + mouseEvent.latLng.toString() + ' 입니다.');
+		});	
+
+		// 지도 드래깅 이벤트를 등록한다 (드래그 시작 : dragstart, 드래그 종료 : dragend)
+		daum.maps.event.addListener(map, 'drag', function () {
+			var message = '지도를 드래그 하고 있습니다. ' + 
+							'지도의 중심 좌표는 ' + map.getCenter().toString() +' 입니다.';
+			console.log(message);
+		});
+		
+		
+		
+		// 마커 이미지의 주소
+		var redMarkerImageUrl = '../images/map/red-pin.png', 
+		markerImageSize = new daum.maps.Size(40, 42), // 마커 이미지의 크기
+	    markerImageOptions = { 
+			offset : new daum.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표
+		    };
+
+		var blueMarkerImageUrl = '../images/map/blue-pin.png', 
+		markerImageSize = new daum.maps.Size(40, 42), // 마커 이미지의 크기
+	    markerImageOptions = { 
+			offset : new daum.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표
+		    };
+		
+		var greenMarkerImageUrl = '../images/map/green-pin.png', 
+		markerImageSize = new daum.maps.Size(40, 42), // 마커 이미지의 크기
+	    markerImageOptions = { 
+			offset : new daum.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표
+		    };
+		
+		// 마커 이미지를 생성한다
+		var redMarkerImage = new daum.maps.MarkerImage(redMarkerImageUrl, markerImageSize, markerImageOptions);
+		var blueMarkerImage = new daum.maps.MarkerImage(blueMarkerImageUrl, markerImageSize, markerImageOptions);
+		var greenMarkerImage = new daum.maps.MarkerImage(greenMarkerImageUrl, markerImageSize, markerImageOptions);
+		// 지도에 마커를 생성하고 표시한다
+		
+		var redMarker = new daum.maps.Marker({
+		    position: new daum.maps.LatLng(37.56634, 126.98854), // 마커의 좌표 (추후에 좌표는 DB에서 불어와야 함.)
+		    draggable : false, // 마커를 드래그 가능하도록 설정한다
+		    image : redMarkerImage, // 마커의 이미지
+		    map: map // 마커를 표시할 지도 객체
+		});
+		
+		var blueMarker = new daum.maps.Marker({
+		    position: new daum.maps.LatLng(37.56729, 126.98749), // 마커의 좌표
+		    draggable : false, // 마커를 드래그 가능하도록 설정한다
+		    image : blueMarkerImage, // 마커의 이미지
+		    map: map // 마커를 표시할 지도 객체
+		});
+		
+		var greenMarker = new daum.maps.Marker({
+		    position: new daum.maps.LatLng(37.56825, 126.98644), // 마커의 좌표
+		    draggable : false, // 마커를 드래그 가능하도록 설정한다
+		    image : greenMarkerImage, // 마커의 이미지
+		    map: map // 마커를 표시할 지도 객체
+		});
+		// 마커에 클릭 이벤트를 등록한다 (우클릭 : rightclick)
+		daum.maps.event.addListener(redMarker, 'click', function() {
+		    console.log("레드마커 클릭");
+		});
+		daum.maps.event.addListener(blueMarker, 'click', function() {
+		    console.log("블루마커 클릭");
+		});
+		daum.maps.event.addListener(greenMarker, 'click', function() {
+		    console.log("그린마커 클릭");
+		});
+		
+		
+		
+		/* 경기리스트 뜨게하는 부분 */
+		
+		// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+		var iwContent = '<div style="padding:5px;"><img src="../images/home/smile.png" width="20px">김당구</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+		    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+		// 인포윈도우를 생성합니다
+		var infoWindow = new daum.maps.InfoWindow({
+		    content : iwContent,
+		    removable : iwRemoveable
+		});
+
+		// 마커에 클릭이벤트를 등록합니다
+		daum.maps.event.addListener(redMarker, 'click', function() {
+		      // 마커 위에 인포윈도우를 표시합니다
+		      infoWindow.open(map, redMarker);  
+		});
+		
+		
+		// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+		var iwContent = '<div style="padding:5px;"><img src="../images/home/smile.png" width="20px">김당구</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+		    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+		// 인포윈도우를 생성합니다
+		var infoWindow = new daum.maps.InfoWindow({
+		    content : iwContent,
+		    removable : iwRemoveable
+		});
+
+		// 마커에 클릭이벤트를 등록합니다
+		daum.maps.event.addListener(blueMarker, 'click', function() {
+		      // 마커 위에 인포윈도우를 표시합니다
+		      infoWindow.open(map, blueMarker);  
+		});
+		
+		// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+		var iwContent = '<div style="padding:5px;"><img src="../images/home/smile.png" width="20px">김당구</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+		    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
+		// 인포윈도우를 생성합니다
+		var infoWindow = new daum.maps.InfoWindow({
+		    content : iwContent,
+		    removable : iwRemoveable
+		});
+
+		// 마커에 클릭이벤트를 등록합니다
+		daum.maps.event.addListener(greenMarker, 'click', function() {
+		      // 마커 위에 인포윈도우를 표시합니다
+		      infoWindow.open(map, greenMarker);  
+		});
+		
+	</script>
+	
+</body>
+</html>
