@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>기록</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<link rel="stylesheet" href="../lib/css/demos.css">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="../lib/navi/index.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$( "[data-role='navbar']" ).navbar();
+	$( "[data-role='header'], [data-role='footer']" ).toolbar();
+});
+// Update the contents of the toolbars
+$( document ).on( "pagecontainerchange", function() {
+	// Each of the four pages in this demo has a data-title attribute
+	// which value is equal to the text of the nav button
+	// For example, on first page: <div data-role="page" data-title="Info">
+	var current = $( ".ui-page-active" ).jqmData( "title" );
+	// Change the heading
+	$( "[data-role='header'] h1" ).text( current );
+	// Remove active class from nav buttons
+	$( "[data-role='navbar'] a.ui-btn-active" ).removeClass( "ui-btn-active" );
+	// Add active class to current nav button
+	$( "[data-role='navbar'] a" ).each(function() {
+		if ( $( this ).text() === current ) {
+			$( this ).addClass( "ui-btn-active" );
+		}
+	});
+});
+</script>
+<style type="text/css">
+.matchInfo {
+	float: right;
+	color: white;
+	font-size: larger;
+	font-weight: 100;
+}
+
+.infoMargin {
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+</style>
+</head>
+<body>
+
+	<div data-role="page" data-title="기록">
+	    <div data-role="main" class="ui-content">
+	    
+			<div data-role="tabs" id="tabs">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#matchRecord" data-ajax="false">대전기록</a></li>
+						<li><a href="#two" data-ajax="false">랭킹</a></li>
+					</ul>
+				</div>
+
+				<div id="matchRecord" class="ui-body-d ui-content"
+					style="padding: 0em">
+					<div class="ui-grid-a">
+						<div class="ui-grid-solo">
+							<div class="ui-block-a">
+								<div class="ui-bar ui-bar-a"
+									style="height: 110px; background-color: #3388CC;">
+									<p align="center"
+										style="color: white; margin-top: 0; margin-bottom: 0; font-size: 140%;">
+										<승리>
+									</p>
+									<span> 
+									<img alt="thumb_up"	src="../lib/images/home/3ball.png" style="height: 50%; margin-top: 2%" />
+									</span>
+									<div class="matchInfo">
+										<p class="infoMargin">대전상대 : 서우철</p>
+										<p class="infoMargin">장 소 : 관악구 신림동</p>
+										<p class="infoMargin">시 간 : 2016.03.30</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div> 
+		<!-- main -->
+	</div> 
+	<!-- page -->
+	
+		<div data-role="footer" data-theme="a">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="recommend.html" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="thumb_up" src="../lib/images/home/thumb_up.png"><br>추천</a></li>
+					<li><a href="#" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="record" src="../lib/images/home/record.png"><br>기록</a></li>
+					<li><a href="home.html" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="home" src="../lib/images/home/home.png"><br>홈</a></li>
+					<li><a href="#" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="my" src="../lib/images/home/my.png"><br> 마이</a></li>
+					<li><a href="more.html" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="more" src="../lib/images/home/more.png"><br>더보기</a></li>
+	            </ul>
+			</div>
+			<!-- /navbar -->
+		</div>
+		<!-- /footer -->
+	
+	<!-- </div> --> 
+	<!-- /page -->
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!-- 
+   Program    : home.html
+   Date       : 2016-04-07
+   Description: BigMatch 홈 화면.
+   Modify     : 서우철
+   History    :   - 2016-04-07 작성자 : 서우철
+                   * 모듈화 작업(각 기능을 따로 html로 뺌). 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>home</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<link rel="stylesheet" href="../lib/css/demos.css">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="../lib/navi/index.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$( "[data-role='navbar']" ).navbar();
+	$( "[data-role='header'], [data-role='footer']" ).toolbar();
+});
+// Update the contents of the toolbars
+$( document ).on( "pagecontainerchange", function() {
+	// Each of the four pages in this demo has a data-title attribute
+	// which value is equal to the text of the nav button
+	// For example, on first page: <div data-role="page" data-title="Info">
+	var current = $( ".ui-page-active" ).jqmData( "title" );
+	// Change the heading
+	$( "[data-role='header'] h1" ).text( current );
+	// Remove active class from nav buttons
+	$( "[data-role='navbar'] a.ui-btn-active" ).removeClass( "ui-btn-active" );
+	// Add active class to current nav button
+	$( "[data-role='navbar'] a" ).each(function() {
+		if ( $( this ).text() === current ) {
+			$( this ).addClass( "ui-btn-active" );
+		}
+	});
+});
+</script>
+</head>
+<body>
+	<div data-role="page" data-title="홈">
+	    <div data-role="main" class="ui-content">
+			<div class="ui-grid-a">
+				<div class="ui-block-a">
+					<a class="ui-shadow ui-btn ui-corner-all" href="#">
+					<img alt="user" src="../lib/images/home/smile.png" width="50%"><br>
+					<font style="font-size: 15pt">닉네임</font></a>
+				</div>
+				<div class="ui-block-b">
+					<a class="ui-shadow ui-btn ui-corner-all" href="#">
+					<img alt="rank" src="../lib/images/home/trophy.png" width="50%"><br>
+					<font style="font-size: 15pt">Rank</font></a>
+				</div>
+			</div>
+			<div class="ui-grid-b">
+				<div class="ui-block-a">
+					<!-- popup창				
+					<a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="#positionWindow" data-rel="popup" data-position-to="window">
+				 	-->
+					<a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="../matchlist/matchMap.html" data-ajax="false">
+						<img alt="3ball" src="../lib/images/home/3ball.png" width="80%"><br>
+						<font style="font-size: 15pt">3구</font>
+					</a>
+				</div>
+				<div class="ui-block-b">
+					<!-- popup창	
+					<a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="#positionWindow" data-rel="popup" data-position-to="window">
+					-->
+					<a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="../matchlist/matchMap.html" data-ajax="false">
+						<img alt="4ball" src="../lib/images/home/4ball.png" width="80%"><br>
+						<font style="font-size: 15pt">4구</font>
+					</a>
+				</div>
+				<div class="ui-block-c">
+					<!-- popup창
+					<a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="#positionWindow" data-rel="popup" data-position-to="window">
+					-->
+					<a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="../matchlist/matchMap.html" data-ajax="false">
+						<img alt="pocketball" src="../lib/images/home/pocketball.png" width="80%"><br>
+						<font style="font-size: 15pt">포켓볼</font>
+					</a>
+				</div>
+			</div>
+			<a class="ui-btn ui-shadow"	href="../add/addMatch.html" data-ajax="false">
+			<font style="font-size: 12pt">대전 등록!</font></a>
+			<a class="ui-btn ui-shadow" href="#">
+			<font style="font-size: 12pt">빠른 대전!</font></a> 
+		</div><!-- /content -->
+		
+		<!--  
+			- 제목 : popup menu(map, list)
+			- 작성자 : 서우철
+			- 추가될 작업 사항 :
+				* 떠있는 icon 밑에 이름 추가할 것.
+				* 뒤에 배경 흐리게 할 것.
+				* 
+			- 추후 작업할 사항으로 변경.
+		-->
+		<!-- 	 
+		<div data-role="popup" id="positionWindow" data-theme="none" data-shadow="false">
+			<a href="../matchlist/matchMap.html"><img alt="mapView" class="popphoto" src="../lib/images/home/map.png" height="40%" width="40%"/></a>
+			<a href="../matchlist/map_list.html"><img alt="listView" class="popphoto" src="../lib/images/home/list.png" height="40%" width="40%"/></a>
+		</div>
+		-->		
+
+	</div>
+	<!-- /page -->
+	<div data-role="footer" data-theme="a">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="recommend.html" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="thumb_up" src="../lib/images/home/thumb_up.png"><br>추천</a></li>
+				<li><a href="record.html" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="record" src="../lib/images/home/record.png"><br>기록</a></li>
+				<li><a href="#" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="home" src="../lib/images/home/home.png"><br>홈</a></li>
+				<li><a href="#" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="my" src="../lib/images/home/my.png"><br> 마이</a></li>
+				<li><a href="more.html" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="more" src="../lib/images/home/more.png"><br>더보기</a></li>
+            </ul>
+		</div>
+		<!-- /navbar -->
+	</div>
+	<!-- /footer -->
+	<!-- </div> --> 
+	<!-- /page -->
+	
+</body>
+</html>

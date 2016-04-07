@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>더보기</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<link rel="stylesheet" href="../lib/css/demos.css">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="../lib/navi/index.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$( "[data-role='navbar']" ).navbar();
+	$( "[data-role='header'], [data-role='footer']" ).toolbar();
+});
+// Update the contents of the toolbars
+$( document ).on( "pagecontainerchange", function() {
+	// Each of the four pages in this demo has a data-title attribute
+	// which value is equal to the text of the nav button
+	// For example, on first page: <div data-role="page" data-title="Info">
+	var current = $( ".ui-page-active" ).jqmData( "title" );
+	// Change the heading
+	$( "[data-role='header'] h1" ).text( current );
+	// Remove active class from nav buttons
+	$( "[data-role='navbar'] a.ui-btn-active" ).removeClass( "ui-btn-active" );
+	// Add active class to current nav button
+	$( "[data-role='navbar'] a" ).each(function() {
+		if ( $( this ).text() === current ) {
+			$( this ).addClass( "ui-btn-active" );
+		}
+	});
+});
+</script>
+<style type="text/css">
+.ui-slider {
+   float: right;
+}
+
+/* #textBox {
+   margin-top: 15px;
+   padding-top: 15px;
+} */
+
+#textBar {
+   padding-top: 0px;
+   padding-bottom: 0px;
+}
+
+#titlebar {
+   margin-top: 20px;
+   margin-bottom: 20px;
+}
+</style>
+</head>
+<body>
+	<div data-role="page" data-title="더보기">
+		<div role="main" class="ui-content">
+			<div style="background-color: #CDCDCD;"id="titleBar" align="center"><font style="font-size:25pt">더보기</font></div>
+			<div class="ui-content" role="main">
+				<ul data-role="listview" data-theme="a" data-dividertheme="e">
+					<li data-role="list-divider">설정</li>
+					<li><a href="#">로그인 정보</a></li>
+					<li id="textBar">
+						<strong id="textBox">위치 제공 동의</strong>
+						<select name="locationAgreement" id="locationAgreement" data-role="slider" data-mini="true">
+							<option value="off">Off</option>
+							<option value="on">On</option>
+						</select>
+					</li>
+					<li id="textBar"><strong id="textBox">알림 설정</strong>
+						<select name="alarmSetting" id="alarmSetting" data-role="slider" data-mini="true">
+							<option value="off">Off</option>
+							<option value="on">On</option>
+						</select>
+					</li>
+					<li data-role="list-divider">고객도움말</li>
+					<li><a href="#">문의사항 & 오류신고</a></li>
+					<li><a href="#">공지사항</a></li>
+					<li data-role="list-divider">정보</li>
+					<li><a href="#">프로그램 정보</a></li>
+					<li><a href="#">이용가이드</a></li>
+				</ul>
+			</div><!-- /content -->
+		</div>
+	</div>
+	
+   <div data-role="footer" data-theme="a">
+      <div data-role="navbar">
+            <ul>
+				<li><a href="recommend.html" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="thumb_up" src="../lib/images/home/thumb_up.png"><br>추천</a></li>
+				<li><a href="record.html" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="record" src="../lib/images/home/record.png"><br>기록</a></li>
+				<li><a href="home.html" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="home" src="../lib/images/home/home.png"><br>홈</a></li>
+				<li><a href="#" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="my" src="../lib/images/home/my.png"><br> 마이</a></li>
+				<li><a href="#" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="more" src="../lib/images/home/more.png"><br>더보기</a></li>
+            </ul>
+      </div>
+      <!-- /navbar -->
+   </div>
+   <!-- /footer -->
+
+</body>
+</html>
