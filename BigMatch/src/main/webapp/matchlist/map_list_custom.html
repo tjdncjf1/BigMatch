@@ -1,33 +1,43 @@
+<!-- 
+Program     : map_list_custom.html
+Date        : 2016-04-07
+Description : 매칭 - 리스트 부분과 map - 핀 클릭시 출력될 부분에 대한 UI
+Modify      : 조민호
+History     : - 2016-04-07 작성자 : 조민호 
+                * UI 수정, 이미지 수정
+-->
+
 <table border=0 cellspacing=0 cellpadding=0 width=440 style="display:block; border:4px solid #E3E3E3;">
 	<tr>
 		<td align=center valign=top width=100 height=100><br>
-			<script language="javascript">
-				var ImgNo=parseInt(Math.random()*8)
-				document.write("<a href='http://jace.esy.es/Namecard/Namecards.html' onfocus='this.blur()'><img src='http://jace.esy.es/Namecard/images/nameCard"+ImgNo+".jpg' border='0' height='80'></a>")
-			</script>
+			 <img src="../lib/images/home/my.png" width="100%"/>
 		</td>
 		<td align=left>
 			<br>
 			<table border=0 cellspacing=0 cellpadding=1>
 	
+                <!--닉에임-->
 				<tr>
+
 					<td width=1 rowspan=5></td>
-					<td align=left valign=middle>
-                        <img src="../images/home/my.png" width="20%"/>
+
+
+					<td  width=20% valign=middle>
+                        <img src="../lib/images/home/my.png" width="30%"/>
 					</td>
-					<td align=left valign=middle>
+					<td width=80% valign=middle>
 						<font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">
 							 이강민(nickname)
 						</font>
 					</td>
 				</tr>
-	
-					<tr>
-					<td align=left valign=middle>
-						
-							<img src="../images/home/trophy.png" width="20%"/>
+                
+	            <!--승률-->
+				<tr>
+					<td width=20% align=left valign=middle>
+							<img src="../lib/images/home/trophy.png" width="30%"/>
 					</td>
-					<td align=left valign=middle>
+					<td width=80% align=left valign=middle>
 						<font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">
 							2200                 
 						</font>
@@ -37,27 +47,41 @@
 					</td>
 				</tr>
                 
-                
+                <!--다마수-->
                 <tr>
-					<td align=left valign=middle>
+					<td width=20% align=left valign=middle>
 						<font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#3E3E3A; line-height:120%">
-							 <img src="../images/home/my.png" width="20%"/>
+							 <img src="../lib/images/home/dama.png" width="30%"/>
 						</font>
 					</td>
-					<td align=left valign=middle>
+					<td width=80% align=left valign=middle>
 						<font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">
-							
+							다마점수
+						</font>
+					</td>
+				</tr>
+                
+                <!--신뢰점수-->
+                <tr>
+					<td width=20% align=left valign=middle>
+						<font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#3E3E3A; line-height:120%">
+							 <img src="../lib/images/home/pin.png" width="30%"/>(신뢰도) <!--이미지 변결 요망..  이미지 크기가 달라서 테이블 구조가 깨짐-->
+						</font>
+					</td>
+					<td width=80% align=left valign=middle>
+						<font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">
+							600점
 						</font>
 					</td>
 				</tr>
                 
                 
-                
+                <!--위치-->
 				<tr>
-					<td align=left valign=middle>
-						<img src="../images/home/pin.png" width="20%"/>
+					<td width=20% align=left valign=middle>
+						<img src="../lib/images/home/pin.png" width="30%"/>
 					</td>
-					<td align=left valign=middle>
+					<td width=80% align=left valign=middle>
 						<font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">
 							
                             서울시 동작구 어딘가?
