@@ -14,7 +14,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>표시</title>
+	<title>대전 리스트(맵)</title>
 	
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -25,7 +25,7 @@
     .map_wrap {
     	position:		fixed;
     	width	:		100%;
-    	height	:		100%;
+    	height	:		80%;
     }
     .title {
     	font-weight:	bold;
@@ -63,7 +63,12 @@
     	white-space:	nowrap;
     }
 </style>
-	
+
+<script type="text/javascript">
+function nowLocationClick() {
+		nowLocation();	
+}
+</script>
 	
 	
 </head>
@@ -71,7 +76,7 @@
 
 	<div data-role="header" data-position="fixed" data-theme="a">
       <a href="../" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
-        <h1>page name</h1>
+        <h1>대전 리스트</h1>
     </div>
 
 	<div class="ui-grid-c">
@@ -99,7 +104,7 @@
 	
 	<!-- //////////////////////////////////////////////////////////////////////////////////////////// -->
 	
-	<div class="map_wrap">
+<div class="map_wrap">
     <!-- <div id="map" style="width:100%;height:600px;position:relative;overflow:hidden;"></div> -->
     <div id="map" style="width:100%;height:100%;position:relative; overflow:visible"></div>
      <div class="hAddr">
@@ -108,32 +113,31 @@
     <div class="rdList">
      	<img src="../lib/images/home/list.png" width="50px">
     </div>
-	</div>
+</div>
 
-	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script>
+<script>
 
-
-	<script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new daum.maps.LatLng(37.566833, 126.978522), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
 
-	// 지도를 생성합니다    
-	var map = new daum.maps.Map(mapContainer, mapOption); 
+// 지도를 생성합니다    
+var map = new daum.maps.Map(mapContainer, mapOption); 
 
-	// 현재위치를 중심으로 지도 위치 추적
-	nowLocation();
+// 현재위치를 중심으로 지도 위치 추적
+nowLocation();
 
-	//////////////////////////////////////현재위치 마커/////////////////////////////////////////////
+//////////////////////////////////////현재위치 마커/////////////////////////////////////////////
 
-	var lat; //위도
-	var lon; //경도
+var lat; //위도
+var lon; //경도
 
-	var locMarker;
-	
-	function nowLocation() {
+var locMarker;
+
+function nowLocation() {
 	
  	if(!!locMarker) {
 		console.log('이전 locMarker 존재');
@@ -223,44 +227,6 @@ function searchDetailAddrFromCoords(coords, callback) {
 	daum.maps.event.addListener(map, 'center_changed', function() {
 		console.log('지도의 중심 좌표 : ' + map.getCenter().toString());
 	});
-		// 지도 중심 좌표 변화 이벤트를 등록한다
-		daum.maps.event.addListener(map, 'center_changed', function () {
-			console.log('지도의 중심 좌표는 ' + map.getCenter().toString() +' 입니다.');
-		});
-
-		// 지도 확대 레벨 변화 이벤트를 등록한다
-		daum.maps.event.addListener(map, 'zoom_changed', function () {
-			console.log('지도의 현재 확대레벨은 ' + map.getLevel() +'레벨 입니다.');
-		});
-
-		// 지도 영역 변화 이벤트를 등록한다
-		daum.maps.event.addListener(map, 'bounds_changed', function () {
-			var mapBounds = map.getBounds(),
-				message = '지도의 남서쪽, 북동쪽 영역좌표는 ' +
-							mapBounds.toString() + '입니다.';
-
-			console.log(message);	
-		});
-
-		// 지도 시점 변화 완료 이벤트를 등록한다
-		daum.maps.event.addListener(map, 'idle', function () {
-			var message = '지도의 중심좌표는 ' + map.getCenter().toString() + ' 이고,' + 
-							'확대 레벨은 ' + map.getLevel() + ' 레벨 입니다.';
-			console.log(message);
-		});
-
-		// 지도 클릭 이벤트를 등록한다 (좌클릭 : click, 우클릭 : rightclick, 더블클릭 : dblclick)
-		daum.maps.event.addListener(map, 'click', function (mouseEvent) {
-			console.log('지도에서 클릭한 위치의 좌표는 ' + mouseEvent.latLng.toString() + ' 입니다.');
-		});	
-
-		// 지도 드래깅 이벤트를 등록한다 (드래그 시작 : dragstart, 드래그 종료 : dragend)
-		daum.maps.event.addListener(map, 'drag', function () {
-			var message = '지도를 드래그 하고 있습니다. ' + 
-							'지도의 중심 좌표는 ' + map.getCenter().toString() +' 입니다.';
-			console.log(message);
-		});
-		
 		
 		
 		// 마커 이미지의 주소
