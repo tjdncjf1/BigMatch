@@ -105,7 +105,7 @@ function nowLocationClick() {
 	
 	
 	
-/*----- 현재 위치 마커 start-----*/
+/*----- 현재위치 추적의 핵심역할 GeoLocation 마커 / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  end -----*/
 	function nowLocation() {
 	
  		if(!!locMarker) {
@@ -133,6 +133,7 @@ function nowLocationClick() {
 			// 지도 중심좌표를 접속위치로 변경합니다
 			map.setCenter(locPosition);
 		}
+
 			
 	//HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 	if (navigator.geolocation) {
@@ -179,7 +180,7 @@ function nowLocationClick() {
 	});
 	
 }
-/*----- 현재위치 추적의 핵심역할 GeoLocation / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  end -----*/
+/*----- 현재위치 추적의 핵심역할 GeoLocation 마커 / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  end -----*/
 	
 
 
