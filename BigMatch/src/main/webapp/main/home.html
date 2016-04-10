@@ -5,6 +5,9 @@
    Modify     : 서우철
    History    :   - 2016-04-07 작성자 : 서우철
                    * 모듈화 작업(각 기능을 따로 html로 뺌). 
+                   * swipe 작업 중.
+                  - 2016-04-08 작성자 : 서우철
+                   * swipe 작업 중.
  -->
 <!DOCTYPE html>
 <html>
@@ -20,7 +23,7 @@
 <script src="../lib/js/navigation.js"></script>
 </head>
 <body>
-	<div data-role="page" data-title="홈">
+	<div data-role="page" data-title="홈" id="home" >
 	    <div data-role="main" class="ui-content">
 			<div class="ui-grid-a">
 				<div class="ui-block-a">
@@ -87,6 +90,31 @@
 
 	</div>
 	<!-- /page -->
+
+	<script type="text/javascript">
+	/**
+		2016.04.07 서우철 
+		- swipe기능 추가 작업중. (추후 작업하는 것으로....)
+	*/
+	$(function() {
+		// home에서 오른쪽 swipe할 시에 record 페이지로 이동
+		$("div#home").bind("swiperight", swipeRecord);
+		// home에서 왼쪽 swipe할 시에 my페이지로 이동
+		$("div#home").bind("swipeleft", swipeMy);
+
+		function swipeRecord(event) {
+//			$.mobile.changePage("record.html", {
+			//	transition: "slide"
+			//});
+			location.href="record.html";
+		}
+			
+		function swipeMy(event) {
+			$.mobile.changePage('#','slide','right');
+		}
+	});
+	</script>
+
 	<div data-role="footer" data-theme="a">
 		<div data-role="navbar">
 			<ul>
@@ -99,9 +127,6 @@
 		</div>
 		<!-- /navbar -->
 	</div>
-	<!-- /footer -->
-	<!-- </div> --> 
-	<!-- /page -->
 	
 </body>
 </html>
