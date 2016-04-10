@@ -101,15 +101,26 @@ function nowLocationClick() {
 	
 	var locMarker;
 	
+	// 중심 마커가 표시될 위치입니다 
+	var centerMarkerPosition = map.getCenter();
+
+	// 중심 마커를 생성합니다
+	var centerMarker = new daum.maps.Marker({
+    	position: centerMarkerPosition
+	});
 	
+	
+
+	// 중심 마커가 지도 위에 표시되도록 설정합니다
+	centerMarker.setMap(map);
 	
 	
 	
 /*----- 현재위치 추적의 핵심역할 GeoLocation 마커 / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  end -----*/
 	function nowLocation() {
-	
- 		if(!!locMarker) {
-			console.log('이전 locMarker 존재');
+		
+	if(!!locMarker) {
+ 		locMarker.setMap(null);
 		}
  	
 		// 지도에 마커와 인포윈도우를 표시하는 함수입니다
@@ -177,6 +188,14 @@ function nowLocationClick() {
 	// 지도 중심 좌표 변화 이벤트를 등록한다
 	daum.maps.event.addListener(map, 'center_changed', function() {
 		console.log('지도의 중심 좌표 : ' + map.getCenter().toString());
+		
+			centerMarker.setMap(null);
+		
+			centerMarkerPosition = map.getCenter();
+			centerMarker = new daum.maps.Marker({
+				position : centerMarkerPosition
+			});
+		centerMarker.setMap(map);
 	});
 	
 }
@@ -184,47 +203,59 @@ function nowLocationClick() {
 	
 
 
+var centerMarkerWindow;
 
-
-/*----- 중심마커(위치찍는 마커)를 항상 중앙에 오도록 하는 part start -----*/
-	// 마커가 표시될 위치입니다 
-	var centerMarkerPosition = map.getCenter();
-
-	// 마커를 생성합니다
-	var centerMarker = new daum.maps.Marker({
-    	position: centerMarkerPosition
-	});
-
-	// 마커가 지도 위에 표시되도록 설정합니다
-	centerMarker.setMap(map);
-
+/*----- 참고 소스-----*/
+	
 	daum.maps.event.addListener(map, 'dragstart', function() {
 		console.log('드래그시작');
-		centerMarkerPosition = map.getCenter();
-		centerMarker = new daum.maps.Marker({
-		    position: centerMarkerPosition
-		});
-		centerMarker.setMap(map);
+		if(!!centerMarkerWindow){
+			centerMarkerWindow.close();
+		}
 	});
 
 	daum.maps.event.addListener(map, 'drag', function() {
-		console.log('드래그중');	
-			centerMarkerPosition = map.getCenter();
-			centerMarker = new daum.maps.Marker({
-				position : centerMarkerPosition
-			});
-		centerMarker.setMap(map);
+		console.log('드래그중');
 	});
+	
 	daum.maps.event.addListener(map, 'dragend', function() {
 		console.log('드래그종료');
+
+		
+		var geocoder = new daum.maps.services.Geocoder();
+
+		var coord = map.getCenter();
+		var callback = function(status, result) {
+		    if (status === daum.maps.services.Status.OK) {
+		    
+		        // 요청위치에 건물이 없는 경우 도로명 주소는 빈값입니다
+		        console.log('도로명 주소 : ' + result[0].roadAddress.name);
+		        console.log('지번 주소 : ' + result[0].jibunAddress.name);
+		        
+		        var centerMarkerContent = '<div style="padding:5px;">주소 : '+result[0].jibunAddress.name+'<br>도로명주소 : '+result[0].roadAddress.name+'</div>',
+				centerMarkerContentPosition = map.getCenter();
+		
+				// 인포윈도우를 생성합니다
+				centerMarkerWindow = new daum.maps.InfoWindow({
+					position : centerMarkerContentPosition,
+					content : centerMarkerContent
+				});
+				
+				centerMarkerWindow.open(map, centerMarker);
+					
+		    }   
+		};
+
+		geocoder.coord2detailaddr(coord, callback);
+
+		
+		
+		
+		
+		
 	});
-/*----- 중심마커(위치찍는 마커)를 항상 중앙에 오도록 하는 part end -----*/
-
-
-
-
-
-
+		  
+	
 
 </script>
 </body>
