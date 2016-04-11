@@ -118,7 +118,7 @@ function nowLocationClick() {
 	
 	
 	
-/*----- 현재위치 추적의 핵심역할 GeoLocation 마커 / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  end -----*/
+/*----- 현재위치 추적의 핵심역할 GeoLocation 마커 / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  start -----*/
 	function nowLocation() {
 		
 	if(!!locMarker) {
@@ -170,9 +170,9 @@ function nowLocationClick() {
 	//지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
 	daum.maps.event.addListener(map, 'click', function(mouseEvent) {
 		searchDetailAddrFromCoords(mouseEvent.latLng, function(status, result) {
-    		if (status === daum.maps.services.Status.OK) {              
-     	 	console.log(result[0].roadAddress.name);
-  	    	console.log(result[0].jibunAddress.name); 
+    		if (status === daum.maps.services.Status.OK) {
+     	 		console.log(result[0].roadAddress.name);
+  	    		console.log(result[0].jibunAddress.name); 
 			}   
 		});
 	});
@@ -234,7 +234,7 @@ var centerMarkerWindow;
 		        console.log('도로명 주소 : ' + result[0].roadAddress.name);
 		        console.log('지번 주소 : ' + result[0].jibunAddress.name);
 		        
-		        var centerMarkerContent = '<div style="padding:5px;">주소 : '+result[0].jibunAddress.name+'<br>도로명주소 : '+result[0].roadAddress.name+'</div>',
+		        var centerMarkerContent = '<div style="padding:5px;">주소 : '+result[0].jibunAddress.name+'<br>도로명주소 : '+result[0].roadAddress.name+'<br><a href="">등록하기</a></div>',
 				centerMarkerContentPosition = map.getCenter();
 		
 				// 인포윈도우를 생성합니다
