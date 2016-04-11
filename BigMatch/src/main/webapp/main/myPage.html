@@ -12,11 +12,39 @@
 <!-- CDN end -->
 
 <style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;width:100%;margin:20px;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-.tg .tg-baqh{text-align:center;vertical-align:top}
-.tg .tg-yw4l{vertical-align:top}
+table {
+	width:96%;
+	margin:2%;
+}
+.pictureCell {
+	align:center;
+	vertical-align:bottom;
+}
+.genderCell {
+	align:center;
+	vertical-align:top;
+}
+.nickNameCell {
+	align:left;
+}
+.rankPointCell {
+	align:left;
+}
+.addressCell {
+	align:left;
+}
+.timeCell {
+	align:left;
+}
+.scoreCell {
+	align:left;
+}
+.recordCell {
+	align:left;
+}
+.stateCell {
+	align:left;
+}
 </style>
 
 </head>
@@ -24,7 +52,6 @@
 <body>
 
 	<div data-role="header" data-position="fixed" data-theme="a">
-		<a href="../" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 			<h1>마이 페이지</h1>
 	</div>
 	
@@ -35,31 +62,54 @@
 		</ul>
 	</div><!-- /navbar -->
 	
-	<div>
-	<table class="tg">
+
+	<table>
+		<tbody>
+			<tr>
+				<td class="pictureCell " rowspan="4" width="30%">사진</td>
+				<td class="nickNameCell" width="30%">닉네임</td>
+				<td class="rankPointCell" width="30%">랭킹포인트</td>
+			</tr>
+			<tr>
+				<td class="addressCell" colspan="2">주소</td>
+			</tr>
+			<tr>
+				<td class="timeCell" colspan="2">시간</td>
+			</tr>
+			<tr>
+				<td class="scoreCell" colspan="2">점수</td>
+			</tr>
+			<tr>
+				<td class="genderCell " rowspan="2">성별</td>
+				<td class="recordCell" colspan="2">전적 승률</td>
+			</tr>
+			<tr>
+				<td class="stateCell" colspan="2">상태 대전중</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	
+	<table>
 		<tr>
-	 		<th class="tg-baqh" rowspan="4">사진</th>
-			<th class="tg-yw4l" colspan="2" >닉네임</th>
-			<th class="tg-yw4l" colspan="2">랭크포인트</th>
-		</tr>
-		<tr>
-			<td class="tg-yw4l" colspan="4">주소</td>
-		</tr>
-		<tr>
-			<td class="tg-yw4l" colspan="4">시간</td>
-		</tr>
-		<tr>
-			<td class="tg-yw4l" colspan="4">희망실력</td>
-		</tr>
-		<tr>
-			<td class="tg-baqh" rowspan="2">성별</td>
-			<td class="tg-yw4l" colspan="4">전적 승률</td>
-		</tr>
-		<tr>
-			<td class="tg-yw4l" colspan="4">대전중</td>
+			<th><form><input type="button" value="대전 취소하기"></form></th>
+			<th><form><input type="button" value="상대와 대화하기"></form></th>
 		</tr>
 	</table>
-	</div>
+	
+	
+	<table>
+  		<tr>
+   	 		<th class="inputResult" colspan="3">결과 입력하기!</th>
+  		</tr>
+  		<tr>
+    		<td class="win" width="33%"><form><input type="button" value="승리"></form></td>
+		    <td class="draw" width="33%"><form><input type="button" value="무승부"></form></td>
+		    <td class="lose" width="33%"><form><input type="button" value="패배"></form></td>
+  		</tr>
+	</table>
+
+
 
 </body>
 </html>
