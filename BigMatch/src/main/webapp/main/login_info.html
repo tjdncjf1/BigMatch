@@ -1,0 +1,69 @@
+<!-- 
+Program     : login_info.html
+Date        : 2016-04-08
+Description : 더보기->로그인정보 에 대한 UI
+Modify      : 조민호
+History     : 
+-->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 모바일 환경 최적화 -->
+    <title>로그인정보</title>
+    <title>대전 선택</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    
+    <style type="text/css">
+        .ui-slider 
+        {
+            float: right;
+        }
+        /* #textBox {
+           margin-top: 15px;
+           padding-top: 15px;
+        } */
+        
+        #textBar {
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+        
+        #autologin
+        {
+            text-align:middle;
+        }
+        
+        #titlebar {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a href="../" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <h1>로그인 정보</h1>
+    </div>
+    
+    
+    <div class="ui-content" role="main">
+				<ul data-role="listview" data-theme="a" data-dividertheme="e">
+					
+					<li ><a >로그 아웃</a></li>
+					<li id="textBar"><strong id="textBox">알림 설정</strong>
+						<select name="locationAgreement" id="locationAgreement" data-role="slider" data-mini="true">
+							<option value="off">Off</option>
+							<option value="on">On</option>
+						</select>
+					</li>
+				</ul>
+			</div><!-- /content -->
+    
+</body>
+
+</html>
