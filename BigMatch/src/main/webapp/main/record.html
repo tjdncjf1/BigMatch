@@ -6,7 +6,9 @@
    History    :   - 2016-04-07 작성자 : 서우철
                    * 대전기록 부분 기능 추가.
                    * 리스트 형식으로 표시되며 승리시 파란 리스트, 패배시 빨간 리스트로 추가할 예정.
-                   * 랭킹 view 미완성. 
+                   * 랭킹 view 미완성.
+                  - 2016-04-11 작성자 : 서우철
+                   * 랭킹 ui 작업.  
  -->
 <!DOCTYPE html>
 <html>
@@ -42,23 +44,21 @@
 				<div data-role="navbar">
 					<ul>
 						<li><a href="#matchRecord" data-ajax="false">대전기록</a></li>
-						<li><a href="#two" data-ajax="false">랭킹</a></li>
+						<li><a href="#rank" data-ajax="false">랭킹</a></li>
 					</ul>
 				</div>
-
-				<div id="matchRecord" class="ui-body-d ui-content"
-					style="padding: 0em">
+				
+				<!-- 대전기록 page -->
+				<div id="matchRecord" class="ui-body-d ui-content" style="padding: 0em">
 					<div class="ui-grid-a">
 						<div class="ui-grid-solo">
 							<div class="ui-block-a">
-								<div class="ui-bar ui-bar-a"
-									style="height: 110px; background-color: #3388CC;">
-									<p align="center"
-										style="color: white; margin-top: 0; margin-bottom: 0; font-size: 140%;">
+								<div class="ui-bar ui-bar-a" style="height: 110px; background-color: #3388CC;">
+									<p align="center" style="color: white; margin-top: 0; margin-bottom: 0; font-size: 140%;">
 										<승리>
 									</p>
 									<span> 
-									<img alt="thumb_up"	src="../lib/images/home/3ball.png" style="height: 50%; margin-top: 2%" />
+										<img alt="img"	src="../lib/images/home/3ball.png" style="height: 50%; margin-top: 2%" />
 									</span>
 									<div class="matchInfo">
 										<p class="infoMargin">대전상대 : 서우철</p>
@@ -69,8 +69,31 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
+				</div> <!-- end of #matchRecord -->
+				
+				<!-- 2016-04-11 작업: 서우철 -->
+				<!-- 랭크 -->
+				<div id="rank" class="ui-body-d ui-content">
+					<img src="../lib/images/home/trophy.png" style="float: left; width: 40%; position: relative; right: 9%;">
+					<div style="position: absolute; left: 40%">
+						<p>3구 &nbsp; 456위 1승 1패 (50%) </p>
+						<p>4구 &nbsp; 1234위 0승 0패 (%)</p>
+						<p>포켓볼 &nbsp; 232승 0패 (100%)</p>
+					</div>
+					<form>
+						<fieldset data-role="controlgroup" data-type="horizontal">
+							<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
+							<label for="radio-choice-h-2a">One</label>
+							<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+							<label for="radio-choice-h-2b">Two</label>
+							<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="other">
+							<label for="radio-choice-h-2c">Three</label>
+						</fieldset>
+					</form>
+									
+				</div> <!-- end of #rank -->
+				
+			</div> <!-- end of #tabs -->
 			
 		</div> 
 		<!-- main -->
