@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <title>Matching List</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script>
+      jQuery( document ).ready( function() 
+      {
+        $( '#jb-tabs' ).tabs();
+       } );
+    </script>
+ 
+  </head>
+  
+  <body>
+    <div data-role="header" data-position="fixed" data-theme="a">
+		<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <h1>page name</h1>
+    </div>
+<!--<div id="head" data-role="header" data-position="fixed">
+    <img src="../images/home/back_bt.jpg" width="5%"/>
+    <h1>page name</h1>
+</div>-->
+      
+    <div id="jb-tabs" style="float:right; width:100%">
+      <ul>
+        <li><a href="#jb-tab-1">3구</a></li>
+        <li><a href="#jb-tab-2">4구</a></li>
+        <li><a href="#jb-tab-3">포켓</a></li>
+        <li><a href="#jb-tab-4">전체</a></li>
+      </ul>
+    
+      <div id="jb-tab-1">
+        <p>Tabs 1 - Lorem</p>
+      </div>
+      
+      <div id="jb-tab-2">
+        <p>Tabs 2 - Ipsum</p>
+      </div>
+      
+      <div id="jb-tab-3">
+        <p>Tabs 3 - Dolor</p>
+      </div>
+      
+      <div id="jb-tab-4">
+        <p>Tabs 4 - Dolor</p>
+      </div>
+        
+    </div>
+  </body>
+</html>
