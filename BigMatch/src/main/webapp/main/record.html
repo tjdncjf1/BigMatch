@@ -7,7 +7,7 @@
                    * 대전기록 부분 기능 추가.
                    * 리스트 형식으로 표시되며 승리시 파란 리스트, 패배시 빨간 리스트로 추가할 예정.
                    * 랭킹 view 미완성.
-                  - 2016-04-11 작성자 : 서우철
+                  - 2016-04-11~12 작성자 : 서우철
                    * 랭킹 ui 작업.  
  -->
 <!DOCTYPE html>
@@ -33,24 +33,51 @@
 	margin-bottom: 0px;
 	margin-top: 0px;
 }
+
+/* 트로피 이미지 */
+#trophyImg {
+	position: relative;
+	right: 5%;
+	width: 34%;
+	float: left;
+}
+
+/* 랭크 간략한기술 부분 */ 
 .rankInfo {
-	position: absolute;
+	/* position: relative; */
 	font-size: smaller;
 	font-weight: bold;
 }
+
 /* 공유 버튼  */
 .ui-btn-inline {
 	/* vertical-align: none !important; */
-	position: absolute;
+	position: relative;
 	font-size: 70%;
-	left: 76%;
-	bottom: 18%;
+	left: -1%;
 }
 /* 3구, 4구, 포켓볼 radio css */
 .ui-controlgroup-controls {
-	position: absolute;
-	right: 22%;
+	position: relative;
+	left: 15%;
 }
+/* rank listview */
+.ui-content .ui-listview{
+	margin : 0;
+}
+
+/* 랭크 트로피 image css */
+.rankTrophy {
+	width: 10%;
+	padding: 3%;
+}
+
+/* listview image contents css */
+.ui-listview>.ui-li-static.ui-li-has-thumb {
+	min-height: 0;
+	padding-left: 15%;
+}
+
 </style>
 </head>
 <body>
@@ -89,40 +116,44 @@
 					</div>
 				</div> <!-- end of #matchRecord -->
 				
-				<!-- 2016-04-11 작업: 서우철 -->
+				<!-- 2016-04-11~12 작업: 서우철 -->
 				<!-- 랭크 -->
 				<div id="rank" class="ui-body-d ui-content">
 					<!-- 간단한 rank 보여주기 part -->
-					<span>
-						<img src="../lib/images/home/trophy.png" style="position: relative; right: 8%; width: 40%">
-						<span id="3ballInfo" class="rankInfo" style="top:30%; ">3구 &nbsp;&nbsp; 456위 1승 1패 (50%)</span>
-						<span id="43ballInfo" class="rankInfo" style="top:41%;">4구 &nbsp;&nbsp; 1234위 0승 0패 (%)</span>
-						<span id="pocketInfo" class="rankInfo" style="top:52%;right:9%;">포켓볼 &nbsp; 232승 0패 (100%)</span>
+					<div>
+						<img src="../lib/images/home/goldTrophy.png" id="trophyImg"/>
+					</div>
+					<div>
+						<span class="rankInfo">3구 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 456위 1승 1패 (50%)</span><br/>
+						<span class="rankInfo">4구 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1234위 0승 0패 (%)</span><br/>
+						<span class="rankInfo" style="right:9%;">포켓볼 &nbsp;&nbsp; 232승 0패 (100%)</span><br/>
 						<input type="button" data-inline="true" value="공유" />
-					</span>
+					</div>
 					
 					<!-- 3구, 4구, 포켓볼 radio button part -->
 					<div>
 						<form>
 							<fieldset data-role="controlgroup" data-type="horizontal">
-								<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
+								<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" checked="checked">
 								<label for="radio-choice-h-2a">3구</label>
-								<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+								<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b">
 								<label for="radio-choice-h-2b">4구</label>
-								<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="other">
+								<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c">
 								<label for="radio-choice-h-2c">포켓볼</label>
 							</fieldset>
 						</form>
 					</div>
 					
+					<!-- 2016-04-12 작성자 : 서우철 -->
 					<!-- 랭킹 상세 list -->
-					<!-- <div>
-						<ul data-role="listview">
-							<li>당구신</li>
-							<li>타이피스트</li>
-							<li>닉넴</li>
-						</ul>
-					</div> -->
+					<div>
+						<ol data-role="listview">
+							<li><img src="../lib/images/home/goldTrophy.png" class="rankTrophy">당구신</li>
+							<li><img src="../lib/images/home/silverTrophy.png" class="rankTrophy">타이피스트</li>
+							<li><img src="../lib/images/home/bronzeTrophy.png" class="rankTrophy">닉넴</li>
+							<li>서우철</li>
+						</ol>
+					</div>
 						
 				</div> <!-- end of #rank -->
 			</div> <!-- end of #tabs -->                                   
