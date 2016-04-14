@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html>
+<!-- 
+   Program    : signUp.html
+   Date       : 2016-04-14
+   Description: 회원가입.
+   Modify     : 임현우
+   History    :   - 2016-04-14 작성자 : 서우철
+                   * ajax 이용해서 DB에 유효한 데이터 보내기. 
+-->
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,44 +44,74 @@
 
 		<form>
 			<div class="form-group">
-				<label for="email">이메일</label> <input type="email"
-					class="form-control" id="email"
+				<label for="email">이메일</label> 
+				<input type="email"	class="form-control" id="userId"
 					placeholder="이메일을 입력하세요   예)example@bigmatch.com">
 			</div>
 
 			<div class="form-group">
-				<label for="password">비밀번호</label> <input type="password"
-					class="form-control" id="password" placeholder="비밀번호를 입력하세요">
+				<label for="password">비밀번호</label> 
+				<input type="password"	class="form-control" id="password" 
+					placeholder="비밀번호를 입력하세요">
 			</div>
 
 			<div class="form-group">
-				<label for="confirmPassword">비밀번호 확인</label> <input type="password"
-					class="form-control" id="confrimPassword" placeholder="비밀번호를 입력하세요">
+				<label for="confirmPassword">비밀번호 확인</label> 
+				<input type="password" class="form-control" id="confrimPassword" 
+					placeholder="비밀번호를 입력하세요">
 			</div>
 
 			<div class="form-group">
-				<label for="nickName">닉네임</label> <input type="text"
-					class="form-control" id="nickName" placeholder="닉네임을 입력하세요">
+				<label for="nickName">닉네임</label> 
+				<input type="text" class="form-control" id="name" placeholder="닉네임을 입력하세요">
 			</div>
 
 			<div class="form-group">
 				<label for="gender">성별</label>
 				<table class="table">
 					<tr>
-						<td><label class="radio-inline"> <input type="radio"
-								name="gender" id="man" value="man"> 남성
-						</label></td>
-						<td><label class="radio-inline"> <input type="radio"
-								name="gender" id="woman" value="woman"> 여성
-						</label></td>
+						<td>
+							<label class="radio-inline"> 
+								<input type="radio" name="gender" class="gender" value="M"> 남성
+							</label>
+						</td>
+						<td>
+							<label class="radio-inline"> 
+								<input type="radio"	name="gender" class="gender" value="W"> 여성
+							</label>
+						</td>
 					</tr>
 				</table>
 			</div>
 			<div class="form-group">
-				<a href="login.html"><button type="button"
-						class="btn btn-primary btn-lg btn-block">가입하기!</button></a>
+				<!-- <a href="login.html"> -->
+				<button type="button" class="btn btn-primary btn-lg btn-block" id="signUp">가입하기!</button><!-- </a> -->
 			</div>
 		</form>
 	</div>
+<script type="text/javascript">
+$(function(){
+	$('#signUp').click(function(){
+		$.ajax({
+			url:'/membership.do',
+			method:'POST',
+			dataType:'json',
+			headers: { 
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},
+			data : JSON.stringify({
+				userId   : $('#userId').val(),
+				password : $('#password').val(),
+				name     : $('#name').val(),
+				gender   : 'M'
+			}),
+			success : function(event) {
+				location.href = "login.html";
+			}
+		});
+	});
+});
+</script>
 </body>
 </html>
