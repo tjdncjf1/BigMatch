@@ -6,7 +6,7 @@
    Description: 회원가입.
    Modify     : 임현우
    History    :   - 2016-04-14 작성자 : 서우철
-                   * ajax 이용해서 DB에 유효한 데이터 보내기. 
+                   * 회원가입 기능 추가. 
 -->
 <head>
 <meta charset="UTF-8">
@@ -72,25 +72,25 @@
 					<tr>
 						<td>
 							<label class="radio-inline"> 
-								<input type="radio" name="gender" class="gender" value="M"> 남성
+								<input type="radio" name="gender" value="M"> 남성
 							</label>
 						</td>
 						<td>
 							<label class="radio-inline"> 
-								<input type="radio"	name="gender" class="gender" value="W"> 여성
+								<input type="radio"	name="gender" value="W"> 여성
 							</label>
 						</td>
 					</tr>
 				</table>
 			</div>
 			<div class="form-group">
-				<!-- <a href="login.html"> -->
-				<button type="button" class="btn btn-primary btn-lg btn-block" id="signUp">가입하기!</button><!-- </a> -->
+				<button type="button" class="btn btn-primary btn-lg btn-block" id="signUp">가입하기!</button>
 			</div>
 		</form>
 	</div>
 <script type="text/javascript">
 $(function(){
+	
 	$('#signUp').click(function(){
 		$.ajax({
 			url:'/membership.do',
@@ -104,13 +104,14 @@ $(function(){
 				userId   : $('#userId').val(),
 				password : $('#password').val(),
 				name     : $('#name').val(),
-				gender   : 'M'
+				gender   : $('input[name="gender"]:checked:checked').val()
 			}),
 			success : function(event) {
 				location.href = "login.html";
 			}
 		});
 	});
+	
 });
 </script>
 </body>
