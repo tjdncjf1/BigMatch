@@ -3,7 +3,7 @@ Program     : inquiry.html
 Date        : 2016-04-10
 Description : 더보기->문의사항&오류신고 에 대한 UI
 Modify      : 조민호
-History     : 
+History     : 2016-04-12 조민호
 -->
 
 
@@ -11,9 +11,9 @@ History     :
 <head>
     <meta charset="utf-8">
     <title>문의사항 & 오류신고</title>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
 
     
 <script language="javascript">
@@ -63,14 +63,17 @@ function checkDisable(frm)
         </form>
         
         <!--    mail 답변 선택 유무   -->
-        <form name="test">
+        <form>
             <label>
-                <input name="chkbox" type="checkbox" onClick="checkDisable(this.body)">E-mail 로 답변받기<br>
-                
+                <input name="chkbox" type="checkbox" onClick="checkDisable(this.form)">E-mail 로 답변받기<br>
+                <input name="textbox" type="text" disabled="disabled">
             </label>
-            
         </form>
-        <input name="textbox" type="text" disabled="disabled">
+        
+        <form>
+            <input name="send" type="button" value="전송">
+            <input name="canceled" type="button" value="취소">
+        </form>
     </center>
 </body>
 </html>

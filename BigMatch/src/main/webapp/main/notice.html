@@ -1,0 +1,71 @@
+<!-- 
+Program     : notice.html
+Date        : 2016-04-12
+Description : 더보기-> 공지사항 페이지 UI
+Modify      : 조민호
+History     : 
+-->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <title>공지사항</title>
+
+    <style type="text/css">
+        p{overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+    </style>
+</head>
+
+<body>
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a href="../" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <h1>공지사항</h1>
+    </div>
+<form>
+    <input id="filterTable-input" data-type="search">
+</form>
+<table data-role="table" id="movie-table" data-filter="true" data-input="#filterTable-input" class="ui-responsive">
+    
+  
+        
+        <thead>
+            <tr>
+                <th data-priority="1" width=10%>No</th>
+                <th data-priority="2" width=70%>공지사항</th>
+                <th data-priority="3" width=20%>Date</th>
+            </tr>
+        </thead>
+            <tbody >
+                <tr>
+                    <th>1</th>
+                    <td><a href="" data-rel="external"><p>우철이 노잼 ㅠㅠ</p></a></td>
+                    <td>89/05/30</td>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <td><a href="" data-rel="external"><p>그렇지 말입니다</p></a></td>
+                    <td>90/04/15</td>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <td><a href="" data-rel="external"><p>상품이 반품되었습니다...</p></a></td>
+                    <td>83/08/03</td>
+
+                </tr>
+                <tr>
+                    <th>4</th>
+                    <td><a href="" data-rel="external"><p>호호호호호호호호 히히히히히히</p></a></td>
+                    <td>89/04/06</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+</body>
+
+</html>
