@@ -7,6 +7,8 @@
    Modify     : 임현우
    History    :   - 2016-04-14 작성자 : 서우철
                    * 회원가입 기능 추가. 
+                  - 2016-04-15 작성자 : 서우철
+                   * 회원가입 유효성 검사 추가(jquery plugin validation). 
 -->
 <head>
 <meta charset="UTF-8">
@@ -14,22 +16,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>가입</title>
 <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <!-- 부가적인 테마 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <style type="text/css">
 .form-group {
 	max-width: 400px;
 	padding: 15px;
 	margin: 15px;
+}
+#registerForm label.error {
+	color: red;
 }
 </style>
 </head>
@@ -42,28 +39,28 @@
 
 		<br>
 
-		<form>
+		<form id="registerForm">
 			<div class="form-group">
-				<label for="email">이메일</label> 
-				<input type="email"	class="form-control" id="userId"
+				<label for="userId">이메일</label> 
+				<input type="email"	class="form-control" id="userId" name="userId"
 					placeholder="이메일을 입력하세요   예)example@bigmatch.com">
 			</div>
 
 			<div class="form-group">
 				<label for="password">비밀번호</label> 
-				<input type="password"	class="form-control" id="password" 
+				<input type="password"	class="form-control" id="password"  name="password"
 					placeholder="비밀번호를 입력하세요">
 			</div>
 
 			<div class="form-group">
 				<label for="confirmPassword">비밀번호 확인</label> 
-				<input type="password" class="form-control" id="confrimPassword" 
+				<input type="password" class="form-control" id="confirmPassword"  name="confirmPassword"
 					placeholder="비밀번호를 입력하세요">
 			</div>
 
 			<div class="form-group">
-				<label for="nickName">닉네임</label> 
-				<input type="text" class="form-control" id="name" placeholder="닉네임을 입력하세요">
+				<label for="name">닉네임</label> 
+				<input type="text" class="form-control" id="name" name="name" placeholder="닉네임을 입력하세요">
 			</div>
 
 			<div class="form-group">
@@ -84,35 +81,17 @@
 				</table>
 			</div>
 			<div class="form-group">
-				<button type="button" class="btn btn-primary btn-lg btn-block" id="signUp">가입하기!</button>
+				<input type="submit" class="btn btn-primary btn-lg btn-block" id="signUp" value="가입하기!"/>
 			</div>
 		</form>
 	</div>
-<script type="text/javascript">
-$(function(){
-	
-	$('#signUp').click(function(){
-		$.ajax({
-			url:'/membership.do',
-			method:'POST',
-			dataType:'json',
-			headers: { 
-				"Accept" : "application/json",
-				"Content-Type" : "application/json"
-			},
-			data : JSON.stringify({
-				userId   : $('#userId').val(),
-				password : $('#password').val(),
-				name     : $('#name').val(),
-				gender   : $('input[name="gender"]:checked:checked').val()
-			}),
-			success : function(event) {
-				location.href = "login.html";
-			}
-		});
-	});
-	
-});
-</script>
+<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<!-- 2016.04.15 유효성 검사 체크 plugin 추가 -->
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js" ></script>
+<!-- 회원가입 유효성 검사 모듈화 -->
+<script src="../lib/js/check.js" ></script> 
 </body>
 </html>
