@@ -3,7 +3,9 @@
    Description: 회원가입 유효성 검사.
    Modify     : 서우철
    History    :   - 2016-04-15 작성자 : 서우철
-                   * 회원가입 유효성 검사 추가 (추후에 DB랑 연동해서 아이디 중복검사 추가해야함). 
+                   * 회원가입 유효성 검사 추가 (추후에 DB랑 연동해서 아이디 중복검사 추가해야함).
+                  - 2016-04-16 작성자 : 조민호
+                   * pw 암호화 작업 추가
 
 */
 $(function(){
@@ -47,7 +49,13 @@ $(function(){
 				minlength:'닉네임이 짧습니다.'
 			}
         },
+ 
         submitHandler: function (){ //유효성 검사를 통과시 전송
+        	//암호화 과정
+        	var rawData = $('#password').val();			// -> 입력받은 암호값
+        	//console.log(rawData);
+        	var resultData = sha256(rawData);			// -> 변환된 암호값
+        	//console.log(resultData);
         	//frm.submit();
         	$.ajax({
         		url:'/membership.do',
@@ -59,12 +67,12 @@ $(function(){
         		},
         		data : JSON.stringify({
         			userId   : $('#userId').val(),
-        			password : $('#password').val(),
+        			password : resultData,
         			name     : $('#name').val(),
         			gender   : $('input[name="gender"]:checked:checked').val()
         		}),
         		success : function(event) {
-        			location.href = "login.html";
+        			//location.href = "login.html";
         		}
         	});
         },

@@ -9,6 +9,8 @@
                    * 회원가입 기능 추가. 
                   - 2016-04-15 작성자 : 서우철
                    * 회원가입 유효성 검사 추가(jquery plugin validation). 
+                  - 2016-04-18 작성자 : 조민호
+                   * pw 암호화 (sha-256)
 -->
 <head>
 <meta charset="UTF-8">
@@ -91,7 +93,14 @@
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!-- 2016.04.15 유효성 검사 체크 plugin 추가 -->
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js" ></script>
+
+<!-- pw 암호화 -->
+<script src="../lib/js/sha-256.js" ></script> 
+
 <!-- 회원가입 유효성 검사 모듈화 -->
 <script src="../lib/js/check.js" ></script> 
+
+
+
 </body>
 </html>
