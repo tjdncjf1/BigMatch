@@ -5,27 +5,18 @@ Description : 매칭 - 리스트 부분
 Modify      : 조민호
 History     : - 2016-04-08 작성자 : 조민호 
                 * UI 수정(시간 추가, 테이블수정), 이미지 추가
+              - 2016-04-18 작성자 : 서우철
+              	* 매치 조회 기능 구현.
 -->
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="pragma" content="no-cache">
-    <title>대전 선택</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
-    <script>
-        jQuery(document).ready(function () {
-            $('#jb-tabs').tabs();
-        });
-    </script>
-
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="pragma" content="no-cache">
+<title>대전 선택</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 </head>
 
 <body>
@@ -57,7 +48,7 @@ History     : - 2016-04-08 작성자 : 조민호
                         <br>
                         <table border=0 cellspacing=0 cellpadding=1>
 
-                            <!--닉에임-->
+                            <!--닉네임-->
                             <tr>
                                 <td width=15% valign=middle><img src="../lib/images/home/my.png" width="30%" /></td>
                                 <td width=45% valign=middle>
@@ -155,7 +146,32 @@ History     : - 2016-04-08 작성자 : 조민호
     <div style="position: fixed; bottom: 5px; right: 5px"  >
          <img src="../lib/images/home/map.png"  width=20% align="right"/>
     </div>
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script>
+	$(function () {
+		$('#jb-tabs').tabs(); // 탭 기능 추가.
+		
+		// 매치 조회
+		$.ajax({
+			url: '/match.do',
+			method: 'GET',
+			dataType: 'json',
+			headers: { 
+    			"Accept" : "application/json",
+    			"Content-Type" : "application/json"
+    		},
+    		data : JSON.stringify({
+				
+    		}),
+    		success : function(event) {
 
+    		}
+		});
+		
+	});
+</script>
 </body>
 
 </html>

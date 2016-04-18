@@ -13,39 +13,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>지도 주소 등록</title>
-    <style>
-    .map_wrap {
-    	position:		fixed;
-    	width	:		100%;
-    	height	:		98%;
-    }
-    .title {
-    	font-weight:	bold;
-    	display :		block;
-    }
-    .hAddr {
-    	position:		absolute;
-    	left :			10px;
-    	top:			10px;
-    	border-radius:	2px;
-    	background:		#fff;
-    	background:		rgba(255,255,255,0.8);
-    	z-index:		1;
-    	padding:		5px;
-    }
-    #centerAddr {
-    	display:		block;
-    	margin-top:		2px;
-    	font-weight:	normal;
-    }
-    .bAddr {
-    	padding:		5px;
-    	text-overflow:	ellipsis;
-    	overflow:		hidden;
-    	white-space:	nowrap;
-    }
+<meta charset="utf-8">
+<title>지도 주소 등록</title>
+<style>
+.map_wrap {
+   	position:		fixed;
+   	width	:		100%;
+   	height	:		98%;
+}
+
+.title {
+	font-weight:	bold;
+   	display :		block;
+}
+ 
+.hAddr {
+   	position:		absolute;
+   	left :			10px;
+   	top:			10px;
+   	border-radius:	2px;
+   	background:		#fff;
+   	background:		rgba(255,255,255,0.8);
+   	z-index:		1;
+   	padding:		5px;
+}
+  
+#centerAddr {
+   	display:		block;
+   	margin-top:		2px;
+   	font-weight:	normal;
+}
+
+.bAddr {
+   	padding:		5px;
+   	text-overflow:	ellipsis;
+   	overflow:		hidden;
+   	white-space:	nowrap;
+}
 </style>
 
 <script type="text/javascript">
@@ -66,11 +70,7 @@ function nowLocationClick() {
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script>
 <script>
 
-
-
-
-
-/*----- 지도 생성 start -----*/
+	/*----- 지도 생성 start -----*/
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     	mapOption = {
         	center: new daum.maps.LatLng(37.566833, 126.978522), // 지도의 중심좌표
@@ -82,7 +82,7 @@ function nowLocationClick() {
 	//지도가 생성됐을때 현재위치 중심 추적 함수
 	
 	nowLocation();
-/*----- 지도 생성 end -----*/
+	/*----- 지도 생성 end -----*/
 
 	//필드 값
 	var lat; //위도
@@ -97,19 +97,15 @@ function nowLocationClick() {
 	var centerMarker = new daum.maps.Marker({
     	position: centerMarkerPosition
 	});
-	
-	
 
 	// 중심 마커가 지도 위에 표시되도록 설정합니다
 	centerMarker.setMap(map);
 	
-	
-	
-/*----- 현재위치 추적의 핵심역할 GeoLocation 마커 / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  start -----*/
+	/*----- 현재위치 추적의 핵심역할 GeoLocation 마커 / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  start -----*/
 	function nowLocation() {
 		
-	if(!!locMarker) {
- 		locMarker.setMap(null);
+		if(!!locMarker) {
+	 		locMarker.setMap(null);
 		}
  	
 		// 지도에 마커와 인포윈도우를 표시하는 함수입니다
@@ -178,12 +174,12 @@ function nowLocationClick() {
 	daum.maps.event.addListener(map, 'center_changed', function() {
 		console.log('지도의 중심 좌표 : ' + map.getCenter().toString());
 		
-			centerMarker.setMap(null);
+		centerMarker.setMap(null);
 		
-			centerMarkerPosition = map.getCenter();
-			centerMarker = new daum.maps.Marker({
-				position : centerMarkerPosition
-			});
+		centerMarkerPosition = map.getCenter();
+		centerMarker = new daum.maps.Marker({
+			position : centerMarkerPosition
+		});
 		centerMarker.setMap(map);
 	});
 	
@@ -238,8 +234,6 @@ var centerMarkerWindow;
 		geocoder.coord2detailaddr(coord, callback);
 		
 	});
-		  
-	
 
 </script>
 </body>
