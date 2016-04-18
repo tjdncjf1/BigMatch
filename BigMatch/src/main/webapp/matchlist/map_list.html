@@ -6,7 +6,7 @@ Modify      : 조민호
 History     : - 2016-04-08 작성자 : 조민호 
                 * UI 수정(시간 추가, 테이블수정), 이미지 추가
               - 2016-04-18 작성자 : 서우철
-              	* 매치 조회 기능 구현.
+              	* 매치 조회 기능 구현.(추후 작업하는 걸로. API가 아직 미완성)
 -->
 <html>
 <head>
@@ -150,7 +150,7 @@ History     : - 2016-04-08 작성자 : 조민호
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <script>
-	$(function () {
+/* 	$(function () {
 		$('#jb-tabs').tabs(); // 탭 기능 추가.
 		
 		// 매치 조회
@@ -162,15 +162,13 @@ History     : - 2016-04-08 작성자 : 조민호
     			"Accept" : "application/json",
     			"Content-Type" : "application/json"
     		},
-    		data : JSON.stringify({
-				
-    		}),
     		success : function(event) {
-
+				console.log(event);
+				console.log('성공');
     		}
 		});
 		
-	});
+	}); */
 </script>
 </body>
 
