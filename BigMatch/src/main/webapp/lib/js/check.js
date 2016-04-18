@@ -53,9 +53,9 @@ $(function(){
         submitHandler: function (){ //유효성 검사를 통과시 전송
         	//암호화 과정
         	var rawData = $('#password').val();			// -> 입력받은 암호값
-        	//console.log(rawData);
+        	console.log(rawData);
         	var resultData = sha256(rawData);			// -> 변환된 암호값
-        	//console.log(resultData);
+        	console.log(resultData);
         	//frm.submit();
         	$.ajax({
         		url:'/membership.do',

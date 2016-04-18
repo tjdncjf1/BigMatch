@@ -7,6 +7,8 @@
    Modify     : 서우철
    History    :   - 2016-04-14 작성자 : 서우철
                    * 로그인 기능 추가. 
+                  - 2016-04-18 작성자 : 조민호
+                   * pw 암호화 후 로그인 기능 추가. 
 -->
 <head>
 <meta charset="UTF-8">
@@ -64,9 +66,23 @@ body {
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<!-- pw 암호화 -->
+<script src="../lib/js/sha-256.js" ></script> 
+
+
 <script type="text/javascript">
+
 $(function(){
+	
+	
+
 	$('#login').click(function(){
+		//암호화 과정
+		var rawData = $('#password').val();			// -> 입력받은 암호값
+		console.log(rawData);
+		var resultData = sha256(rawData);			// -> 변환된 암호값
+		console.log(resultData);
 		$.ajax({
 			url:'/login.do',
 			method:'POST',
@@ -77,7 +93,7 @@ $(function(){
 			},
 			data : JSON.stringify({
 				userId   : $('#userId').val(),
-				password : $('#password').val()
+				password : resultData
 			}),
 			success : function(data) {
 				if(data.result == "SUCCESS") {
