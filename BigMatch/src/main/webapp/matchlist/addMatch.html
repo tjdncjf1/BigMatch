@@ -7,6 +7,8 @@ History     : - 2016-04-07 작성자 : 조민호
                 * UI 수정  포기 ㅠㅠ
               - 2016-04-15 수정자 : 임현우
               	* UI에 위치등록 추가 및 UI 다듬기, 지도 팝업 추가
+              - 2016-04-18 수정자 : 임현우
+              	* 매치등록을 DB에 접근한다.
 -->
 
 
@@ -22,22 +24,18 @@ History     : - 2016-04-07 작성자 : 조민호
 <script
 	src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <style>
-#inputBar {
+#title {
 	padding-left: 4%;
 	padding-right: 4%;
 }
 
-#num {
+#level {
 	margin-left: 4%;
 	margn-right: 4%;	
 }
 
-#location {
-	margin-left: 4%;
-	margn-right: 4%;	
-}
 
-#textarea {
+#matchingDescription {
 	padding-left: 4%;
 	padding-right: 4%;
 }
@@ -62,10 +60,10 @@ iframe {
 	</div>
 
 
-	<div id="inputBar" align="center">
-		<label for="textinput-hide" class="ui-hidden-accessible">제목을
-			입력하세요...</label> <input type="text" name="textinput-hide" id="textinput-hide"
-			placeholder="제목을 입력하세요..." value="">
+	<div id="title" align="center">
+		<label for="textinput-hide" class="ui-hidden-accessible">Title</label>
+		<input type="text" name="matchingTitle" id="matchingTitle"
+			placeholder="제목을 입력하세요.">
 	</div>
 
 
@@ -73,11 +71,11 @@ iframe {
 		<form>
 			<fieldset data-role="controlgroup" data-type="horizontal">
 				<!--<legend>종목</legend>-->
-				<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="3ball" checked="checked">
-				<label for="radio-choice-h-2a">3 구</label>
-				<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="4ball">
-				<label for="radio-choice-h-2b">4 구</label>
-				<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="pocket">
+				<input type="radio" name="eventType" id="radio-choice-h-2a" value="EVT001" checked="checked">
+				<label for="radio-choice-h-2a">3  구</label>
+				<input type="radio" name="eventType" id="radio-choice-h-2b" value="EVT002">
+				<label for="radio-choice-h-2b">4  구</label>
+				<input type="radio" name="eventType" id="radio-choice-h-2c" value="EVT003">
 				<label for="radio-choice-h-2c">포켓볼</label>
 			</fieldset>
 		</form>
@@ -85,23 +83,22 @@ iframe {
 
 
 
-	<div id="persons" align="center">
+	<div align="center">
 		<form>
 			<fieldset data-role="controlgroup" data-type="horizontal">
-				<!--<legend>Horizontal:</legend>-->
-				<input type="radio" name="radio-choice-h-3" id="1-choice-h-2a"
-					value="on" checked="checked"> <label for="1-choice-h-2a">1
-					: 1</label> <input type="radio" name="radio-choice-h-3" id="1-choice-h-2b"
-					value="off"> <label for="1-choice-h-2b">2 : 2</label> <input
-					type="radio" name="radio-choice-h-3" id="1-choice-h-2c"
-					value="other"> <label for="1-choice-h-2c">3 : 3</label>
+				<input type="radio" name="memberCount" id="1-choice-h-2a" value="1" checked="checked">
+				<label for="1-choice-h-2a">1 : 1</label>
+				<input type="radio" name="memberCount" id="1-choice-h-2b" value="2">
+				<label for="1-choice-h-2b">2 : 2</label> 
+				<input type="radio" name="memberCount" id="1-choice-h-2c" value="3">
+				<label for="1-choice-h-2c">3 : 3</label>
 			</fieldset>
 		</form>
 	</div>
 
-		<div id="num" style="width:92%">
+		<div id="level" style="width:92%">
 			<!--<label for="select-choice-a" class="select">희망상대실력</label>-->
-			<select name="select-choice-a" id="select-choice-a"
+			<select name="level" id="select-choice-a"
 				data-native-menu="false">
 				<option>희망상대실력</option>
 				<option value="30">30이하</option>
@@ -117,17 +114,8 @@ iframe {
 		</div>
 
 
-<!-- 
-		<div id="location" style="width: 92%">
-			<button
-				class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-location">위치</button>
-		</div>
-		 -->
-		
-		<!--------------------------------------------------------------------------------------->
-		
 		<div align="center">
-		<a href="#popupMap" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open Map</a>
+		<a href="#popupMap" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">위치 등록</a>
 		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15">
     	<a href="#" data-rel="back" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     	<iframe src="registerMap.html" width="80%" height="80%" seamless=""></iframe>
@@ -136,8 +124,11 @@ iframe {
 		
 		<!--------------------------------------------------------------------------------------->
 
+	
+		
+	
 
-	<div id="textarea" align="center">
+	<div id="description" align="center">
 		<form>
 			<!--<label for="textarea-1">내용</label>
 <textarea name="textarea-1" id="textarea-1"></textarea>-->
@@ -145,14 +136,14 @@ iframe {
 			<!--<label for="textarea-6">Textarea:</label>-->
 			    
 			<textarea cols="40" rows="8" name="textarea-6" id="textarea-6"
-				placeholder="간단한 내용을 입력하세요..."></textarea>
+				placeholder="간단한 내용을 입력하세요"></textarea>
 		</form>
 	</div>
 
 
 	<div id="input" align="center">
 		<form>
-			<input type="button" data-inline="true" value="입력">
+			<input type="submit" data-inline="true" value="입력">
 			<div class="ui-input-btn ui-btn ui-btn-inline">
 				취소 <input type="button" data-enhanced="true" value="Enhanced">
 			</div>
@@ -195,7 +186,7 @@ $( document ).on( "pagecreate", function() {
         .css( { "width" : 0, "height" : 0 } );
     $( "#popupMap" ).on({
         popupbeforeposition: function() {
-            var size = scale( 520, 440, 0, 1 ),
+            var size = scale( 600, 800, 0, 1 ),
                 w = size.width,
                 h = size.height;
             $( "#popupMap iframe" )
@@ -214,5 +205,28 @@ $( document ).on( "pagecreate", function() {
     });
 });
 </script>
+
+
+
+<script type="text/javascript">
+$.ajax({
+	url:'/match.do',
+	method:'POST',
+	dataType:'json',
+	headers: { 
+		"Accept" : "application/json",
+		"Content-Type" : "application/json"
+	},
+	data : JSON.stringify({
+		matchingTitle   : $('#matchTitle').val(),
+		password : resultData,
+		name     : $('#name').val(),
+		gender   : $('input[name="gender"]:checked:checked').val()
+	}),
+	success : function(event) {
+		//location.href = "login.html";
+	}
+</script>
+
 </body>
 </html>
