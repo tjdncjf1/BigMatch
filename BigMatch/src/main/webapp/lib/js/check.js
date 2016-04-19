@@ -6,19 +6,26 @@
                    * 회원가입 유효성 검사 추가 (추후에 DB랑 연동해서 아이디 중복검사 추가해야함).
                   - 2016-04-16 작성자 : 조민호
                    * pw 암호화 작업 추가
+                  - 2016-04-19 작성자 : 서우철
+                   * pw 특수문자,영문,숫자 포함하게 정규식 작성
 
 */
 $(function(){
+	
+	// 패스워드 정규식.
+	$.validator.addMethod("passwordCk",  function( value, element ) {
+		return this.optional(element) ||  /^.*(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/.test(value);
+	}, '영문,숫자,특수문자 포함'); 
 	
 	// 기본 형태
 	//$('#registerForm').validate();  // 유효성 검사를 적용
 	
 	$('#registerForm').validate({
 		rules: {
-			//userId:{required:true, minlength:3, remote:"Validate"},
 			userId:{required:true, email:true},
             password: {
             	required: true,
+            	passwordCk: true,
 				minlength: 8	
             },
             confirmPassword: {
@@ -56,7 +63,6 @@ $(function(){
         	//console.log(rawData);
         	var resultData = sha256(rawData);			// -> 변환된 암호값
         	//console.log(resultData);
-        	//frm.submit();
         	$.ajax({
         		url:'/membership.do',
         		method:'POST',
