@@ -35,7 +35,6 @@ body {
 </style>
 </head>
 <body>
-
 	<div align="center">
 		<h1>
 			Big Match
@@ -66,16 +65,13 @@ body {
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
+<!-- 공통 자바스크립트 -->
+<script src="../lib/js/common.js" ></script> 
 <!-- pw 암호화 -->
 <script src="../lib/js/sha-256.js" ></script> 
-
-
 <script type="text/javascript">
 
 $(function(){
-	
-	
 
 	$('#login').click(function(){
 		//암호화 과정
@@ -84,7 +80,7 @@ $(function(){
 		var resultData = sha256(rawData);			// -> 변환된 암호값
 		console.log(resultData);
 		$.ajax({
-			url:'/login.do',
+			url: baseUrl + '/login.do',
 			method:'POST',
 			dataType:'json',
 			headers: { 

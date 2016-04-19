@@ -1,4 +1,4 @@
-/*
+/**
    Program    : joinValidation.js
    Description: 회원가입 유효성 검사.
    Modify     : 서우철
@@ -63,7 +63,7 @@ $(function(){
         	var resultData = sha256(rawData);			// -> 변환된 암호값
         	console.log('암호화된 비밀번호 : ' + resultData);
         	$.ajax({
-        		url:'/membership.do',
+        		url: baseUrl + '/membership.do',
         		method:'POST',
         		dataType:'json',
         		headers: { 

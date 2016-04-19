@@ -1,3 +1,11 @@
+/**
+   Program    : navigation.js
+   Description: 네비게이션 바.
+   Modify     : 서우철
+   History    :   - 2016-04-15 작성자 : 서우철
+                   * 네비게이션 바 기능 추가
+
+*/
 $(function() {
 	$( "[data-role='navbar']" ).navbar();
 	$( "[data-role='header'], [data-role='footer']" ).toolbar();
