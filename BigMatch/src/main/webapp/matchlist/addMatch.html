@@ -8,7 +8,7 @@ History     : - 2016-04-07 작성자 : 조민호
               - 2016-04-15 수정자 : 임현우
               	* UI에 위치등록 추가 및 UI 다듬기, 지도 팝업 추가
               - 2016-04-18 수정자 : 임현우
-              	* 매치등록을 DB에 접근한다.
+              	* 매치등록을 DB에 접근.
 -->
 
 <html>
@@ -194,15 +194,15 @@ width
 					method:'POST',
 					dataType:'json',
 					headers: { 
-					 'Accept' : 'application/json',
-					 'Content-Type' : 'application/json'
+						'Accept' : 'application/json',
+						'Content-Type' : 'application/json'
 					},
 					data : JSON.stringify({
-					 matchingTitle		: $('#matchingTitle').val(),
-					 eventTypeCd		: $('input[name="eventType"]:checked:checked').val(),
-					 memberCount		: $('input[name="memberCount"]:checked:checked').val(),
-					 targetStartLevel	: $('select[name="level"]').val(),
-					 matchingDesc		: $('#textarea-6').val()
+						matchingTitle		: $('#matchingTitle').val(),
+						eventTypeCd			: $('input[name="eventType"]:checked:checked').val(),
+						memberCount			: $('input[name="memberCount"]:checked:checked').val(),
+						targetStartLevel	: $('select[name="level"]').val(),
+						matchingDesc		: $('#textarea-6').val()
 					}),
 					success : function(event) {
 						if(event.result == 'SUCCESS') {
