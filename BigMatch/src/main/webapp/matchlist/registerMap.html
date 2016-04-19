@@ -67,6 +67,8 @@ function nowLocationClick() {
     </div>
 </div>
 
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script	src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script>
 <script>
 
@@ -223,8 +225,11 @@ var centerMarkerWindow;
 		        console.log('도로명 주소 : ' + result[0].roadAddress.name);
 		        console.log('지번 주소 : ' + result[0].jibunAddress.name);
 		        
-		        var centerMarkerContent = '<div style="padding:5px;">주소 : '+result[0].jibunAddress.name+'<br>도로명주소 : '+result[0].roadAddress.name+'<br><a class="registerButton">등록하기</a></div>',
-				centerMarkerContentPosition = map.getCenter();
+		        var centerMarkerContent = 	'<div style="padding:5px;">주소 : '+result[0].jibunAddress.name+
+		        							'<br>도로명주소 : '+result[0].roadAddress.name+
+		        							'<br><a href="#" id="registerBt">등록하기</a></div>';
+		        							//'<br><a class="registerButton">등록하기</a></div>';
+				var	centerMarkerContentPosition = map.getCenter();
 		
 				// 인포윈도우를 생성합니다
 				centerMarkerWindow = new daum.maps.InfoWindow({
@@ -234,14 +239,18 @@ var centerMarkerWindow;
 				
 				centerMarkerWindow.open(map, centerMarker);
 					
-		    }   
+		    }
 		};
 
 		geocoder.coord2detailaddr(coord, callback);
 		
 	});
 	
-
+	$(function(){
+		$('#registerBt').click(function(){
+			top.opner.history.go(0);
+		});
+	});
 	
 </script>
 

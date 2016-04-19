@@ -1,5 +1,5 @@
 /*
-   Program    : check.js
+   Program    : joinValidation.js
    Description: 회원가입 유효성 검사.
    Modify     : 서우철
    History    :   - 2016-04-15 작성자 : 서우철
@@ -56,7 +56,6 @@ $(function(){
 				minlength:'닉네임이 짧습니다.'
 			}
         },
- 
         submitHandler: function (){ //유효성 검사를 통과시 전송
         	//암호화 과정
         	var rawData = $('#password').val();			// -> 입력받은 암호값
@@ -78,7 +77,12 @@ $(function(){
         			gender   : $('input[name="gender"]:checked:checked').val()
         		}),
         		success : function(event) {
-        			location.href = "login.html";
+        			if(event.result == 'SUCCESS') {
+						alert('회원 가입 성공');
+						location.href = "login.html";
+					} else {
+						alert('회원 가입 실패');
+					}
         		}
         	});
         },
