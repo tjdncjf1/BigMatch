@@ -88,11 +88,14 @@ function nowLocationClick() {
 	var lat; //위도
 	var lon; //경도
 	
+	
+	
 	var locMarker;
 	
 	// 중심 마커가 표시될 위치입니다 
 	var centerMarkerPosition = map.getCenter();
-
+	
+	
 	// 중심 마커를 생성합니다
 	var centerMarker = new daum.maps.Marker({
     	position: centerMarkerPosition
@@ -173,6 +176,9 @@ function nowLocationClick() {
 	// 지도 중심 좌표 변화 이벤트를 등록한다
 	daum.maps.event.addListener(map, 'center_changed', function() {
 		console.log('지도의 중심 좌표 : ' + map.getCenter().toString());
+		console.log('이것은 바로 위도 : '+map.getCenter().getLat().toString());
+		console.log('이것은 바로 경도 : '+map.getCenter().getLng().toString());
+		
 		
 		centerMarker.setMap(null);
 		
@@ -217,7 +223,7 @@ var centerMarkerWindow;
 		        console.log('도로명 주소 : ' + result[0].roadAddress.name);
 		        console.log('지번 주소 : ' + result[0].jibunAddress.name);
 		        
-		        var centerMarkerContent = '<div style="padding:5px;">주소 : '+result[0].jibunAddress.name+'<br>도로명주소 : '+result[0].roadAddress.name+'<br><a href="">등록하기</a></div>',
+		        var centerMarkerContent = '<div style="padding:5px;">주소 : '+result[0].jibunAddress.name+'<br>도로명주소 : '+result[0].roadAddress.name+'<br><a class="registerButton">등록하기</a></div>',
 				centerMarkerContentPosition = map.getCenter();
 		
 				// 인포윈도우를 생성합니다
@@ -234,7 +240,9 @@ var centerMarkerWindow;
 		geocoder.coord2detailaddr(coord, callback);
 		
 	});
+	
 
+	
 </script>
 
 </body>

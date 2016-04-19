@@ -115,11 +115,11 @@ iframe {
 
 
 		<div align="center">
-		<a href="#popupMap" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">위치 등록</a>
-		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15">
-    	<a href="#" data-rel="back" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-    	<iframe src="registerMap.html" width="80%" height="80%" seamless=""></iframe>
-		</div>
+			<a href="#popupMap" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">위치 등록</a>
+			<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15">
+	    		<a href="#" data-rel="back" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+	    		<iframe src="registerMap.html" width="80%" height="80%" seamless=""></iframe>
+			</div>
 		</div>
 		
 		<!--------------------------------------------------------------------------------------->
@@ -135,7 +135,7 @@ iframe {
 
 			<!--<label for="textarea-6">Textarea:</label>-->
 			    
-			<textarea cols="40" rows="8" name="textarea-6" id="textarea-6"
+			<textarea cols="40" rows="8" name="description" id="textarea-6"
 				placeholder="간단한 내용을 입력하세요"></textarea>
 		</form>
 	</div>
@@ -149,6 +149,8 @@ iframe {
 			</div>
 		</form>
 	</div>
+	
+	
 	
 	
 	
@@ -204,11 +206,16 @@ $( document ).on( "pagecreate", function() {
         }
     });
 });
+
 </script>
 
 
 
 <script type="text/javascript">
+
+console.log($('input[name="eventType"]:checked:checked').val());
+console.log($('#textarea-6').val());
+
 $.ajax({
 	url:'/match.do',
 	method:'POST',
@@ -218,14 +225,17 @@ $.ajax({
 		"Content-Type" : "application/json"
 	},
 	data : JSON.stringify({
-		matchingTitle   : $('#matchTitle').val(),
-		password : resultData,
-		name     : $('#name').val(),
-		gender   : $('input[name="gender"]:checked:checked').val()
+		matchingTitle	: $('#title').val(),
+		eventTypeCd		: $('input[name="eventType"]:checked:checked').val(),
+		memberCount		: $('input[name="memberCount"]:checked:checked').val(),
+		targetStartLevel: $('select[name="level"]').val(),
+		matchingDesc	: $('#textarea-6').val()
 	}),
 	success : function(event) {
-		//location.href = "login.html";
+		//location.href = "matchlist.html";
 	}
+});
+
 </script>
 
 </body>
