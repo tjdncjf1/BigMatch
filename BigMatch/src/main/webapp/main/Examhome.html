@@ -1,0 +1,124 @@
+<!-- 
+   Program    : home.html
+   Date       : 2016-04-07
+   Description: BigMatch 홈 화면.
+   Modify     : 서우철
+   History    :   - 2016-04-07 작성자 : 서우철
+                   * 모듈화 작업.(각 기능을 따로 html로 뺌)
+                  - 2016-04-20 작성자 : 서우철
+                   * swipe 기능 추가. 
+                   * record, recommend, more, myPage 페이지 home.html로 추합.
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>home</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<link rel="stylesheet" href="../lib/css/navigation.css">
+<!-- Link Swiper's CSS -->
+<link rel="stylesheet" href="../lib/swiper/css/swiper.css">
+</head>
+<body>
+	<div class="swiper-container">
+        <div class="swiper-wrapper">
+        
+        	<div class="swiper-slide">
+        	슬라이드1
+        	</div><!-- swiper-slide -->
+        	
+        	<div class="swiper-slide">
+        	슬라이드2
+        	</div><!-- swiper-slide -->
+        	
+        	<div class="swiper-slide">
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<a class="ui-shadow ui-btn ui-corner-all" href="#">
+								<img alt="user" src="../lib/images/home/smile.png" width="50%"><br>
+								<font style="font-size: 15pt">닉네임</font></a>
+							</div>
+							<div class="ui-block-b">
+								<a class="ui-shadow ui-btn ui-corner-all" href="#">
+								<img alt="rank" src="../lib/images/home/trophy.png" width="50%"><br>
+								<font style="font-size: 15pt">Rank</font></a>
+							</div>
+						</div>
+						<div class="ui-grid-b">
+							<div class="ui-block-a">
+								<!-- popup창				
+								<a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="#positionWindow" data-rel="popup" data-position-to="window">
+							 	-->
+								<a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="../matchlist/matchMap.html" data-ajax="false">
+									<img alt="3ball" src="../lib/images/home/3ball.png" width="80%"><br>
+									<font style="font-size: 15pt">3구</font>
+								</a>
+							</div>
+							<div class="ui-block-b">
+								<!-- popup창	
+								<a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="#positionWindow" data-rel="popup" data-position-to="window">
+								-->
+								<a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="../matchlist/matchMap.html" data-ajax="false">
+									<img alt="4ball" src="../lib/images/home/4ball.png" width="80%"><br>
+									<font style="font-size: 15pt">4구</font>
+								</a>
+							</div>
+							<div class="ui-block-c">
+								<!-- popup창
+								<a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="#positionWindow" data-rel="popup" data-position-to="window">
+								-->
+								<a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="../matchlist/matchMap.html" data-ajax="false">
+									<img alt="pocketball" src="../lib/images/home/pocketball.png" width="80%"><br>
+									<font style="font-size: 15pt">포켓볼</font>
+								</a>
+							</div>
+						</div>
+						<a class="ui-btn ui-shadow"	href="../matchlist/addMatch.html" data-ajax="false">
+						<font style="font-size: 12pt">대전 등록!</font></a>
+						<a class="ui-btn ui-shadow" href="#">
+						<font style="font-size: 12pt">빠른 대전!</font></a> 
+					<!-- 	 
+					<div data-role="popup" id="positionWindow" data-theme="none" data-shadow="false">
+						<a href="../matchlist/matchMap.html"><img alt="mapView" class="popphoto" src="../lib/images/home/map.png" height="40%" width="40%"/></a>
+						<a href="../matchlist/map_list.html"><img alt="listView" class="popphoto" src="../lib/images/home/list.png" height="40%" width="40%"/></a>
+					</div>
+					-->		
+			</div> <!-- swiper-slide -->
+			
+			<div class="swiper-slide">
+			슬라이드3
+			</div> <!-- swiper-slide -->
+			
+			<div class="swiper-slide">
+			슬라이드4
+			</div> <!-- swiper-slide -->
+			
+		</div> <!-- swiper-wrapper -->
+	</div> <!-- swiper-container -->
+
+	<div data-role="footer" data-theme="a">
+		<div data-role="navbar">
+			<ul style="right: 0.5%">
+				<li><a href="recommend.html" data-prefetch="true" data-transition="slide" data-direction="reverse" data-ajax="false"><img alt="thumb_up" src="../lib/images/home/thumb_up.png"><br>추천</a></li>
+				<li><a href="record.html" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="record" src="../lib/images/home/record.png"><br>기록</a></li>
+				<li><a href="#" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="home" src="../lib/images/home/home.png"><br>홈</a></li>
+				<li><a href="#" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="my" src="../lib/images/home/my.png"><br> 마이</a></li>
+				<li><a href="more.html" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="more" src="../lib/images/home/more.png"><br>더보기</a></li>
+            </ul>
+		</div><!-- /navbar -->
+	</div>
+	
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="../lib/swiper/js/swiper.jquery.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="../lib/js/navigation.js"></script>
+<script>
+/* swipe 속성 부여 */
+var swiper = new Swiper('.swiper-container', {
+	initialSlide: 2, // 두번째 페이지(div)가 첫화면으로 띄움(home화면)
+	loop: false // 1페이지(추천페이지)에서 왼쪽으로 더이상 swipe 못하게 막음
+});
+</script>
+</body>
+</html>
