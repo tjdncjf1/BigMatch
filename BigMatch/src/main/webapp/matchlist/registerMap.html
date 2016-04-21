@@ -96,7 +96,6 @@
 	//중심 마커가 표시될 위치입니다 
 	var centerMarkerPosition = map.getCenter();
 	
-	
 	//중심 마커를 생성합니다
 	var centerMarker = new daum.maps.Marker({
 		position: centerMarkerPosition
@@ -134,7 +133,6 @@
 		// 지도 중심좌표를 접속위치로 변경합니다
 		map.setCenter(locPosition);
 	}
-	
 		
 	//HTML5의 geolocation으로 사용할 수 있는지 확인합니다 
 	if (navigator.geolocation) {
@@ -198,6 +196,10 @@
 	
 	/*----- 참고 소스-----*/
 	
+	function popClose(){
+		parent.popupClose();
+	}
+	
 	daum.maps.event.addListener(map, 'dragstart', function() {
 	console.log('드래그시작');
 	if(!!centerMarkerWindow){
@@ -225,21 +227,14 @@
 	        var jibunAddr = '주소 : '+result[0].jibunAddress.name+'<br>';
 	        	detailAddr = '도로명주소 : '+result[0].roadAddress.name+'<br>';
 	        
-	        /* var sendAddr = '<div align="center"><a href="addMatch.html?'
+	       /*  var sendAddr = '<div align="center"><!-- <a href="addMatch.html?'
 	        				+'lat='+map.getCenter().getLat().toString()
 	        				+'&lng='+map.getCenter().getLng().toString()
-	        				+'&loc='+result[0].jibunAddress.name+'"><input type="button" value="이 위치 전송"></a></div>';
-	         */	
-	        				
-	        var sendAddr = '<div align="center"><a href="#" id="regBt"><input type="button" value="이 위치 전송"></a></div>'				
-	        
-	        
-	        $(function() {
-	        	$("#regBt").bind("click", function(){
-	        		self.close();
-	        	});
-	        });
-	        
+	        				+'&loc='+result[0].jibunAddress.name+'">--> <input type="button" id="regBt" value="이 위치 전송"></a></div>';
+	        				 */
+	        				 
+	        var sendAddr = '<div align="center">'
+	        				+ '<input type="button" onclick="popClose();" value="이 위치 전송"></a></div>'				
 	        
 	        var centerMarkerContent = sendAddr;
 	        		
@@ -247,7 +242,7 @@
 				'<br>도로명주소 : '+result[0].roadAddress.name+
 				'<br><input type="button" id="registerBt" value="등록">';
 				//'<br><a class="registerButton">등록하기</a></div>';
-	*/	        	
+			*/	        	
 	        	
 			var	centerMarkerContentPosition = map.getCenter();
 	
@@ -265,6 +260,8 @@
 	geocoder.coord2detailaddr(coord, callback);
 	
 	});
+	
+
 
 </script>
 

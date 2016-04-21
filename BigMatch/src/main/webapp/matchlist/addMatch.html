@@ -24,29 +24,22 @@ History     : - 2016-04-07 작성자 : 조민호
 	padding-left: 4%;
 	padding-right: 4%;
 }
-
-
 #description {
 	padding-left: 4%;
 	padding-right: 4%;
 }
-
 #level {
 	padding-left: 4%;
 	padding-right: 4%;
 }
-
 iframe {
 	border: none;
 }
-
 .*{
 	width:92%;
 }
 </style>
-
 </head>
-
 <body>
 	<div data-role="header" data-position="fixed" data-theme="a">
 		<a href="../" data-rel="back"
@@ -100,6 +93,13 @@ iframe {
 			</select>
 		</div>
 
+		<script type="text/javascript">
+			function popupClose() {
+				console.log("도착했다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				$('#popupMap').popup('close');
+			}
+		</script>
+
 		<div align="center">
 			<a href="#popupMap" data-rel="popup" data-position-to="window"
 				class="ui-btn ui-corner-all ui-shadow ui-btn-inline">위치 등록</a>
@@ -111,8 +111,6 @@ iframe {
 				<iframe src="registerMap.html" width="90%" height="90%" seamless=""></iframe>
 			</div>
 		</div>
-		
-		
 
 		<!--------------------------------------------------------------------------------------->
 
@@ -134,13 +132,10 @@ iframe {
 <script src="../lib/js/popup.js" ></script>
 
 <script type="text/javascript">
-	
-</script>
- 
-<script type="text/javascript">
-
 
 	$(function() {
+		
+		
 		$('form').on('submit', function(event) {
 			event.preventDefault(); // 디폴트 이벤트 제거
 			

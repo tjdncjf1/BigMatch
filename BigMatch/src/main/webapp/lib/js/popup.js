@@ -6,7 +6,7 @@
    History    :   - 2016-04-19 작성자 : 서우철
                    * 팝업 기능 모듈화
  * 
- */
+*/
 
 // popup examples
 $(document).on("pagecreate",function() {
@@ -56,7 +56,7 @@ $(document).on("pagecreate",function() {
 								 .css({
 									"width" : 0,
 									"height" : 0
-			});
+								 });
 		}
 	});
 
