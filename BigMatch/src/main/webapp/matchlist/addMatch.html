@@ -94,6 +94,7 @@ iframe {
 		</div>
 
 		<script type="text/javascript">
+			// popup창 close function()
 			function popupClose() {
 				console.log("도착했다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 				$('#popupMap').popup('close');
@@ -135,6 +136,7 @@ iframe {
 
 	$(function() {
 		
+		console.log(location.search);
 		
 		$('form').on('submit', function(event) {
 			event.preventDefault(); // 디폴트 이벤트 제거

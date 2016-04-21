@@ -11,6 +11,9 @@
 				  	현재위치 geoLocation
 				  - 2016-04-10 작성자 : 임현우
 				 	중심 마커생성 및 주소 표시 완료! 마지막으로 확인!
+				  - 2016-04-21 작성자 : 서우철
+				    * iframe popup창 close
+				    *  
     -->
 
 <html>
@@ -74,7 +77,6 @@
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script>
 
 <script type="text/javascript">
-
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
 			center: new daum.maps.LatLng(37.566833, 126.978522), // 지도의 중심좌표
@@ -92,6 +94,7 @@
 	var lat; //위도
 	var lon; //경도
 	var locMarker;
+	var jibun=''; // 주소 
 	
 	//중심 마커가 표시될 위치입니다 
 	var centerMarkerPosition = map.getCenter();
@@ -152,10 +155,12 @@
 	
 	//주소-좌표 변환 객체를 생성합니다
 	var geocoder = new daum.maps.services.Geocoder();
+
 	
 	//지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
 	daum.maps.event.addListener(map, 'click', function(mouseEvent) {
 		searchDetailAddrFromCoords(mouseEvent.latLng, function(status, result) {
+			addr = result[0].jibunAddress.name;
 			if (status === daum.maps.services.Status.OK) {
 	 	 		console.log(result[0].roadAddress.name);
 		    		console.log(result[0].jibunAddress.name); 
@@ -190,14 +195,20 @@
 	});
 	
 	}
+	
+	
 	/*----- 현재위치 추적의 핵심역할 GeoLocation 마커 / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  end -----*/
 	
 	var centerMarkerWindow;
 	
 	/*----- 참고 소스-----*/
 	
+	// 팝업창 닫고 addMatch.html로 데이터전송 function() 
 	function popClose(){
 		parent.popupClose();
+		location.href= 'addMatch.html?lat='+map.getCenter().getLat().toString()
+									+'&lng='+map.getCenter().getLng().toString()
+									+'&loc="'+jibun+ '"';
 	}
 	
 	daum.maps.event.addListener(map, 'dragstart', function() {
