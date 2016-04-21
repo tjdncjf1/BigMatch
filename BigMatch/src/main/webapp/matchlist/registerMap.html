@@ -13,8 +13,8 @@
 				 	중심 마커생성 및 주소 표시 완료! 마지막으로 확인!
 				  - 2016-04-21 작성자 : 서우철
 				    * iframe popup창 close
-				    *  
-    -->
+				    * html간 데이터 전송 실패(04-21) 
+-->
 
 <html>
 <head>
@@ -206,9 +206,11 @@
 	// 팝업창 닫고 addMatch.html로 데이터전송 function() 
 	function popClose(){
 		parent.popupClose();
+		/* 데이터 전송 하는것 다시 생각. (04-21 fail)
 		location.href= 'addMatch.html?lat='+map.getCenter().getLat().toString()
 									+'&lng='+map.getCenter().getLng().toString()
 									+'&loc="'+jibun+ '"';
+		*/
 	}
 	
 	daum.maps.event.addListener(map, 'dragstart', function() {
