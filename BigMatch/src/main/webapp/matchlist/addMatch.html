@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!-- 
 Program     :addMatch.html
 Date        : 2016-04-07
@@ -24,12 +25,13 @@ History     : - 2016-04-07 작성자 : 조민호
 	padding-right: 4%;
 }
 
-#level {
-	margin-left: 4%;
-	margn-right: 4%;
+
+#description {
+	padding-left: 4%;
+	padding-right: 4%;
 }
 
-#matchingDescription {
+#level {
 	padding-left: 4%;
 	padding-right: 4%;
 }
@@ -38,7 +40,7 @@ iframe {
 	border: none;
 }
 
-.{
+.*{
 	width:92%;
 }
 </style>
@@ -53,7 +55,7 @@ iframe {
 	</div>
 
 	<form>
-		<div align="center">
+		<div align="center" id="title">
 			<label for="textinput-hide" class="ui-hidden-accessible">Title</label>
 			<input type="text" name="matchingTitle" id="matchingTitle"
 				placeholder="제목을 입력하세요.">
@@ -106,9 +108,11 @@ iframe {
 				<a href="#" data-rel="back"
 					class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-a ui-icon-delete 
 	    		ui-btn-icon-notext ui-btn-right">Close</a>
-				<iframe src="registerMap.html" width="80%" height="80%" seamless=""></iframe>
+				<iframe src="registerMap.html" width="90%" height="90%" seamless=""></iframe>
 			</div>
 		</div>
+		
+		
 
 		<!--------------------------------------------------------------------------------------->
 
@@ -118,7 +122,7 @@ iframe {
 		</div>
 
 		<div id="input" align="center">
-			<input type="submit" id="registerMatch" data-inline="true" value="입력">
+			<input type="submit" id="registerMatch" data-inline="true" value="등록하기!">
 		</div>
 	</form>
 	
@@ -127,11 +131,25 @@ iframe {
 <!-- 공통 자바스크립트 -->
 <script src="../lib/js/common.js" ></script> 
 <!-- 팝업 -->
-<script src="../lib/js/popup.js" ></script> 
+<script src="../lib/js/popup.js" ></script>
+
 <script type="text/javascript">
+	
+</script>
+ 
+<script type="text/javascript">
+
+
 	$(function() {
 		$('form').on('submit', function(event) {
 			event.preventDefault(); // 디폴트 이벤트 제거
+			
+			console.log($('#matchingTitle').val()); //제목
+			console.log($('input[name="eventType"]:checked:checked').val()); //경기타입
+			console.log($('input[name="memberCount"]:checked:checked').val()); //멤버수
+			console.log($('select[name="level"]').val()); //희망상대실력
+			console.log($('#textarea-6').val()); //간단한 내용
+			
 			$.ajax({
 				url: baseUrl + '/match.do',
 				method:'POST',
@@ -156,10 +174,11 @@ iframe {
 					}
 				}
 			});
-		});
-		
+		});		
 	});
 </script>
+
+
 
 </body>
 </html>

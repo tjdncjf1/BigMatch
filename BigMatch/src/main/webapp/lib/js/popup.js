@@ -40,7 +40,7 @@ $(document).on("pagecreate",function() {
 					
 	$("#popupMap").on({
 		popupbeforeposition : function() {
-			var size = scale(600, 800,0, 1), w = size.width, h = size.height;
+			var size = scale(300, 400,0, 0), w = size.width, h = size.height;
 			$("#popupMap iframe").attr("width", w).attr("height", h);
 			$("#popupMap iframe").contents()
 								 .find("#map_canvas")

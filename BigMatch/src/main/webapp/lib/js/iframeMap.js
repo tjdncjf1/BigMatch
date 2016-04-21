@@ -9,7 +9,7 @@
  */
 
 /*----- 지도 생성 start -----*/
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+/*var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
     	center: new daum.maps.LatLng(37.566833, 126.978522), // 지도의 중심좌표
 		level: 3 // 지도의 확대 레벨
@@ -20,7 +20,7 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 //지도가 생성됐을때 현재위치 중심 추적 함수
 
 nowLocation();
-/*----- 지도 생성 end -----*/
+----- 지도 생성 end -----
 
 //필드 값
 var lat; //위도
@@ -38,8 +38,9 @@ var centerMarker = new daum.maps.Marker({
 
 // 중심 마커가 지도 위에 표시되도록 설정합니다
 centerMarker.setMap(map);
+map.setDraggable(true);
 
-/*----- 현재위치 추적의 핵심역할 GeoLocation 마커 / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  start -----*/
+----- 현재위치 추적의 핵심역할 GeoLocation 마커 / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  start -----
 function nowLocation() {
 	
 	if(!!locMarker) {
@@ -125,11 +126,11 @@ function nowLocation() {
 	});
 
 }
-/*----- 현재위치 추적의 핵심역할 GeoLocation 마커 / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  end -----*/
+----- 현재위치 추적의 핵심역할 GeoLocation 마커 / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  end -----
 
 var centerMarkerWindow;
 
-/*----- 참고 소스-----*/
+----- 참고 소스-----
 
 daum.maps.event.addListener(map, 'dragstart', function() {
 	console.log('드래그시작');
@@ -155,10 +156,22 @@ daum.maps.event.addListener(map, 'dragend', function() {
 	        console.log('도로명 주소 : ' + result[0].roadAddress.name);
 	        console.log('지번 주소 : ' + result[0].jibunAddress.name);
 	        
-	        var centerMarkerContent = 	'<div style="padding:5px;">주소 : '+result[0].jibunAddress.name+
-	        							'<br>도로명주소 : '+result[0].roadAddress.name+
-	        							'<br><a href="#" id="registerBt">등록하기</a></div>';
-	        							//'<br><a class="registerButton">등록하기</a></div>';
+	        var jibunAddr = '주소 : '+result[0].jibunAddress.name+'<br>';
+	        	detailAddr = '도로명주소 : '+result[0].roadAddress.name+'<br>';
+	        
+	        var sendAddr = '<div align="center"><a href="addMatch.html?'
+	        				+'lat='+map.getCenter().getLat().toString()
+	        				+'&lng='+map.getCenter().getLng().toString()
+	        				+'&loc='+result[0].jibunAddress.name+'"><input type="button" value="이 위치 전송"></a></div>';
+	        	
+	        var centerMarkerContent = sendAddr;
+	        		
+	        	'주소 : '+result[0].jibunAddress.name+
+				'<br>도로명주소 : '+result[0].roadAddress.name+
+				'<br><input type="button" id="registerBt" value="등록">';
+				//'<br><a class="registerButton">등록하기</a></div>';
+	        	
+	        	
 			var	centerMarkerContentPosition = map.getCenter();
 	
 			// 인포윈도우를 생성합니다
@@ -175,10 +188,4 @@ daum.maps.event.addListener(map, 'dragend', function() {
 	geocoder.coord2detailaddr(coord, callback);
 	
 });
-
-$(function(){
-	$('#registerBt').click(function(){
-		top.opner.history.go(0);
-	});
-});
-
+*/
