@@ -16,42 +16,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>home</title>
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-<link rel="stylesheet" href="../lib/css/navigation.css">
 <!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="../lib/swiper/css/swiper.css">
 <!-- record page css -->
 <link rel="stylesheet" href="../lib/css/record.css">
+<!-- swiper css -->
+<link rel="stylesheet" href="../lib/css/home_swiper.css">
+<!-- more page css -->
+<link rel="stylesheet" href="../lib/css/more.css">
 <style>
-    body {
-    	margin: 0;
-        padding: 0;
-    }
-    .swiper-container {
-        width: 100%;
-        height: 100%;
-    }
-    .swiper-slide {
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        align-items: center;
-    }
+body {
+	margin: 0;
+    padding: 0;
+}
 </style>
 </head>
 <body>
 	<div class="swiper-container">
         <div class="swiper-wrapper">
         
-        	<div class="swiper-slide" style="width:100%">
-        	슬라이드1
+        	<!-- 추천화면 -->
+        	<div class="swiper-slide">
+        		<div data-role="tabs" id="tabs">
+					<div data-role="navbar">
+						<ul>
+							<li><a href="#one" data-ajax="false">one</a></li>
+							<li><a href="#two" data-ajax="false">two</a></li>
+						</ul>
+					</div>
+					<div id="one" class="ui-body-d ui-content" style="padding: 0em">
+						<div data-role="collapsibleset" data-content-theme="a"
+							data-iconpos="right" id="set">
+							<div data-role="collapsible" data-collapsed="true">
+								<h3>Section 1</h3>
+								<p>I'm the collapsible content.</p>
+							</div>
+						</div>
+					</div>
+					<div id="two" class="ui-body-d ui-content" style="padding: 0em">
+						<div data-role="collapsibleset" data-content-theme="a"
+							data-iconpos="right" id="set">
+							<div data-role="collapsible" data-collapsed="true">
+								<h3>Section 2</h3>
+								<p>I'm the collapsible content.</p>
+							</div>
+						</div>
+					</div>
+				</div>
         	</div><!-- swiper-slide -->
         	
         	<!-- 기록화면 -->
-        	<div class="swiper-slide" style="width:100%">
+        	<div class="swiper-slide">
         		<div data-role="tabs" id="tabs">
 					<div data-role="navbar">
 						<ul>
@@ -127,7 +142,7 @@
         	</div><!-- swiper-slide -->
 
 			<!-- 홈화면 -->        	
-        	<div class="swiper-slide" id="home" style="width:100%">
+        	<div class="swiper-slide">
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
 						<a class="ui-shadow ui-btn ui-corner-all" href="#">
@@ -192,40 +207,49 @@
 				-->		
 			</div> <!-- swiper-slide -->
 			
-			<div class="swiper-slide" style="width:100%">
+			<!-- my 페이지 -->
+			<div class="swiper-slide">
 			슬라이드3
 			</div> <!-- swiper-slide -->
 			
-			<div class="swiper-slide" style="width:100%">
-			슬라이드4
+			<!-- 더보기 페이지 -->
+			<div class="swiper-slide">
+				<div class="ui-content" role="main">
+					<ul data-role="listview" data-theme="a" data-dividertheme="e">
+						<li data-role="list-divider">설정</li>
+						<li><a href="#">로그인 정보</a></li>
+						<li id="textBar">
+							<strong id="textBox">위치 제공 동의</strong>
+							<select name="locationAgreement" id="locationAgreement" data-role="slider" data-mini="true">
+								<option value="off">Off</option>
+								<option value="on">On</option>
+							</select>
+						</li>
+						<li id="textBar"><strong id="textBox">알림 설정</strong>
+							<select name="alarmSetting" id="alarmSetting" data-role="slider" data-mini="true">
+								<option value="off">Off</option>
+								<option value="on">On</option>
+							</select>
+						</li>
+						<li data-role="list-divider">고객도움말</li>
+						<li><a href="#">문의사항 & 오류신고</a></li>
+						<li><a href="#">공지사항</a></li>
+						<li data-role="list-divider">정보</li>
+						<li><a href="#">프로그램 정보</a></li>
+						<li><a href="#">이용가이드</a></li>
+					</ul>
+				</div><!-- /content -->
 			</div> <!-- swiper-slide -->
-			
 		</div> <!-- swiper-wrapper -->
+		
+		<!-- 하단에 네비게이션바 -->
+		<div class="swiper-pagination"></div>
+		
 	</div> <!-- swiper-container -->
-
-	<div data-role="footer" data-theme="a">
-		<div data-role="navbar">
-			<ul style="right: 0.5%">
-				<li><a href="recommend.html" data-prefetch="true" data-transition="slide" data-direction="reverse" data-ajax="false"><img alt="thumb_up" src="../lib/images/home/thumb_up.png"><br>추천</a></li>
-				<li><a href="record.html" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="record" src="../lib/images/home/record.png"><br>기록</a></li>
-				<li><a href="#" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="home" src="../lib/images/home/home.png"><br>홈</a></li>
-				<li><a href="#" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="my" src="../lib/images/home/my.png"><br> 마이</a></li>
-				<li><a href="more.html" data-prefetch="true" data-transition="slide" data-ajax="false"><img alt="more" src="../lib/images/home/more.png"><br>더보기</a></li>
-            </ul>
-		</div><!-- /navbar -->
-	</div>
-	
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="../lib/swiper/js/swiper.jquery.js"></script>
+<script src="../lib/swiper/js/swiper.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<script src="../lib/js/navigation.js"></script>
-<script>
-/* swipe 속성 부여 */
-var swiper = new Swiper('.swiper-container', {
-	initialSlide: 2, // 두번째 페이지(div)가 첫화면으로 띄움(home화면)
-	loop: false, // 1페이지(추천페이지)에서 왼쪽으로 더이상 swipe 못하게 막음
-	spaceBetween: 29 // 페이지 사이마다 공간 부여
-});
-</script>
+<!-- swiper 속성 수정한 js -->
+<script src="../lib/js/home_swiper.js"></script>
 </body>
 </html>
