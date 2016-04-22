@@ -25,8 +25,8 @@ $(function(){
 			userId:{required:true, email:true},
             password: {
             	required: true,
-            	passwordCk: true,
-				minlength: 8	
+				minlength: 8,
+				passwordCk: true
             },
             confirmPassword: {
             	required:true, 
