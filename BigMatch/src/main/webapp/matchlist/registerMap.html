@@ -227,15 +227,10 @@
 	        console.log('도로명 주소 : ' + result[0].roadAddress.name);
 	        console.log('지번 주소 : ' + result[0].jibunAddress.name);
 	        
-	        var jibunAddr = '주소 : '+result[0].jibunAddress.name+'<br>';
-	        	detailAddr = '도로명주소 : '+result[0].roadAddress.name+'<br>';
+	        var jibunAddr = result[0].jibunAddress.name;
+	        var	detailAddr = '도로명주소 : '+result[0].roadAddress.name+'<br>';
 	        	
-	        if (detailAddr != '') {
-	        	addrToAddMatch = result[0].roadAddress.name;
-	        } else {
-	        	addrToAddMatch = result[0].jibunAddress.name;
-	        }
-	        	
+	        addrToAddMatch = jibunAddr;
 	        	
 	        
 	       /*  var sendAddr = '<div align="center"><!-- <a href="addMatch.html?'
