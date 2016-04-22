@@ -87,7 +87,7 @@
 	var map = new daum.maps.Map(mapContainer, mapOption);
 	//지도가 생성됐을때 현재위치 중심 추적 함수
 	
-		nowLocation();
+	nowLocation();
 	/*----- 지도 생성 end -----*/
 	
 	//필드 값
@@ -196,7 +196,6 @@
 	
 	}
 	
-	
 	/*----- 현재위치 추적의 핵심역할 GeoLocation 마커 / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  end -----*/
 	
 	var centerMarkerWindow;
@@ -232,24 +231,11 @@
 	        	
 	        addrToAddMatch = jibunAddr;
 	        	
-	        
-	       /*  var sendAddr = '<div align="center"><!-- <a href="addMatch.html?'
-	        				+'lat='+map.getCenter().getLat().toString()
-	        				+'&lng='+map.getCenter().getLng().toString()
-	        				+'&loc='+result[0].jibunAddress.name+'">--> <input type="button" id="regBt" value="이 위치 전송"></a></div>';
-	        				 */
-	        				 
 	        var sendAddr = '<div align="center">'
 	        				+ '<input type="button" onclick="popClose();" value="이 위치 전송"></a></div>'				
 	        
 	        var centerMarkerContent = sendAddr;
 	        		
-	        /*	'주소 : '+result[0].jibunAddress.name+
-				'<br>도로명주소 : '+result[0].roadAddress.name+
-				'<br><input type="button" id="registerBt" value="등록">';
-				//'<br><a class="registerButton">등록하기</a></div>';
-			*/	        	
-	        	
 			var	centerMarkerContentPosition = map.getCenter();
 	
 			// 인포윈도우를 생성합니다
@@ -266,8 +252,6 @@
 	geocoder.coord2detailaddr(coord, callback);
 	
 	});
-	
-	
 	
 	// 팝업창 닫고 addMatch.html로 데이터전송 function() 
 	function popClose(){
@@ -288,11 +272,8 @@
 									+'&loc="'+jibun+ '"';
 		*/
 		
-		
 	}
 	
-
-
 </script>
 
 </body>

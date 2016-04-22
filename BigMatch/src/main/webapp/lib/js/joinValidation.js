@@ -22,7 +22,10 @@ $(function(){
 	
 	$('#registerForm').validate({
 		rules: {
-			userId:{required:true, email:true},
+			userId:{
+				required:true,
+				email:true
+			},
             password: {
             	required: true,
 				minlength: 8,
@@ -34,7 +37,7 @@ $(function(){
             	},               
             name: {
             	required:true, 
-            	minlength: 4,
+            	minlength: 4
             }
         },
         messages: {

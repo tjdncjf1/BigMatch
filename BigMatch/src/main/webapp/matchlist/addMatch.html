@@ -130,13 +130,12 @@ iframe {
 
 <script type="text/javascript">
 	
-	var addLat = '';
-	var addLng = '';
-	var addLoc = '';
+	var addLat = ''; // 위도  
+	var addLng = ''; // 경도
+	var addLoc = ''; // 주소
 	
 	//popup창 close function()
 	function popupClose(lat, lng, loc) {
-		console.log("도착했다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	
 		addLat = lat;
 		addLng = lng;
@@ -146,16 +145,14 @@ iframe {
 		console.log(addLng);
 		console.log(addLoc);
 		
-		$('#regAddr').val(addLoc);
-		
-		$('#popupMap').popup('close');
+		$('#regAddr').val(addLoc);		// 주소 등록. 
+		$('#popupMap').popup('close');	// 팝업창 close
 }
-	
 	
 	$(function() {
 		
 		console.log(location.search);
-		console.log('베이스URL :: ' + baseUrl);
+		//console.log('베이스URL :: ' + baseUrl);
 		
 		$('form').on('submit', function(event) {
 			event.preventDefault(); // 디폴트 이벤트 제거
@@ -165,7 +162,6 @@ iframe {
 			console.log($('input[name="memberCount"]:checked:checked').val()); //멤버수
 			console.log($('select[name="level"]').val()); //희망상대실력
 			console.log($('#textarea-6').val()); //간단한 내용
-			
 			
 			$.ajax({
 				url: baseUrl + '/match.do',
@@ -187,7 +183,7 @@ iframe {
 				success : function(event) {
 					if(event.result == 'SUCCESS') {
 						alert('매치 등록 성공');
-						//location.href = "matchlist.html";
+						location.href = "../main/myPage.html";
 					} else {
 						alert('매치 등록 실패');
 					}
@@ -196,8 +192,6 @@ iframe {
 		});		
 	});
 </script>
-
-
 
 </body>
 </html>
