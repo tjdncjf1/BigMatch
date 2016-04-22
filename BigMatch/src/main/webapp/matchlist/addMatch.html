@@ -93,14 +93,6 @@ iframe {
 			</select>
 		</div>
 
-		<script type="text/javascript">
-			// popup창 close function()
-			function popupClose() {
-				console.log("도착했다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				$('#popupMap').popup('close');
-			}
-		</script>
-
 		<div align="center">
 			<a href="#popupMap" data-rel="popup" data-position-to="window"
 				class="ui-btn ui-corner-all ui-shadow ui-btn-inline">위치 등록</a>
@@ -111,6 +103,10 @@ iframe {
 	    		ui-btn-icon-notext ui-btn-right">Close</a>
 				<iframe src="registerMap.html" width="90%" height="90%" seamless=""></iframe>
 			</div>
+		</div>
+		
+		<div align="center">
+			<input type="text" id="regAddr" width="20px" value="">
 		</div>
 
 		<!--------------------------------------------------------------------------------------->
@@ -133,7 +129,29 @@ iframe {
 <script src="../lib/js/popup.js" ></script>
 
 <script type="text/javascript">
-
+	
+	var addLat = '';
+	var addLng = '';
+	var addLoc = '';
+	
+	//popup창 close function()
+	function popupClose(lat, lng, loc) {
+		console.log("도착했다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	
+		addLat = lat;
+		addLng = lng;
+		addLoc = loc;
+	
+		console.log(addLat);
+		console.log(addLng);
+		console.log(addLoc);
+		
+		$('#regAddr').val(addLoc);
+		
+		$('#popupMap').popup('close');
+}
+	
+	
 	$(function() {
 		
 		console.log(location.search);
@@ -146,6 +164,7 @@ iframe {
 			console.log($('input[name="memberCount"]:checked:checked').val()); //멤버수
 			console.log($('select[name="level"]').val()); //희망상대실력
 			console.log($('#textarea-6').val()); //간단한 내용
+			
 			
 			$.ajax({
 				url: baseUrl + '/match.do',
@@ -160,7 +179,9 @@ iframe {
 					eventTypeCd			: $('input[name="eventType"]:checked:checked').val(),
 					memberCount			: $('input[name="memberCount"]:checked:checked').val(),
 					targetStartLevel	: $('select[name="level"]').val(),
-					matchingDesc		: $('#textarea-6').val()
+					matchingDesc		: $('#textarea-6').val(),
+					placeLatitude		: addLat,
+					placeLongitude		: addLng
 				}),
 				success : function(event) {
 					if(event.result == 'SUCCESS') {

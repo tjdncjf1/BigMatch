@@ -94,8 +94,8 @@
 	var lat; //위도
 	var lon; //경도
 	var locMarker;
-	var jibun=''; // 주소 
-	
+	var addrToAddMatch = '';
+		
 	//중심 마커가 표시될 위치입니다 
 	var centerMarkerPosition = map.getCenter();
 	
@@ -167,7 +167,7 @@
 			}   
 		});
 	});
-	
+		
 	function searchAddrFromCoords(coords, callback) {
 	// 좌표로 행정동 주소 정보를 요청합니다
 	geocoder.coord2addr(coords, callback);         
@@ -202,17 +202,7 @@
 	var centerMarkerWindow;
 	
 	/*----- 참고 소스-----*/
-	
-	// 팝업창 닫고 addMatch.html로 데이터전송 function() 
-	function popClose(){
-		parent.popupClose();
-		/* 데이터 전송 하는것 다시 생각. (04-21 fail)
-		location.href= 'addMatch.html?lat='+map.getCenter().getLat().toString()
-									+'&lng='+map.getCenter().getLng().toString()
-									+'&loc="'+jibun+ '"';
-		*/
-	}
-	
+		
 	daum.maps.event.addListener(map, 'dragstart', function() {
 	console.log('드래그시작');
 	if(!!centerMarkerWindow){
@@ -239,6 +229,14 @@
 	        
 	        var jibunAddr = '주소 : '+result[0].jibunAddress.name+'<br>';
 	        	detailAddr = '도로명주소 : '+result[0].roadAddress.name+'<br>';
+	        	
+	        if (detailAddr != '') {
+	        	addrToAddMatch = result[0].roadAddress.name;
+	        } else {
+	        	addrToAddMatch = result[0].jibunAddress.name;
+	        }
+	        	
+	        	
 	        
 	       /*  var sendAddr = '<div align="center"><!-- <a href="addMatch.html?'
 	        				+'lat='+map.getCenter().getLat().toString()
@@ -273,6 +271,30 @@
 	geocoder.coord2detailaddr(coord, callback);
 	
 	});
+	
+	
+	
+	// 팝업창 닫고 addMatch.html로 데이터전송 function() 
+	function popClose(){
+		
+		var addLat = map.getCenter().getLat().toString();
+		var addLng = map.getCenter().getLng().toString();
+		var addLoc = addrToAddMatch;
+		
+		console.log('reg = '+addLat);
+		console.log('reg = '+addLng);
+		console.log('reg = '+addLoc);				
+		
+		
+		parent.popupClose(addLat, addLng, addLoc);
+		/* 데이터 전송 하는것 다시 생각. (04-21 fail)
+		location.href= 'addMatch.html?lat='+map.getCenter().getLat().toString()
+									+'&lng='+map.getCenter().getLng().toString()
+									+'&loc="'+jibun+ '"';
+		*/
+		
+		
+	}
 	
 
 
