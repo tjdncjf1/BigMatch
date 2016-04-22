@@ -7,4 +7,5 @@
                    * 공통으로 사용하는 url 글로벌 변수 추가 
  * 
  */
-var baseUrl = 'http://javateam3.com:8080';
+//var baseUrl = 'http://localhost:8080';
+var baseUrl = 'http://javateam3.com:8080'; // host 파일에 등록된 url
