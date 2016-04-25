@@ -74,22 +74,22 @@
 	<div class="ui-grid-c">
     	<div class="ui-block-a">
     		<div class="ui-body ui-body-d">
-    			<label><input name="viewChoice" id="3ball" type="radio" onclick="javascript:3ballMap" value="selected">3구</label>
+    			<label><input name="viewChoice" id="3ball" type="radio" checked="checked" value="EVT001">3구</label>
     		</div>
     	</div>
 	    <div class="ui-block-b">
 	    	<div class="ui-body ui-body-d">
-	    		<label><input name="viewChoice" id="4ball" type="radio">4구</label>
+	    		<label><input name="viewChoice" id="4ball" type="radio" value="EVT002">4구</label>
 	    	</div>
 	    </div>
 	    <div class="ui-block-c">
 	    	<div class="ui-body ui-body-d">
-				<label><input name="viewChoice" id="pocketball" type="radio">포켓볼</label>
+				<label><input name="viewChoice" id="pocketball" type="radio" value="EVT003">포켓볼</label>
 	    	</div>
 	    </div>
 	    <div class="ui-block-d">
 	    	<div class="ui-body ui-body-d">
-				<label><input name="viewChoice" id="total" type="radio">전체</label>
+				<label><input name="viewChoice" id="total" type="radio" value="all">전체</label>
 	    	</div>
 	    </div>
 	</div><!-- /grid-c -->
@@ -106,13 +106,15 @@
 
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<!-- 공통function이 있는 js -->
+<script src="../lib/js/common.js"></script>
 <script type="text/javascript">
-	function nowLocationClick() {
-		nowLocation();
-	}
+// 현재 위치 refrash
+function nowLocationClick() {
+	nowLocation();
+}
 </script>
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script>
 <script src="../lib/js/mapView.js"></script>
-	
 </body>
 </html>
