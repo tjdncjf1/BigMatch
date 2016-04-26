@@ -5,6 +5,9 @@
    Modify     : 서우철
    History    :   - 2016-04-19 작성자 : 서우철
                    * 대전 찾기 시 보여줄 맵 자바스크립트 추가. 
+                  - 2016-04-26 작성자 : 서우철
+                   * DB에서 select하여 맵에 pin 찍기.
+                   * 슬라이드 이벤트 시에 refresh 기능 추가.
  * 
  */
 /*----- 지도 생성 start -----*/
@@ -102,69 +105,66 @@
 	
 	// 지도 중심 좌표 변화 이벤트를 등록한다
 	daum.maps.event.addListener(map, 'center_changed', function() {
+		// 지도의 현재 영역을 얻어옵니다 
+	    var bounds = map.getBounds();
+	    // 영역의 남서쪽 좌표를 얻어옵니다 
+	    var swLatLng = bounds.getSouthWest(); 
+	    // 영역의 북동쪽 좌표를 얻어옵니다 
+	    var neLatLng = bounds.getNorthEast(); 
+	    
 		console.log('지도의 중심 좌표 : ' + map.getCenter().toString());
+		console.log('지도의 남서쪽 좌표는 ' + swLatLng.getLat() + ', ' + swLatLng.getLng());
+	    console.log('북동쪽 좌표는 ' + neLatLng.getLat() + ', ' + neLatLng.getLng());
+	    
+	    // Map에 DB에 Marker 표시
+		$.ajax({
+			url: baseUrl + '/mapMatchList.do',
+			method:'GET',
+			dataType:'json',
+			headers: { 
+				'Accept' : 'application/json',
+				'Content-Type' : 'application/json'
+			},
+			data : {
+				eventTypeCd		: $('input[name="viewChoice"]:checked:checked').val(),
+				//placeLatitude 	: map.getCenter().toString().split(',')[0].substring(1).trim(),
+				//placeLongitude  : map.getCenter().toString().split(',')[1].replace(')','').trim(),
+				swLatitude 		: swLatLng.getLat(),
+				swLongitude 	: swLatLng.getLng(),
+				neLatitude 		: neLatLng.getLat(),
+				neLongitude 	: neLatLng.getLng()
+			},
+			success : function(result) {
+				console.log('result :: ' + result.length);
+				$(result).each(function(i) {
+					var marker = new daum.maps.Marker({
+						position : new daum.maps.LatLng(result[i].placeLatitude, result[i].placeLongitude)
+					});
+					marker.setMap(map);
+					console.log('결과 위도 :: ' + result[i].placeLatitude);
+					console.log('결과 경도 :: ' + result[i].placeLongitude);
+				})
+			}
+		});
 	});
-		
+	
 	// 마커 이미지의 주소
-	var redMarkerImageUrl = '../lib/images/map/red-pin.png', 
-		markerImageSize = new daum.maps.Size(40, 42), // 마커 이미지의 크기
-		markerImageOptions = { 
-			offset : new daum.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표
-    	};
+//	var redMarkerImageUrl = '../lib/images/map/red-pin.png', 
+//		markerImageSize = new daum.maps.Size(40, 42), // 마커 이미지의 크기
+//		markerImageOptions = { 
+//			offset : new daum.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표
+//    	};
 
-	var blueMarkerImageUrl = '../lib/images/map/blue-pin.png', 
-		markerImageSize = new daum.maps.Size(40, 42), // 마커 이미지의 크기
-		markerImageOptions = { 
-			offset : new daum.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표
-	    };
-	
-	var greenMarkerImageUrl = '../lib/images/map/green-pin.png', 
-		markerImageSize = new daum.maps.Size(40, 42), // 마커 이미지의 크기
-	    markerImageOptions = { 
-			offset : new daum.maps.Point(20, 42)// 마커 좌표에 일치시킬 이미지 안의 좌표
-	    };
-	
 	// 마커 이미지를 생성한다
-	var redMarkerImage = new daum.maps.MarkerImage(redMarkerImageUrl, markerImageSize, markerImageOptions);
-	var blueMarkerImage = new daum.maps.MarkerImage(blueMarkerImageUrl, markerImageSize, markerImageOptions);
-	var greenMarkerImage = new daum.maps.MarkerImage(greenMarkerImageUrl, markerImageSize, markerImageOptions);
-	// 지도에 마커를 생성하고 표시한다
+//	var redMarkerImage = new daum.maps.MarkerImage(redMarkerImageUrl, markerImageSize, markerImageOptions);
 	
-	var redMarker = new daum.maps.Marker({
-	    position: new daum.maps.LatLng(37.495301, 127.027298), // 마커의 좌표 (추후에 좌표는 DB에서 불어와야 함.)
-	    draggable : false, // 마커를 드래그 가능하도록 설정한다
-	    image : redMarkerImage, // 마커의 이미지
-	    map: map, // 마커를 표시할 지도 객체
-	});
+//	var redMarker = new daum.maps.Marker({
+//	    position: new daum.maps.LatLng(37.495301, 127.027298), // 마커의 좌표 (추후에 좌표는 DB에서 불어와야 함.)
+//	    draggable : false, // 마커를 드래그 가능하도록 설정한다
+//	    image : redMarkerImage, // 마커의 이미지
+//	    map: map, // 마커를 표시할 지도 객체
+//	});
 	
-	var blueMarker = new daum.maps.Marker({
-	    position: new daum.maps.LatLng(37.494923, 127.026630), // 마커의 좌표
-	    draggable : false, // 마커를 드래그 가능하도록 설정한다
-	    image : blueMarkerImage, // 마커의 이미지
-	    map: map // 마커를 표시할 지도 객체
-	});
-	
-	var greenMarker = new daum.maps.Marker({
-	    position: new daum.maps.LatLng(37.4938505, 127.028484), // 마커의 좌표
-	    draggable : false, // 마커를 드래그 가능하도록 설정한다
-	    image : greenMarkerImage, // 마커의 이미지
-	    map: map // 마커를 표시할 지도 객체
-	});
-	
-	// 마커에 클릭 이벤트를 등록한다 (우클릭 : rightclick)
-	daum.maps.event.addListener(redMarker, 'click', function() {
-	    console.log("레드마커 클릭");
-	});
-	daum.maps.event.addListener(blueMarker, 'click', function() {
-	    console.log("블루마커 클릭");
-	});
-	daum.maps.event.addListener(greenMarker, 'click', function() {
-	    console.log("그린마커 클릭");
-	});
-	
-	/* 경기리스트 뜨게하는 부분 */
-	
-	// 추후 작업 필요.
 	// 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
 	var iwContent = '<div style="padding:5px;"><div id="jb-tab-1">  <table border=0 cellspacing=0 cellpadding=0 width=440 style="display:block; border:4px solid #E3E3E3;"> <tr> <td align=center valign=top width=100 height=100><br> <img src="../images/home/my.png" width="100%"/> </td> <td align=left> <br> <table border=0 cellspacing=0 cellpadding=1> <!--닉네임--> <tr> <td width=1 rowspan=5></td> <td width=20% valign=middle> <img src="../images/home/my.png" width="30%"/> </td> <td width=80% valign=middle> <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%"> 이강민(nickname) </font> </td> </tr> <!--승률--> <tr> <td width=20% align=left valign=middle> <img src="../images/home/trophy.png" width="30%"/> </td> <td width=80% align=left valign=middle> <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%"> 2200 </font> <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%"> (승률 50% : 승/무/패) </font> </td> </tr> <!--다마수--> <tr> <td width=20% align=left valign=middle> <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#3E3E3A; line-height:120%"> <img src="../lib/images/home/dama.png" width="30%"/> </font> </td> <td width=80% align=left valign=middle> <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%"> 다마점수 </font> </td> </tr> <!--신뢰점수--> <tr> <td width=20% align=left valign=middle> <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#3E3E3A; line-height:120%"> <img src="../lib/images/home/pin.png" width="30%"/>(신뢰도) <!--이미지 변결 요망.. 이미지 크기가 달라서 테이블 구조가 깨짐--> </font> </td> <td width=80% align=left valign=middle> <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%"> 600점 </font> </td> </tr> <!--위치--> <tr> <td width=20% align=left valign=middle> <img src="../lib/images/home/pin.png" width="30%"/> </td> <td width=80% align=left valign=middle> <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%"> 서울시 동작구 어딘가? </font> </td> </tr><!--//////////////////////////////////////////////////////////임시////////////////////////////////////////////////////////////////////////////////////////--></table><br></td></tr></table> </div></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 		iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
@@ -176,40 +176,7 @@
 	});
 
 	// 마커에 클릭이벤트를 등록합니다
-	daum.maps.event.addListener(redMarker, 'click', function() {
-	      // 마커 위에 인포윈도우를 표시합니다
-	      infoWindow.open(map, redMarker);  
-	});
-	
-	// 지도의 현재 영역을 얻어옵니다 
-    var bounds = map.getBounds();
-    // 영역의 남서쪽 좌표를 얻어옵니다 
-    var swLatLng = bounds.getSouthWest(); 
-    // 영역의 북동쪽 좌표를 얻어옵니다 
-    var neLatLng = bounds.getNorthEast(); 
-    
-    console.log('지도의 남서쪽 좌표는 ' + swLatLng.getLat() + ', ' + swLatLng.getLng());
-    console.log('북동쪽 좌표는 ' + neLatLng.getLat() + ', ' + neLatLng.getLng());
-    console.log('자기 위치 위도, 경도는 ' + map.getCenter().toString().split(',')[1].replace(')','').trim());
-    
-	// Map에 DB에 Marker 표시
-	$.ajax({
-		url: baseUrl + '/matchList.do',
-		method:'GET',
-		headers: { 
-			"Accept" : "application/json",
-			"Content-Type" : "application/json"
-		},
-		data : {
-			eventTypeCd		: $('input[name="viewChoice"]:checked:checked').val(),
-			placeLatitude 	: map.getCenter().toString().split(',')[0].substring(1).trim(),
-			placeLongitude  : map.getCenter().toString().split(',')[1].replace(')','').trim(),
-			swLatitude 		: swLatLng.getLat(),
-			swLongitude 	: swLatLng.getLng(),
-			neLatitude 		: neLatLng.getLat(),
-			neLongitude 	: neLatLng.getLng()
-		},
-		success : function(event) {
-
-		}
-	});
+//	daum.maps.event.addListener(redMarker, 'click', function() {
+//	      // 마커 위에 인포윈도우를 표시합니다
+//	      infoWindow.open(map, redMarker);  
+//	});

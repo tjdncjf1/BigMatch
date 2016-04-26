@@ -18,7 +18,7 @@ History     : - 2016-04-07 작성자 : 조민호
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>add</title>
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<link rel="stylesheet" href="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
 <style>
 #title {
 	padding-left: 4%;
@@ -57,13 +57,12 @@ iframe {
 		<div align="center">
 			<fieldset data-role="controlgroup" data-type="horizontal">
 				<!--<legend>종목</legend>-->
-				<input type="radio" name="eventType" id="radio-choice-h-2a"
-					value="EVT001" checked="checked"> <label
-					for="radio-choice-h-2a">3 구</label> <input type="radio"
-					name="eventType" id="radio-choice-h-2b" value="EVT002"> <label
-					for="radio-choice-h-2b">4 구</label> <input type="radio"
-					name="eventType" id="radio-choice-h-2c" value="EVT003"> <label
-					for="radio-choice-h-2c">포켓볼</label>
+				<input type="radio" name="eventType" id="radio-choice-h-2a"	value="THREE" checked="checked"> 
+				<label for="radio-choice-h-2a">3 구</label> 
+				<input type="radio"	name="eventType" id="radio-choice-h-2b" value="FOUR"> 
+				<label for="radio-choice-h-2b">4 구</label> 
+				<input type="radio" name="eventType" id="radio-choice-h-2c" value="POOL"> 
+				<label for="radio-choice-h-2c">포켓볼</label>
 			</fieldset>
 		</div>
 
@@ -121,8 +120,8 @@ iframe {
 		</div>
 	</form>
 	
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script	src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="../lib/jquery/jquery.js"></script>
+<script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
 <!-- 공통 자바스크립트 -->
 <script src="../lib/js/common.js" ></script> 
 <!-- 팝업 -->
@@ -141,9 +140,9 @@ iframe {
 		addLng = lng;
 		addLoc = loc;
 	
-		console.log(addLat);
-		console.log(addLng);
-		console.log(addLoc);
+		console.log('위도 :: ' + addLat);
+		console.log('경도 :: ' + addLng);
+		console.log('주소 :: ' + addLoc);
 		
 		$('#regAddr').val(addLoc);		// 주소 등록. 
 		$('#popupMap').popup('close');	// 팝업창 close
@@ -183,7 +182,7 @@ iframe {
 				success : function(event) {
 					if(event.result == 'SUCCESS') {
 						alert('매치 등록 성공');
-						location.href = "../main/myPage.html";
+						location.href = "../main/home.html";
 					} else {
 						alert('매치 등록 실패');
 					}

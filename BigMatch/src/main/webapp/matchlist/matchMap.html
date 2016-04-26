@@ -18,7 +18,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>대전 리스트(맵)</title>
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet" href="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
 	
 <style>
     .map_wrap {
@@ -71,27 +71,27 @@
         <h1>대전 리스트</h1>
     </div>
 
-	<div class="ui-grid-c">
+	<div class="ui-grid-b">
     	<div class="ui-block-a">
     		<div class="ui-body ui-body-d">
-    			<label><input name="viewChoice" id="3ball" type="radio" checked="checked" value="EVT001">3구</label>
+    			<label><input name="viewChoice" id="3ball" type="radio" checked="checked" value="THREE">3구</label>
     		</div>
     	</div>
 	    <div class="ui-block-b">
 	    	<div class="ui-body ui-body-d">
-	    		<label><input name="viewChoice" id="4ball" type="radio" value="EVT002">4구</label>
+	    		<label><input name="viewChoice" id="4ball" type="radio" value="FOUR">4구</label>
 	    	</div>
 	    </div>
 	    <div class="ui-block-c">
 	    	<div class="ui-body ui-body-d">
-				<label><input name="viewChoice" id="pocketball" type="radio" value="EVT003">포켓볼</label>
+				<label><input name="viewChoice" id="pocketball" type="radio" value="POOL">포켓볼</label>
 	    	</div>
 	    </div>
-	    <div class="ui-block-d">
+	    <!-- <div class="ui-block-d">
 	    	<div class="ui-body ui-body-d">
 				<label><input name="viewChoice" id="total" type="radio" value="all">전체</label>
 	    	</div>
-	    </div>
+	    </div> -->
 	</div><!-- /grid-c -->
 	
 	<div class="map_wrap">
@@ -104,8 +104,8 @@
 	    </div>
 	</div>
 
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="../lib/jquery/jquery.js"></script>
+<script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
 <!-- 공통function이 있는 js -->
 <script src="../lib/js/common.js"></script>
 <script type="text/javascript">

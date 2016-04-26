@@ -9,7 +9,7 @@
  */
 $(function(){
 	var swiper = new Swiper('.swiper-container', {
-		initialSlide: 2, // 두번째 페이지(div)가 첫화면으로 띄움(home화면)
+		initialSlide: view, // 두번째 페이지(div)가 첫화면으로 띄움(home화면)
 		loop: false, // 1페이지(추천페이지)에서 왼쪽으로 더이상 swipe 못하게 막음
 		spaceBetween: 29, // 페이지 사이마다 공간 부여
 		pagination: '.swiper-pagination',
