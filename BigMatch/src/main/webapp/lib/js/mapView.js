@@ -93,62 +93,63 @@
 	    geocoder.coord2detailaddr(coords, callback);
 	}
 	
-	
-	
-	
-	
 	// 지금부터 마커생성을 시작한다.
-		
 	// 첫째, 마커를 표시할 위치 객체 배열을 생성한다.	
 	var marker;
 	var markers=[]; // 마커 객체 배열
-	
-	
-	var listInfoWindow;
-	var listInfoWindows=[];
+	var infowindow; // 인포윈도우
 	
 	function addMarker(position) {
 	    // 마커를 생성합니다
 	    marker = new daum.maps.Marker({
 	        position: position
 	    });
-	    listInfoWindow = new daim.maps.InfoWindow({
-	    	position : position
-	    });
+	    // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
+    	var iwContent = '<div style="padding:5px;">Hello World!</div>' // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+
+    	// 인포윈도우를 생성합니다
+    	infowindow = new daum.maps.InfoWindow({
+    	    content : iwContent
+    	});
+    	
 		// 생성된 마커를 배열에 추가합니다
-	    markers.push(marker);
-	    listInfoWindows.push(listInfoWindow);
+	    markers.push({marker, infowindow});
 	}
 	
 	// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+	// 
 	function setMarkers(map) {
 	    for (var i = 0; i < markers.length; i++) {
-	    	markers[i].setMap(map);
-	    }
-	    for (var i = 0; i < listInfoWindows.length; i++) {
-	    	listInfoWindows[i].setMap(map);
+	    	markers[i].marker.setMap(map);
+	    	setInfoWindow(markers[i]);
 	    }
 	}
     
+	function setInfoWindow(markers) {
+		daum.maps.event.addListener(markers.marker, 'click', function() {
+			markers.infowindow.close();
+    		// 마커 위에 인포윈도우를 표시합니다
+    		markers.infowindow.open(map, markers.marker);
+    	});
+	}
+	
 	// 드래그가 끝났을 시 마커 핀 업데이트.
 	daum.maps.event.addListener(map, 'dragend', function() {
-		
 		setMarkers(null); // 드레그가 끝났을 시 마커 객체 삭제
 		console.log('마커배열 길이 :'+markers.length);
-		
 		console.log(markers.length);
 		markers=[]; // 마커 객체 배열 초기화
-		    
-//		console.log('지도의 중심 좌표 : ' + map.getCenter().toString());
-//		console.log('지도의 남서쪽 좌표는 ' + swLatLng.getLat() + ', ' + swLatLng.getLng());
-//	    console.log('북동쪽 좌표는 ' + neLatLng.getLat() + ', ' + neLatLng.getLng());
-	    
 	    viewMarkers();
-	    
 	});
 	
 	// 확대가 변경 됐을 시 마커 핀 업데이트.
 	daum.maps.event.addListener(map, 'zoom_changed', function() {
+		setMarkers(null);
+		markers=[];
+		viewMarkers();
+	});
+	
+	$('.eventView').bind('click', function(){
 		setMarkers(null);
 		markers=[];
 		viewMarkers();
