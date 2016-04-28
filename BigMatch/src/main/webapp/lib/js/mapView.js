@@ -117,19 +117,24 @@
 	}
 	
 	// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
-	// 
 	function setMarkers(map) {
 	    for (var i = 0; i < markers.length; i++) {
 	    	markers[i].marker.setMap(map);
-	    	setInfoWindow(markers[i]);
+	    	// map이 null이 아닐경우 맵지역을 클릭 시 infowindow close.
+	    	if(map != null) {
+	    		setInfoWindow(markers[i], map);
+	    	}
 	    }
 	}
     
-	function setInfoWindow(markers) {
+	function setInfoWindow(markers, map) {
+		// 마커 클릭시 인포윈도우 표시
 		daum.maps.event.addListener(markers.marker, 'click', function() {
+			markers.infowindow.open(map, markers.marker);
+    	});
+		// 맵을 클릭시 infowindow close
+		daum.maps.event.addListener(map, 'click', function() {
 			markers.infowindow.close();
-    		// 마커 위에 인포윈도우를 표시합니다
-    		markers.infowindow.open(map, markers.marker);
     	});
 	}
 	
