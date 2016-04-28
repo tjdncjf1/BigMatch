@@ -31,6 +31,7 @@
 		// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
 		var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption); 
 			//markerPosition = new daum.maps.LatLng(lat, lon); // 마커가 표시될 위치입니다
+		
 	
 		function displayMarker(locPosition, message) {
 	
@@ -101,20 +102,31 @@
 	// 첫째, 마커를 표시할 위치 객체 배열을 생성한다.	
 	var marker;
 	var markers=[]; // 마커 객체 배열
-
+	
+	
+	var listInfoWindow;
+	var listInfoWindows=[];
+	
 	function addMarker(position) {
 	    // 마커를 생성합니다
 	    marker = new daum.maps.Marker({
 	        position: position
 	    });
+	    listInfoWindow = new daim.maps.InfoWindow({
+	    	position : position
+	    });
 		// 생성된 마커를 배열에 추가합니다
 	    markers.push(marker);
+	    listInfoWindows.push(listInfoWindow);
 	}
 	
 	// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
 	function setMarkers(map) {
 	    for (var i = 0; i < markers.length; i++) {
 	    	markers[i].setMap(map);
+	    }
+	    for (var i = 0; i < listInfoWindows.length; i++) {
+	    	listInfoWindows[i].setMap(map);
 	    }
 	}
     
