@@ -1,0 +1,11 @@
+.ui-slider {
+	float: right;
+}
+#textBar {
+   padding-top: 0px;
+   padding-bottom: 0px;
+}
+#titlebar {
+   margin-top: 20px;
+   margin-bottom: 20px;
+}

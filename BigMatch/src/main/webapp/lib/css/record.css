@@ -1,0 +1,55 @@
+.matchInfo {
+	float: right;
+	color: white;
+	font-size: larger;
+	font-weight: 100;
+}
+
+.infoMargin {
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+
+/* 트로피 이미지 */
+#trophyImg {
+	position: relative;
+	right: 5%;
+	width: 34%;
+	float: left;
+}
+
+/* 랭크 간략한기술 부분 */ 
+.rankInfo {
+	/* position: relative; */
+	font-size: smaller;
+	font-weight: bold;
+}
+
+/* 공유 버튼  */
+.ui-btn-inline {
+	/* vertical-align: none !important; */
+	position: relative;
+	font-size: 70%;
+	left: -1%;
+}
+/* 3구, 4구, 포켓볼 radio css */
+.ui-controlgroup-controls {
+	position: relative;
+	left: 15%;
+}
+/* rank listview */
+.ui-content .ui-listview{
+	margin : 0;
+}
+
+/* 랭크 트로피 image css */
+.rankTrophy {
+	width: 10%;
+	padding: 3%;
+}
+
+/* listview image contents css */
+.ui-listview>.ui-li-static.ui-li-has-thumb {
+	min-height: 0;
+	padding-left: 15%;
+}
