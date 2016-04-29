@@ -97,7 +97,7 @@
 	// 첫째, 마커를 표시할 위치 객체 배열을 생성한다.	
 	var marker;
 	var markers=[]; // 마커 객체 배열
-	var infowindow; // 인포윈도우
+	var overlay; // 커스텀 오버레이
 	
 	function addMarker(position) {
 	    // 마커를 생성합니다
@@ -105,51 +105,69 @@
 	        position: position
 	    });
 	    
-	    // 마커를 클릭했을 때 마커 위에 표시할 인포윈도우를 생성합니다
-    	var iwContent = '<div style="padding:5px;">Hello World!</div>' // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+	    // ajax요청 작성.
+	    
+	    var content = '<div id="wrapper">' + 
+        '    			<div id="info">';
 
-    	// 인포윈도우를 생성합니다
-    	infowindow = new daum.maps.InfoWindow({
-    	    content : iwContent
+	    for(var i=0; i < 5; i++) {
+	    	content += '<div class="list">' + 
+	        '            <div class="userImg">' +
+	        '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="100%" height="100%">' +
+	        '           </div>' + 
+	        '            <div class="desc">' + 
+	        '                <div class="matchTitle">제주특별자치도 제주시 첨단로 242</div>' + 
+	        '                <div class="jibun matchTitle">(우) 63309 (지번) 영평동 2181</div>' + 
+	        '            </div>' + 
+	        '        </div>';
+	    }
+	    content += '</div></div>';
+
+	    // 커스텀 오버레이를 생성합니다
+    	overlay = new daum.maps.CustomOverlay({
+    	    content : content
     	});
     	
 		// 생성된 마커를 배열에 추가합니다
-	    markers.push({marker, infowindow});
+	    markers.push({marker, overlay});
 	}
 	
 	// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
 	function setMarkers(map) {
 	    for (var i = 0; i < markers.length; i++) {
 	    	markers[i].marker.setMap(map);
-	    	// map이 null이 아닐경우 맵지역을 클릭 시 infowindow close.
+	    	// map이 null이 아닐경우 맵지역을 클릭 시 커스텀 오버레이 close.
 	    	if(map != null) {
-	    		setInfoWindow(markers[i], markers, map);
+	    		setOverlay(markers[i], markers, map);
 	    	}
 	    }
 	}
     
-	function setInfoWindow(clickMarker, totalMarkers, map) {
-		// 마커 클릭시 인포윈도우 표시
+	function setOverlay(clickMarker, totalMarkers, map) {
+		// 마커 클릭시 커스텀 오버레이 표시
 		daum.maps.event.addListener(clickMarker.marker, 'click', function() {
 			for (var i = 0; i < totalMarkers.length; i++) {
-				if(!!totalMarkers[i].infowindow) {
-					totalMarkers[i].infowindow.close();
+				if(!!totalMarkers[i].overlay) {
+					totalMarkers[i].overlay.setMap(null);
 				}
 			}
-			clickMarker.infowindow.open(map, clickMarker.marker);
+			// 클릭한 마커를 중심으로 바뀜.
+			map.setCenter(clickMarker.marker.getPosition());
+			clickMarker.overlay.setPosition(clickMarker.marker.getPosition());
+			clickMarker.overlay.setMap(map);
     	});
-		// 맵을 클릭시 infowindow close
+//		 맵을 클릭시 커스텀 오버레이 close
 		daum.maps.event.addListener(map, 'click', function() {
-			clickMarker.infowindow.close();
+			clickMarker.overlay.setMap(null);
     	});
 	}
 	
 	// 드래그가 끝났을 시 마커 핀 업데이트.
 	daum.maps.event.addListener(map, 'dragend', function() {
-		// 드래그가 끝났을 시 infowindow close
+		// 드래그가 끝났을 시 커스텀 오버레이 close
 		for (var i = 0; i < markers.length; i++) {
-			if(!!markers[i].infowindow) {
-				markers[i].infowindow.close();
+			if(!!markers[i].overlay) {
+				markers[i].overlay.setMap(null);
 			}
 		}
 		setMarkers(null); // 드레그가 끝났을 시 마커 객체 삭제
@@ -161,10 +179,10 @@
 	
 	// 확대가 변경 됐을 시 마커 핀 업데이트.
 	daum.maps.event.addListener(map, 'zoom_changed', function() {
-		// 드래그가 끝났을 시 infowindow close
+		// 드래그가 끝났을 시 커스텀 오버레이 close
 		for (var i = 0; i < markers.length; i++) {
-			if(!!markers[i].infowindow) {
-				markers[i].infowindow.close();
+			if(!!markers[i].overlay) {
+				markers[i].overlay.setMap(null);
 			}
 		}
 		setMarkers(null);
@@ -173,6 +191,12 @@
 	});
 	
 	$('.eventView').bind('click', function(){
+		// 드래그가 끝났을 시 커스텀 오버레이 close
+		for (var i = 0; i < markers.length; i++) {
+			if(!!markers[i].overlay) {
+				markers[i].overlay.setMap(null);
+			}
+		}
 		setMarkers(null);
 		markers=[];
 		viewMarkers();
@@ -208,11 +232,11 @@
 				neLongitude 	: neLatLng.getLng()
 			},
 			success : function(result) {
-				console.log('result :: ' + result.length);
+				console.log('result에 userId :: ' + result[0].userInfoVo.userId);
+				console.log('result length:: ' + result.length);
 				$(result).each(function(i) {
 					addMarker(new daum.maps.LatLng(result[i].placeLatitude, result[i].placeLongitude));
 				});
-				console.log('마커배열 길이 :'+markers.length);
 				setMarkers(map);
 			}
 		});
