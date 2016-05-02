@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>대전 상세 보기</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;width:96%}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-baqh{text-align:center;vertical-align:top}
+.tg .tg-yw4l{vertical-align:top}
+table {margin-left:2%;margin-right:2%}
+#textarea {margin-left:2%;margin-right:2%;width:96%}
+div {margin-left:2%;margin-right:2%}
+</style>
+
+</head>
+<body>
+
+	
+	
+    <div data-role="header" data-position="fixed" data-theme="a">
+        <a href="../" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <h1>대전 상세 정보</h1>
+    </div>
+	
+	<div>
+		<h4>★ 매치 정보</h4>
+	</div>
+
+	<table class="tg">
+		<tr>
+			<th class="tg-baqh" rowspan="2">사진<br></th>
+			<th class="tg-yw4l" colspan="3" align="left">닉네임</th>
+		</tr>
+		<tr>
+			<td class="tg-yw4l" colspan="3">랭킹포인트</td>
+		</tr>
+		<tr>
+			<td class="tg-baqh">성별</td>
+			<td class="tg-yw4l" colspan="3">신뢰등급</td>
+		</tr>
+		<tr>
+			<td class="tg-baqh" colspan="4">주소</td>
+		</tr>
+		<tr>
+			<td class="tg-baqh" colspan="4">시간</td>
+		</tr>
+		<tr>
+			<td class="tg-baqh" colspan="4">희망 상대실력</td>
+		</tr>
+	</table>
+
+	
+	<textarea cols="40" rows="8" name="textarea" id="textarea" readonly="readonly">내용j</textarea>
+	
+	
+	<form>
+    	<textarea name="textarea-1" id="textarea-1" readonly="readonly"></textarea>
+	</form>
+	
+	
+	<script src="../lib/js/common.js"></script>
+	<script src="../lib/jquery/jquery.js"></script>
+	<script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	
+	<script type="text/javascript">
+		$.ajax({
+			url			: baseUrl + '/matchDetail.do/288',
+			type		: 'get',
+			headers: { 
+    			"Accept" : "application/json",
+    			"Content-Type" : "application/json"
+    		},
+    		success		: function(event) {
+    			console.log(event);
+    		}
+		});
+	</script>
+	
+</body>
+</html>

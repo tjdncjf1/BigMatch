@@ -38,6 +38,14 @@ iframe {
 .*{
 	width:92%;
 }
+#addrBar {
+	padding-left: 4%;
+	padding-right: 4%;
+}
+.ui-field-contain {
+	padding-left: 4%;
+	padding-right: 4%;
+}
 </style>
 </head>
 <body>
@@ -57,11 +65,11 @@ iframe {
 		<div align="center">
 			<fieldset data-role="controlgroup" data-type="horizontal">
 				<!--<legend>종목</legend>-->
-				<input type="radio" name="eventType" id="radio-choice-h-2a"	value="THREE" checked="checked"> 
+				<input type="radio" name="eventType" id="radio-choice-h-2a"	value="EVT001" checked="checked"> 
 				<label for="radio-choice-h-2a">3 구</label> 
-				<input type="radio"	name="eventType" id="radio-choice-h-2b" value="FOUR"> 
+				<input type="radio"	name="eventType" id="radio-choice-h-2b" value="EVT002"> 
 				<label for="radio-choice-h-2b">4 구</label> 
-				<input type="radio" name="eventType" id="radio-choice-h-2c" value="POOL"> 
+				<input type="radio" name="eventType" id="radio-choice-h-2c" value="EVT003"> 
 				<label for="radio-choice-h-2c">포켓볼</label>
 			</fieldset>
 		</div>
@@ -92,22 +100,28 @@ iframe {
 			</select>
 		</div>
 
+
+		
+		
 		<div align="center">
 			<a href="#popupMap" data-rel="popup" data-position-to="window"
-				class="ui-btn ui-corner-all ui-shadow ui-btn-inline">위치 등록</a>
+				class="ui-btn ui-corner-all ui-shadow ui-btn-inline">위치등록</a>
 			<div data-role="popup" id="popupMap" data-overlay-theme="a"
 				data-theme="a" data-corners="false" data-tolerance="15,15">
 				<a href="#" data-rel="back"	class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-a ui-icon-delete 
-	    		ui-btn-icon-notext ui-btn-right">Close</a>
+    			ui-btn-icon-notext ui-btn-right">Close</a>
 				<iframe src="registerMap.html" width="90%" height="90%" ></iframe>
 			</div>
 		</div>
-		
-		<div align="center">
-			<input type="text" id="regAddr" width="20px" value="">
+	
+		<div id="addrBar" align="center">
+			<input type="text" id="regAddr" width="20px" value="" readonly="readonly">
 		</div>
+			
+				
+		<script src="../lib/js/timeSelect.js"></script>
 
-		<!--------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------->
 
 		<div id="description" align="center">
 			<textarea cols="40" rows="8" name="description" id="textarea-6"
@@ -159,6 +173,7 @@ iframe {
 			console.log($('input[name="eventType"]:checked:checked').val()); //경기타입
 			console.log($('input[name="memberCount"]:checked:checked').val()); //멤버수
 			console.log($('select[name="level"]').val()); //희망상대실력
+			console.log($('select[name="selectTime"]').val());
 			console.log($('#textarea-6').val()); //간단한 내용
 			
 			$.ajax({
@@ -174,6 +189,7 @@ iframe {
 					eventTypeCd			: $('input[name="eventType"]:checked:checked').val(),
 					memberCount			: $('input[name="memberCount"]:checked:checked').val(),
 					targetStartLevel	: $('select[name="level"]').val(),
+					timeCd				: $('select[name="selectTime"]').val(),
 					matchingDesc		: $('#textarea-6').val(),
 					placeLatitude		: addLat,
 					placeLongitude		: addLng
