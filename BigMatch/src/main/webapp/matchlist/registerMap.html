@@ -74,7 +74,7 @@
 			nowLocation();	
 	}
 </script>
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=8332365d3f31965de2e7a8fc335c6877&libraries=services"></script>
 
 <script type="text/javascript">
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -95,7 +95,16 @@
 	var lon; //경도
 	var locMarker;
 	var addrToAddMatch = '';
-		
+	
+	
+	
+	var sendAddr = '<div align="center"><input type="button" onclick="popClose();" value="이 위치 전송"></a></div>';
+
+	var centerMarkerContent = sendAddr;
+
+	var	centerMarkerContentPosition = map.getCenter();
+	
+			
 	//중심 마커가 표시될 위치입니다 
 	var centerMarkerPosition = map.getCenter();
 	
@@ -104,10 +113,13 @@
 		position: centerMarkerPosition
 	});
 	
+	var centerMarkerWindow;
+	
 	//중심 마커가 지도 위에 표시되도록 설정합니다
 	centerMarker.setMap(map);
 	map.setDraggable(true);
 	
+		
 	/*----- 현재위치 추적의 핵심역할 GeoLocation 마커 / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  start -----*/
 	function nowLocation() {
 	
@@ -198,8 +210,6 @@
 	
 	/*----- 현재위치 추적의 핵심역할 GeoLocation 마커 / 위치정보제공 동의 / 현재위치추적기능 / 주소정보 / 지도 중심좌표  end -----*/
 	
-	var centerMarkerWindow;
-	
 	/*----- 참고 소스-----*/
 		
 	daum.maps.event.addListener(map, 'dragstart', function() {
@@ -231,20 +241,14 @@
 		        	
 		        addrToAddMatch = jibunAddr;
 		        	
-		        var sendAddr = '<div align="center">'
-		        				+ '<input type="button" onclick="popClose();" value="이 위치 전송"></a></div>'				
-		        
-		        var centerMarkerContent = sendAddr;
-		        		
-				var	centerMarkerContentPosition = map.getCenter();
-		
-				// 인포윈도우를 생성합니다
-				centerMarkerWindow = new daum.maps.InfoWindow({
-					position : centerMarkerContentPosition,
-					content : centerMarkerContent
-				});
-				
-				centerMarkerWindow.open(map, centerMarker);
+		  
+				// 인포윈도우를 생성합니다		
+		    	centerMarkerWindow = new daum.maps.InfoWindow({
+		    		position : centerMarkerContentPosition,
+		    		content : centerMarkerContent
+		    	});
+		  	  	
+		    	centerMarkerWindow.open(map, centerMarker);
 					
 		    }
 		};

@@ -19,8 +19,6 @@ div {margin-left:2%;margin-right:2%}
 
 </head>
 <body>
-
-	
 	
     <div data-role="header" data-position="fixed" data-theme="a">
         <a href="../" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
@@ -63,24 +61,27 @@ div {margin-left:2%;margin-right:2%}
 	</form>
 	
 	
-	<script src="../lib/js/common.js"></script>
-	<script src="../lib/jquery/jquery.js"></script>
-	<script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="../lib/js/common.js"></script>
+<script src="../lib/jquery/jquery.js"></script>
+<script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	
-	<script type="text/javascript">
-		$.ajax({
-			url			: baseUrl + '/matchDetail.do/288',
-			type		: 'get',
-			headers: { 
-    			"Accept" : "application/json",
-    			"Content-Type" : "application/json"
-    		},
-    		success		: function(event) {
-    			console.log(event);
-    		}
-		});
-	</script>
+<script type="text/javascript">
+	console.log("주소 ::: " + typeof(location.href.split('?')[1].split('=')[1]));
+
+	$.ajax({
+		url			: baseUrl + '/matchDetail.do/' + Number(location.href.split('?')[1].split('=')[1]),
+		type		: 'get',
+		dataType	:'json',
+		headers		: { 
+   			"Accept" : "application/json",
+   			"Content-Type" : "application/json"
+   		},
+   		success		: function(result) {
+   			console.log(result);
+   		}
+	});
+</script>
 	
 </body>
 </html>

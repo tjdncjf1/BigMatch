@@ -99,88 +99,42 @@
 	var markers=[]; // 마커 객체 배열
 	var overlay; // 커스텀 오버레이
 	
-	function moveMatchDetail(matchSeq) {
-		location.href = 'matchDetailView.html?matchSeq=' + matchSeq;
-	}
-	
-	function addMarker(result) {
-//		console.log("타입 :: " + Array.isArray(result));
-		
-		if(Array.isArray(result)) {
-//			console.log('result array :: ' + result[0].placeLatitude);
-//			console.log('위치 :: ' + result[0].placeLatitude + ', ' + result[0].placeLongitude);
-			// 마커를 생성합니다
-			marker = new daum.maps.Marker({
-				position: new daum.maps.LatLng(result[0].placeLatitude, result[0].placeLongitude)
-			});
-			
-			console.log('result[0] ::: ' + result[0].placeLatitude + ', ' + result[0].placeLongitude);
-			
-			if(result.length > 1) {
-				var content = '<div id="wrapper" style="height:163px">' + 
-				'    			<div id="info" style="height:152px">';
-			} else {
-				var content = '<div id="wrapper">' + 
-				'    			<div id="info">';
-			}
-			
-			for(var i = 0; i < result.length; i++) {
-				content += '<div class="list" onclick="moveMatchDetail(43)">' + 
-				'            <div class="userImg">' +
-				'                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="100%" height="100%">' +
-				'           </div>' + 
-				'            <div class="desc">' + 
-				'                <div class="matchTitle">한판붙자!</div>' + 
-				'                <div class="jibun matchTitle">(우) 63309 (지번) 영평동 2181</div>' + 
-				'            </div>' + 
-				'        </div>';
-			}
-			
-			content += '</div></div>';
-			
-			// 커스텀 오버레이를 생성합니다
-			overlay = new daum.maps.CustomOverlay({
-				content : content
-			});
-			
-			// 생성된 마커를 배열에 추가합니다
-			markers.push({marker, overlay});
-		} else {
-			console.log('위치 :: ' + result.placeLatitude + ', ' + result.placeLongitude);
-			// 마커를 생성합니다
-			marker = new daum.maps.Marker({
-				position: new daum.maps.LatLng(result.placeLatitude, result.placeLongitude)
-			});
-			
-			var content = '<div id="wrapper">' + 
-			'    			<div id="info">';
-			content += '<div class="list" onclick="moveMatchDetail(43)">' + 
-			'            <div class="userImg">' +
-			'                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="100%" height="100%">' +
-			'           </div>' + 
-			'            <div class="desc">' + 
-			'                <div class="matchTitle">제주특별자치도 제주시 첨단로 242</div>' + 
-			'                <div class="jibun matchTitle">(우) 63309 (지번) 영평동 2181</div>' + 
-			'            </div>' + 
-			'        </div>';
-			content += '</div></div>';
-			
-			// 커스텀 오버레이를 생성합니다
-			overlay = new daum.maps.CustomOverlay({
-				content : content
-			});
-			
-			// 생성된 마커를 배열에 추가합니다
-//			markers.push({marker, overlay});
-			
-		}
+	function addMarker(position) {
+	    // 마커를 생성합니다
+	    marker = new daum.maps.Marker({
+	        position: position
+	    });
+	    
+	    // ajax요청 작성.
+	    
+	    var content = '<div id="wrapper">' + 
+        '    			<div id="info">';
+
+	    for(var i=0; i < 5; i++) {
+	    	content += '<div class="list">' + 
+	        '            <div class="userImg">' +
+	        '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="100%" height="100%">' +
+	        '           </div>' + 
+	        '            <div class="desc">' + 
+	        '                <div class="matchTitle">제주특별자치도 제주시 첨단로 242</div>' + 
+	        '                <div class="jibun matchTitle">(우) 63309 (지번) 영평동 2181</div>' + 
+	        '            </div>' + 
+	        '        </div>';
+	    }
+	    content += '</div></div>';
+
+	    // 커스텀 오버레이를 생성합니다
+    	overlay = new daum.maps.CustomOverlay({
+    	    content : content
+    	});
+    	
+		// 생성된 마커를 배열에 추가합니다
+	    markers.push({marker, overlay});
 	}
 	
 	// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
 	function setMarkers(map) {
-		console.log('markers ::::::: ' + markers);
 	    for (var i = 0; i < markers.length; i++) {
-	    	console.log('markers['+i+'] 위치 ::::::: ' + markers[i].marker.getPosition());
 	    	markers[i].marker.setMap(map);
 	    	// map이 null이 아닐경우 맵지역을 클릭 시 커스텀 오버레이 close.
 	    	if(map != null) {
@@ -280,35 +234,10 @@
 			},
 			success : function(result) {
 				console.log('result :: ' + result);
-//				console.log('result length:: ' + result.length);
-				while(true) {
-					var samePositionArr = [];
-					if(result.length > 0 && result.length == 1) {
-						addMarker(result[0]);
-						break;
-					} else if(result.length > 0 && result.length > 1) {
-//						console.log('result[0] :: ' + result[0]);
-//						console.log('result[0] 위치:: ' + result[0].placeLatitude);
-//						console.log('result length:: ' + result.length);
-						samePositionArr.push(result[0]);
-						result.splice(0,1);
-//						console.log('samePositionArr[0] :: ' + samePositionArr[0]);
-//						console.log('samePositionArr[0] 위치:: ' + samePositionArr[0].placeLatitude);
-						for(var i=(result.length)-1; i>=0; i--) {
-							console.log('samePositionArr[0].placeLatitude :: ' + samePositionArr[0].placeLatitude);
-							console.log('result[i].placeLatitude :: ' + result[i].placeLatitude);
-							if(samePositionArr[0].placeLatitude == result[i].placeLatitude &&
-									samePositionArr[0].placeLongitude == result[i].placeLongitude) {
-								console.log('if문으로 들어옴');
-								samePositionArr.push(result[i]);
-								result.splice(i,1);
-							}
-						}
-//						console.log('samePositionArr :: ' + samePositionArr);
-//						console.log('samePositionArr 위치:: ' + samePositionArr[0].placeLatitude);
-						addMarker(samePositionArr);
-					}
-				}
+				console.log('result length:: ' + result.length);
+				$(result).each(function(i) {
+					addMarker(new daum.maps.LatLng(result[i].placeLatitude, result[i].placeLongitude));
+				});
 				
 				setMarkers(map);
 			}

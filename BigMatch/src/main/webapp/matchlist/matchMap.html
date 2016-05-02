@@ -60,7 +60,24 @@
     	overflow:		hidden;
     	white-space:	nowrap;
     }
-    
+     
+    /* .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;} */
+    #wrapper {position: absolute;left: 0;bottom: 40px;width: 288px;height: 88px;margin-left: -144px;text-align: left;overflow: visible;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    #wrapper * {padding: 0;margin: 0;}
+/*     .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: scroll;background: #fff;} */
+    #wrapper #info {width: 100%;height: 76px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+    #wrapper #info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+    #info .list {
+    	background-color: white;
+    	border : 1px solid red;
+    }
+    /* .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;} */
+    #info .desc {position: relative;height: 74px;}
+    .desc .matchTitle {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+    /* .info .userImg {float:left; top: 6px;left: 5px;width: 27%;height: 72px;border: 1px solid #ddd;color: #888;overflow: hidden;} */
+ 	#info .userImg {float:left; width: 27%;height: 72px;border: 1px solid #ddd;}
+    #info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
 </style>
 
 </head>
@@ -101,15 +118,23 @@
 
 <script src="../lib/jquery/jquery.js"></script>
 <script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=8332365d3f31965de2e7a8fc335c6877&libraries=services"></script>
 <!-- 공통function이 있는 js -->
 <script src="../lib/js/common.js"></script>
+<script src="../lib/js/mapView.js"></script>
+<!-- <script src="../lib/js/iscroll.js"></script> -->
 <script type="text/javascript">
 // 현재 위치 refrash
 function nowLocationClick() {
 	nowLocation();
 }
+
+/* var myScroll = new iScroll('info', {
+	hScroll:false,
+	hideScrollbar:true
+}); 
+ */
 </script>
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script>
-<script src="../lib/js/mapView.js"></script>
+
 </body>
 </html>
