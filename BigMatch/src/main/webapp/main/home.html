@@ -317,7 +317,7 @@ body {
 				<div class="ui-content" role="main">
 					<ul data-role="listview" data-theme="a" data-dividertheme="e">
 						<li data-role="list-divider">설정</li>
-						<li><a href="userInfo.html">내 정보</a></li>
+						<li><a href="#" onclick="userInfo()">내 정보</a></li>
 						<li id="textBar">
 							<strong id="textBox">위치 제공 동의</strong>
 							<select name="locationAgreement" id="locationAgreement" data-role="slider" data-mini="true">
@@ -355,5 +355,10 @@ body {
 <script src="../lib/js/common.js"></script>
 <!-- swiper 속성 수정한 js -->
 <script src="../lib/js/home_swiper.js"></script>
+<script type="text/javascript">
+	function userInfo() {
+		location.href='userInfo.html?userSeq=111'
+	}
+</script>
 </body>
 </html>

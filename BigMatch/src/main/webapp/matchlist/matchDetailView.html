@@ -70,7 +70,7 @@ div {margin-left:2%;margin-right:2%}
 	console.log("주소 ::: " + typeof(location.href.split('?')[1].split('=')[1]));
 
 	$.ajax({
-		url			: baseUrl + '/matchDetail.do/' + Number(location.href.split('?')[1].split('=')[1]),
+		url			: baseUrl + '/mebership.do/' + Number(location.href.split('?')[1].split('=')[1]),
 		type		: 'get',
 		dataType	:'json',
 		headers		: { 

@@ -2,8 +2,77 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>내 정보</title>
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+<link rel="stylesheet" href="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css" />
+
+<style>
+.circle_div {
+	margin-top: 5%;
+	margin-left: 40%;
+	margin-bottom: 2%; background-color : #fff;
+	height: 25%;
+	width: 25%;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	overflow: hidden;
+	background-color: #fff;
+}
+
+.tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.tg td {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	padding: 10px 5px;
+	overflow: hidden;
+	word-break: normal;
+}
+
+.tg th {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	overflow: hidden;
+	word-break: normal;
+}
+
+.tg .tg-01 {
+	vertical-align: middle;
+	width: 30%;
+	text-align: right;
+}
+
+.tg .tg-02 {
+	vertical-align: middle;
+	width: 70%;
+}
+.tg .tg-03 {
+	vertical-align: middle;
+	width: 20%;
+}
+
+.tg .tg-04 {
+	vertical-align: middle;
+	width: 5px;
+}
+
+table {
+	width: 92%;
+	margin-right: 8%;
+}
+
+#btbar {
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
+</style>
+
 </head>
 
 <body>
@@ -12,8 +81,98 @@
         <a href="../" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
         <h1>내 정보</h1>
     </div>
+    
+    <form>
+    
+    <div align="center" class="circle_div">
+    	<img alt="image" width="100%" height="100%" src="../lib/images/home/profile.jpg">
+    </div>
+
+		<table class="tg">
+			<tr>
+				<th class="tg-01">이메일 &nbsp;&nbsp;</th>
+				<th class="tg-02" colspan="6"><input type="email" data-clear-btn="false" name="email-1" id="email-1" value="">
+				</th>
+			</tr>
+			<tr>
+				<th class="tg-01">비밀번호 &nbsp;&nbsp;</th>
+				<th class="tg-02" colspan="6"><input type="password" data-clear-btn="false" name="password-1" id="password-1" value="" autocomplete="off"></th>
+			</tr>
+			<tr>
+				<th class="tg-01">비밀번호 확인 &nbsp;&nbsp;</th>
+				<th class="tg-02" colspan="6"><input type="password" data-clear-btn="false" name="password-2" id="password-1" value="" autocomplete="off"></th>
+			</tr>
+			<tr>
+				<th class="tg-01">닉네임 &nbsp;&nbsp;</th>
+				<th class="tg-02" colspan="6"><input type="text" name="nickname-1" id="text-1" value=""></th>
+			</tr>
+			<tr>
+				<th class="tg-01">이름 &nbsp;&nbsp;</th>
+				<th class="tg-02" colspan="6"><input type="text" name="name-1" id="text-1" value=""></th>
+			</tr>
+			<tr>
+				<th class="tg-01">휴대전화 &nbsp;&nbsp;</th>
+				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel-1" id="tel-1" value=""></th>
+				<th class="tg-04">-</th>
+				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel-2" id="tel-1" value=""></th>
+				<th class="tg-04">-</th>
+				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel-3" id="tel-1" value=""></th>
+			</tr>
+			<tr>
+				<th class="tg-01">생년월일 &nbsp;&nbsp;</th>
+				<th class="tg-03"><input type="datetime" data-clear-btn="false" name="datetime-1" id="datetime-1" value=""></th>
+				<th class="tg-04">년</th>
+				<th class="tg-03"><input type="datetime" data-clear-btn="false" name="datetime-2" id="datetime-1" value=""></th>
+				<th class="tg-04">월</th>
+				<th class="tg-03"><input type="datetime" data-clear-btn="false" name="datetime-3" id="datetime-1" value=""></th>
+				<th class="tg-04">일</th>
+			</tr>
+		</table>
+		
+		<div align="center" id="btbar">
+			<input id="updateBt" width="50%" type="submit" value="내정보 수정">
+		</div>
+		<br>
+		<div align="center" id="logoutBar">
+			로그아웃
+		</div>
+		<br>
+	</form>
 	
-	<script src="../lib/jquery/jquery.js"></script>
-	<script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+	<script src="../lib/jquery/jquery.min.js"></script>
+	<script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../lib/js/common.js"></script>
+
+	<script type="text/javascript">
+		console.log("주소 ::: " + location.href.split('?')[1].split('=')[1]);
+
+		$.ajax({
+			url			: baseUrl + '/userInfo.do/' + Number(location.href.split('?')[1].split('=')[1]),
+			type		: 'get',
+			dataType	: 'json',
+			headers		: { 
+   				"Accept" : "application/json",
+   				"Content-Type" : "application/json"
+   			},
+   			data : JSON.stringify({
+   				
+    		}),
+   			success		: function(result) {
+   				console.log(result);
+   				$('input[name=email-1]').attr('value',result.userId);
+   				$('input[name=password-1]').attr('value',result.password); 
+   				$('input[name=password-2]').attr('value',result.password); 
+   				$('input[name=nickname-1]').attr('value',result.name); 
+   				$('input[name=name-1]').attr('value',result.nameEn);
+   				$('input[name=tel-1]').attr('value',result.phoneNo2);
+   				$('input[name=tel-2]').attr('value',result.phoneNo3);
+   				$('input[name=tel-3]').attr('value',result.phoneNo4);
+   				$('input[name=datetime-1]').attr('value',result.birthYear);
+   				$('input[name=datetime-2]').attr('value',result.birthMonth);
+   				$('input[name=datetime-3]').attr('value',result.birthDay);
+   			}
+		});
+	</script>
+
 </body>
 </html>
