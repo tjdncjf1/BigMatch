@@ -31,56 +31,101 @@ div {margin-left:2%;margin-right:2%}
 
 	<table class="tg">
 		<tr>
-			<th class="tg-baqh" rowspan="2">사진<br></th>
-			<th class="tg-yw4l" colspan="3" align="left">닉네임</th>
+			<th class="tg-baqh" rowspan="2"><img alt="사진" src=""></th> <!-- 사진 -->
+			<th class="tg-yw4l" colspan="3" align="left"></th> <!-- 닉네임 -->
 		</tr>
 		<tr>
-			<td class="tg-yw4l" colspan="3">랭킹포인트</td>
+			<td class="tg-yw4l" colspan="3"></td> <!-- 랭킹포인트 -->
 		</tr>
 		<tr>
-			<td class="tg-baqh">성별</td>
-			<td class="tg-yw4l" colspan="3">신뢰등급</td>
+			<td class="tg-baqh">남</td> <!-- 성별 -->
+			<td class="tg-yw4l" colspan="3"></td> <!-- 신뢰포인트 --> <!-- 신뢰등급 추후 작성 -->
+ 		</tr>
+		<tr>
+			<td class="tg-baqh" colspan="4"></td> <!-- 주소 -->
 		</tr>
 		<tr>
-			<td class="tg-baqh" colspan="4">주소</td>
+			<td class="tg-baqh" colspan="4">시간</td> <!-- 시간 -->
 		</tr>
 		<tr>
-			<td class="tg-baqh" colspan="4">시간</td>
+			<td class="tg-baqh" colspan="4"></td> <!-- 희망실력 -->
 		</tr>
 		<tr>
-			<td class="tg-baqh" colspan="4">희망 상대실력</td>
+			<td class="tg-baqh" colspan="4"></td> <!-- 매칭 설명 -->
 		</tr>
 	</table>
-
 	
-	<textarea cols="40" rows="8" name="textarea" id="textarea" readonly="readonly">내용j</textarea>
-	
-	
-	<form>
-    	<textarea name="textarea-1" id="textarea-1" readonly="readonly"></textarea>
-	</form>
-	
+	<input type="button" value="신청하기" id="reqMatch" style="position: absolute; top: 55%; left:41%;">
 	
 <script src="../lib/js/common.js"></script>
 <script src="../lib/jquery/jquery.js"></script>
 <script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	
-<script type="text/javascript">
-	console.log("주소 ::: " + typeof(location.href.split('?')[1].split('=')[1]));
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=8332365d3f31965de2e7a8fc335c6877&libraries=services"></script>
 
+<script type="text/javascript">
+	
+	var machingSeq = Number(location.href.split('?')[1].split('=')[1]);
+	
 	$.ajax({
-		url			: baseUrl + '/mebership.do/' + Number(location.href.split('?')[1].split('=')[1]),
-		type		: 'get',
-		dataType	:'json',
-		headers		: { 
+		url		  : baseUrl + '/matchDetail.do/' + machingSeq,
+		//url		  : baseUrl + '/matchDetail.do/38',
+		type	  : 'GET',
+		dataType  :'json',
+		headers	  : { 
    			"Accept" : "application/json",
    			"Content-Type" : "application/json"
    		},
-   		success		: function(result) {
+   		success   : function(result) {
    			console.log(result);
+   			var geocoder = new daum.maps.services.Geocoder();
+   			var coord = new daum.maps.LatLng(Number(result.placeLatitude), Number(result.placeLongitude));
+   			var addr = '';
+   			var callback = function(status, result) {
+   			    if (status === daum.maps.services.Status.OK) {
+   			        console.log('지번 주소 : ' + result[0].jibunAddress.name);
+   			        addr = result[0].jibunAddress.name;
+		   			console.log("addr :: " + addr);
+		   			$('tr:eq(3) td').append(addr);
+   			    }
+   			};
+			
+   			geocoder.coord2detailaddr(coord, callback);
+   			
+   			$('tr:eq(0) th:eq(1)').append(result.hostUser.name); // 닉네임
+			$(result.hostPointList).each(function(index){
+				if(result.hostPointList[index].pointTypeCd == 'RANK') {
+					// 랭킹 포인트
+	   				$('tr:eq(1) td').append("랭크포인트 : " + result.hostPointList[index].point + "점"); 
+	   			} else if (result.hostPointList[index].pointTypeCd == 'CREDIT') {
+	   				$('tr:eq(2) td:eq(1)').append("신뢰포인트 : " + result.hostPointList[index].point + "점"); 
+	   			}
+			});
+   			$('tr:eq(5) td').append(result.targetStartLevel); // 희망실력
+   			$('tr:eq(6) td').append(result.matchingDesc); // 매칭 설명
    		}
 	});
+	
+	$('#reqMatch').bind('click', function(){
+		$.ajax({
+			url		  : baseUrl + '/appender.do',
+			type	  : 'POST',
+			dataType  :'json',
+			headers	  : { 
+	   			"Accept" : "application/json",
+	   			"Content-Type" : "application/json"
+	   		},
+	   		data 	  : JSON.stringify({
+    			matchingInfoSeq   : machingSeq,
+    			appenderOrder	  : 1,
+    			appenderUserSeq   : 294,  // 추후 로컬 스토리지에 있는 userSeq 넣어야됨.
+    		}),
+	   		success   : function(result) {
+	   			console.log("성공 or 실패 ? :::::::  " + result);
+	   		}
+		});
+	});
+	
 </script>
 	
 </body>
