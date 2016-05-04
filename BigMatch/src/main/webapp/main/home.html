@@ -25,6 +25,9 @@
 <link rel="stylesheet" href="../lib/css/home_swiper.css">
 <!-- more page css -->
 <link rel="stylesheet" href="../lib/css/more.css">
+<!-- toast css -->
+<!-- <link rel="stylesheet" href="../lib/css/toastr.css" /> -->
+<link rel="stylesheet" href="../lib/css/jquery.toast.css" />
 <style>
 body {
 	margin: 0;
@@ -363,77 +366,118 @@ body {
 <script src="../lib/js/common.js"></script>
 <!-- swiper 속성 수정한 js -->
 <script src="../lib/js/home_swiper.js"></script>
-
-<script>
-function moveMyInfo() {
-	location.href="userInfo.html";
-}
-
-
+<script type="text/javascript" src="../lib/js/jquery.toast.js"></script>
+<!-- <script type="text/javascript" src="../lib/js/toastr.js"></script> -->
+<script type="text/javascript">
+	
+	// 내 정보보기 클릭 시 이동.
+	function moveMyInfo() {
+		location.href="userInfo.html";
+	}
+	
+	if(location.href.split('?')[1] != undefined) {
+		//console.log('view :: ' + location.href.split('?')[1].split('=')[1]);
+		view = location.href.split('?')[1].split('=')[1];
+	} 
+	
+	<!--  loacl storage 에 저장된 userseq  -->
+	var userseq = localStorage.getItem('userseq');
+	console.log('userseq : '+userseq);
+	
+	if(view == 1) {
+				
+	} else if(view == 2) {
+		$.ajax({
+			url			: baseUrl + '/userInfo.do/' + userseq,
+			type		: 'get',
+			dataType	: 'json',
+			headers		: { 
+					"Accept" : "application/json",
+					"Content-Type" : "application/json"
+				},
+			success		: function(result) {
+				console.log("home userInfo : " + result);
+				$('#userNik_text').append(result.nickname);
+			}
+		});
+	} else if(view == 3) {
+		
+	}
+	
 	$('#addmatch').click(function(){
-		<!--  loacl storage 에 저장된 userseq  -->
-		var userseq = localStorage.getItem('userseq');
-		console.log('userseq : '+userseq);
 		
 		 $.ajax({
-			url: baseUrl + '/matchDupCheck.do/'+userseq,
+			url: baseUrl + '/matchDupCheck.do/' +userseq,
 			method:'GET',
 			headers: { 
 				"Accept" : "application/json",
 				"Content-Type" : "application/json"
 			},
-			success : function(data) 
-			{
-				console.log("받아온 결과data값 : "+data);
+			success : function(data) {
+				console.log("받아온 결과 data값 : "+data);
 				
-				if(data == "POSSIBLE_ACTION") 
-				{
-					alert('등록 가능');
-					//location.href = "../matchlist/addMatch.html"; 
-				}
-				else if(data == "ALREADY_REGISTERED")
-				{
-					//alert('이미 매치 신청');
-					//$('#addmatch').attr('href', '#popupMenu'); 
-				}
-				else if(data == "ALREADY_APPENDED")
-				{
-					//alert('이미 신청');
+				if(data == "POSSIBLE_ACTION") {
+					//alert('등록 가능');
+					location.href = "../matchlist/addMatch.html"; 
+				} else if(data == "ALREADY_REGISTERED")	{
+					$.toast({
+		   	   		    //heading: 'Error',
+		   	   		    text: '이미 등록한 매칭이 있습니다.',
+		   	   			position: 'bottom-left',
+		   	   		    icon: 'error',
+		   	   			textAlign: 'center'
+   	   				}); 
+					/* Command: toastr["warning"]("Are you the six fingered man?")
+
+					toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "newestOnTop": false,
+					  "progressBar": false,
+					  "positionClass": "toast-bottom-full-width",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "300",
+					  "hideDuration": "1000",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					} */
+				} else if(data == "ALREADY_APPENDED")	{
+					$.toast({
+		   	   		    //heading: 'Error',
+		   	   		    text: '이미 신청한 매칭이 있습니다.',
+		   	   			position: 'bottom-left',
+		   	   		    icon: 'error',
+		   	   		  	textAlign: 'center'
+   	   				}); 
+					/* Command: toastr["warning"]("Are you the six fingered man?")
+
+					toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "newestOnTop": false,
+					  "progressBar": false,
+					  "positionClass": "toast-bottom-full-width",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "300",
+					  "hideDuration": "1000",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					} */
 				}
 			}
 		}); 
 	}); 
 	
-</script>
-
-<script>
-
-	<!--  loacl storage 에 저장된 userseq  -->
-	var userseq = localStorage.getItem('userseq');
-	
-	$.ajax({
-		url			: baseUrl + '/userInfo.do/' + userseq,
-		type		: 'get',
-		dataType	: 'json',
-		headers		: { 
-				"Accept" : "application/json",
-				"Content-Type" : "application/json"
-			},
-		success		: function(result) {
-			console.log("home userInfo : " + result);
-			$('#userNik_text').append(result.name);
-			/* $('input[name=password-1]').attr('value',result.password); 
-			$('input[name=password-2]').attr('value',result.password); 
-			$('input[name=nickname-1]').attr('value',result.name); 
-			$('input[name=name-1]').attr('value',result.nameEn);
-			$('input[name=tel-1]').attr('value',result.phoneNo2);
-			$('input[name=tel-2]').attr('value',result.phoneNo3);
-			$('input[name=tel-3]').attr('value',result.phoneNo4); */
-			/* $('input[name=datetime-1]').attr('value',result.birthYear);
-			$('input[name=datetime-2]').attr('value',result.birthMonth);
-			$('input[name=datetime-3]').attr('value',result.birthDay); */
-		}
-});
 </script>
 </body>
 </html>
