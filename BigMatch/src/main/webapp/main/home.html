@@ -146,9 +146,9 @@ body {
         	<div class="swiper-slide">
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
-						<a class="ui-shadow ui-btn ui-corner-all" href="#">
+						<a class="ui-shadow ui-btn ui-corner-all" href="userInfo.html">
 						<img alt="user" src="../lib/images/home/smile.png" width="50%"><br>
-						<font style="font-size: 15pt">닉네임</font></a>
+						<font id="userNik_text"  style="font-size: 15pt"></font></a>
 					</div>
 					<div class="ui-block-b">
 						<a class="ui-shadow ui-btn ui-corner-all" href="#">
@@ -161,7 +161,7 @@ body {
 						<!-- popup창				
 						<a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="#positionWindow" data-rel="popup" data-position-to="window">
 					 	-->
-						<a class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="../matchlist/matchMap.html" data-ajax="false">
+						<a id="3ball_bt" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" href="../matchlist/matchMap.html" data-ajax="false">
 							<img alt="3ball" src="../lib/images/home/3ball.png" width="80%"><br>
 							<font style="font-size: 15pt">3구</font>
 						</a>
@@ -325,7 +325,7 @@ body {
 				<div class="ui-content" role="main">
 					<ul data-role="listview" data-theme="a" data-dividertheme="e">
 						<li data-role="list-divider">설정</li>
-						<li><a href="#" onclick="userInfo()">내 정보</a></li>
+						<li><a href="#" onclick="moveMyInfo()">내 정보</a></li>
 						<li id="textBar">
 							<strong id="textBox">위치 제공 동의</strong>
 							<select name="locationAgreement" id="locationAgreement" data-role="slider" data-mini="true">
@@ -363,18 +363,20 @@ body {
 <script src="../lib/js/common.js"></script>
 <!-- swiper 속성 수정한 js -->
 <script src="../lib/js/home_swiper.js"></script>
-<script type="text/javascript">
-	function userInfo() {
-		location.href='userInfo.html?userSeq=111'
-	}
-	
+
+<script>
+function moveMyInfo() {
+	location.href="userInfo.html";
+}
+
+
 	$('#addmatch').click(function(){
 		<!--  loacl storage 에 저장된 userseq  -->
 		var userseq = localStorage.getItem('userseq');
 		console.log('userseq : '+userseq);
 		
 		 $.ajax({
-			url: baseUrl + '/matchDupCheck.do/' +userseq,
+			url: baseUrl + '/matchDupCheck.do/'+userseq,
 			method:'GET',
 			headers: { 
 				"Accept" : "application/json",
@@ -402,6 +404,36 @@ body {
 		}); 
 	}); 
 	
+</script>
+
+<script>
+
+	<!--  loacl storage 에 저장된 userseq  -->
+	var userseq = localStorage.getItem('userseq');
+	
+	$.ajax({
+		url			: baseUrl + '/userInfo.do/' + userseq,
+		type		: 'get',
+		dataType	: 'json',
+		headers		: { 
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},
+		success		: function(result) {
+			console.log("home userInfo : " + result);
+			$('#userNik_text').append(result.name);
+			/* $('input[name=password-1]').attr('value',result.password); 
+			$('input[name=password-2]').attr('value',result.password); 
+			$('input[name=nickname-1]').attr('value',result.name); 
+			$('input[name=name-1]').attr('value',result.nameEn);
+			$('input[name=tel-1]').attr('value',result.phoneNo2);
+			$('input[name=tel-2]').attr('value',result.phoneNo3);
+			$('input[name=tel-3]').attr('value',result.phoneNo4); */
+			/* $('input[name=datetime-1]').attr('value',result.birthYear);
+			$('input[name=datetime-2]').attr('value',result.birthMonth);
+			$('input[name=datetime-3]').attr('value',result.birthDay); */
+		}
+});
 </script>
 </body>
 </html>

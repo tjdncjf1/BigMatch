@@ -149,10 +149,13 @@ table {
 	<script src="../lib/js/common.js"></script>
 
 	<script type="text/javascript">
-		console.log("주소 ::: " + location.href.split('?')[1].split('=')[1]);
 
+	<!--  loacl storage 에 저장된 userseq  -->
+	var userseq = localStorage.getItem('userseq');
+	console.log('userseq : '+userseq);
+	
 		$.ajax({
-			url			: baseUrl + '/userInfo.do/' + Number(location.href.split('?')[1].split('=')[1]),
+			url			: baseUrl + '/userInfo.do/' + userseq,
 			type		: 'get',
 			dataType	: 'json',
 			headers		: { 
