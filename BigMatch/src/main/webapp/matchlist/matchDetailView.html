@@ -61,7 +61,10 @@ div {margin-left:2%;margin-right:2%}
 <script src="../lib/jquery/jquery.js"></script>
 <script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=35281aceab086c0a7cccadc0b4963623&libraries=services"></script>
+<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=8332365d3f31965de2e7a8fc335c6877&libraries=services"></script> --> <!-- 다음 로그인 서우철 -->
+<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=35281aceab086c0a7cccadc0b4963623&libraries=services"></script> --> <!-- 카카오톡 로그인 서우철 -->
+<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script> --> <!-- 다음 로그인 임현우 -->
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=9080e1a934aab4b455f480ca93a0c7f5&libraries=services"></script> <!-- 다음 로그인 정승택 -->
 <script type="text/javascript">
 	
 	var machingSeq = Number(location.href.split('?')[1].split('=')[1]);
@@ -105,23 +108,46 @@ div {margin-left:2%;margin-right:2%}
 	});
 	
 	$('#reqMatch').bind('click', function(){
+		
 		$.ajax({
-			url		  : baseUrl + '/appender.do',
-			type	  : 'POST',
-			dataType  :'json',
-			headers	  : { 
-	   			"Accept" : "application/json",
-	   			"Content-Type" : "application/json"
-	   		},
-	   		data 	  : JSON.stringify({
-    			matchingInfoSeq   : machingSeq,
-    			appenderOrder	  : 1,
-    			appenderUserSeq   : 294,  // 추후 로컬 스토리지에 있는 userSeq 넣어야됨.
-    		}),
-	   		success   : function(result) {
-	   			console.log("성공 or 실패 ? :::::::  " + result);
-	   		}
-		});
+	         //url: baseUrl + '/matchDupCheck.do/' +userseq,
+	         url: baseUrl + '/matchDupCheck.do/294',
+	         method:'GET',
+	         headers: { 
+	            "Accept" : "application/json",
+	            "Content-Type" : "application/json"
+	         },
+	         success : function(data) {
+	            console.log("받아온 결과data값 : "+data);
+	            if(data == "POSSIBLE_ACTION") {
+					alert('신청 가능');
+					$.ajax({
+						url		  : baseUrl + '/appender.do',
+		       			type	  : 'POST',
+		       			dataType  :'json',
+		       			headers	  : { 
+		       	   			"Accept" : "application/json",
+		       	   			"Content-Type" : "application/json"
+		       	   		},
+		       	   		data 	  : JSON.stringify({
+		           			matchingInfoSeq   : machingSeq,
+		           			appenderOrder	  : 1,
+		           			appenderUserSeq   : 294,  // 추후 로컬 스토리지에 있는 userSeq 넣어야됨.
+		           		}),
+		       	   		success   : function(event) {
+		       	   			console.log("성공 or 실패 ? :::::::  " + event.result);
+		       	   		}
+	       			});
+	            } else if(data == "ALREADY_REGISTERED") {
+	               alert('이미 매칭 등록');
+	               //$('#addmatch').attr('href', '#popupMenu');
+	            } else if(data == "ALREADY_APPENDED") {
+	               alert('이미 매치 신청');
+	            }
+	         }
+		}); 
+		
+		
 	});
 	
 </script>

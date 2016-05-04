@@ -287,7 +287,6 @@
 					var samePositionArr = [];
 					if(result.length > 0 && result.length == 1) {
 						addMarker(result[0]);
-						console.log("도착하나?")
 						break;
 					} else if(result.length > 0 && result.length > 1) {
 //						console.log('result[0] :: ' + result[0]);
