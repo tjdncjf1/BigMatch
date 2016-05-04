@@ -9,6 +9,9 @@
                    * 로그인 기능 추가. 
                   - 2016-04-18 작성자 : 조민호
                    * pw 암호화 후 로그인 기능 추가. 
+                   
+                  - 2016-05-02 작성자 : 조민호
+                   * DB에서 받아온 useresq loacl storage에 저장. 
 -->
 <head>
 <meta charset="UTF-8">
@@ -72,7 +75,7 @@ body {
 <script type="text/javascript">
 
 $(function(){
-
+	
 	$('#login').click(function(){
 		//암호화 과정
 		var rawData = $('#password').val();			// -> 입력받은 암호값
@@ -91,15 +94,25 @@ $(function(){
 				userId   : $('#userId').val(),
 				password : resultData
 			}),
-			success : function(data) {
-				if(data.result == "SUCCESS") {
-					alert('로그인 성공!');
-					location.href = "../main/home.html";
-				} else {
+			success : function(data) 
+			{
+				console.log("받아온 data값 : "+data);
+				if(data.result == "FAILURE") 
+				{
 					alert('로그인 실패!');
-				}
+				} 
+				else 
+				{
+					alert('로그인 성공!');
+					// 로그인 성공시 로컬 스토리지에 저장  key /value -> usserseq / 각각 seq 값
+					localStorage.setItem('userseq', data);
+					console.log("local에 저장된 값 : "+localStorage.getItem('userseq'));
+					location.href = "../main/home.html";
+					
+					// 로컬 스토리지에 저장된 값 불러오기
+					//console.log("local에 저장된 값 : "+localStorage.getItem('userseq'));
+				} 
 			}
-			
 		});
 	});
 });
