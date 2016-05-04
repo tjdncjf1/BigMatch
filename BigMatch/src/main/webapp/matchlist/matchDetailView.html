@@ -61,8 +61,7 @@ div {margin-left:2%;margin-right:2%}
 <script src="../lib/jquery/jquery.js"></script>
 <script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=8332365d3f31965de2e7a8fc335c6877&libraries=services"></script>
-
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=35281aceab086c0a7cccadc0b4963623&libraries=services"></script>
 <script type="text/javascript">
 	
 	var machingSeq = Number(location.href.split('?')[1].split('=')[1]);
@@ -85,11 +84,10 @@ div {margin-left:2%;margin-right:2%}
    			    if (status === daum.maps.services.Status.OK) {
    			        console.log('지번 주소 : ' + result[0].jibunAddress.name);
    			        addr = result[0].jibunAddress.name;
-		   			console.log("addr :: " + addr);
+		   			//console.log("addr :: " + addr);
 		   			$('tr:eq(3) td').append(addr);
    			    }
    			};
-			
    			geocoder.coord2detailaddr(coord, callback);
    			
    			$('tr:eq(0) th:eq(1)').append(result.hostUser.name); // 닉네임

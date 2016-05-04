@@ -29,111 +29,22 @@ History     : - 2016-04-08 작성자 : 조민호
     <div id="jb-tabs" style="float:left; width:100%">
         <!--tap menu-->
         <ul>
-            <li><a href="#jb-tab-1">3구</a></li>
-            <li><a href="#jb-tab-2">4구</a></li>
-            <li><a href="#jb-tab-3">포켓</a></li>
+            <li id="3ball"><a href="#jb-tab-1">3구</a></li>
+            <li id="4ball"><a href="#jb-tab-1">4구</a></li>
+            <li id="poketBall"><a href="#jb-tab-1">포켓</a></li>
         </ul>
 
         <div id="jb-tab-1">
 
-            <!--//////////////////////////////////////////////////////////임시////////////////////////////////////////////////////////////////////////////////////////-->
-            <table border=0 cellspacing=0 cellpadding=0 width=100% style="display:block; border:4px solid #E3E3E3;">
-                <tr>
-                    <td align=center width=150 height=100>
-                        <br>
-                        <img src="../lib/images/home/my.png" width="100%" />
-                    </td>
-                    <td>
-                        <br>
-                        <table border=0 cellspacing=0 cellpadding=1>
-
-                            <!--닉네임-->
-                            <tr>
-                                <td width=15% valign=middle><img src="../lib/images/home/my.png" width="30%" /></td>
-                                <td width=45% valign=middle>
-                                    <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">
-                            이강민(nickname)
-                        </font>
-                                </td>
-                                <!--신뢰점수-->
-                                <td width=15% valign=middle>
-                                    <img src="../lib/images/home/pin.png" width="30%">
-                                </td>
-                                <td width=25% valign=middle>
-                                    <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">
-                            600점
-                        </font>
-                                </td>
-                            </tr>
-
-                            <!--승률-->
-                            <tr>
-                                <td align=left valign=middle>
-                                    <img src="../lib/images/home/trophy.png" width="30%" />
-                                </td>
-                                <td align=left valign=middle>
-                                    <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">
-							2200                 
-						</font>
-                                    <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">
-							(승률  50% : 승/무/패)
-                        </font>
-                                </td>
-                            </tr>
-
-                            <!--위치-->
-                            <tr>
-                                <td align=left valign=middle>
-                                    <img src="../lib/images/home/pin.png" width="30%" />
-                                </td>
-                                <td align=left valign=middle>
-                                    <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">
-                            서울시 동작구 어딘가?
-						</font>
-                                </td>
-                            </tr>
-
-                            <!--대전시간-->
-                            <tr>
-                                <td valign=middle>
-                                    <img src="../lib/images/home/watch.png" width="30%" />
-                                </td>
-                                <td valign=middle>
-                                    <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">
-							 11:30~14:00
-						</font>
-                                </td>
-                            </tr>
-
-                            <!--다마수-->
-                            <tr>
-                                <td align=left valign=middle>
-                                    <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#3E3E3A; line-height:120%">
-							 <img src="../lib/images/home/dama.png" width="20%"/>
-						</font>
-                                </td>
-                                <td align=left valign=middle>
-                                    <font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">
-							(희망)다마점수
-						</font>
-                                </td>
-                            </tr>
-                        </table>
-                        <br>
-                    </td>
-                </tr>
-            </table>
-            <!--//////////////////////////////////////////////////////////임시////////////////////////////////////////////////////////////////////////////////////////-->
-
         </div>
 
-        <div id="jb-tab-2">
+<!--         <div id="jb-tab-2">
             <p>Tabs 2 - Ipsum</p>
         </div>
 
         <div id="jb-tab-3">
             <p>Tabs 3 - Dolor</p>
-        </div>
+        </div> -->
 
     </div>
    
@@ -146,6 +57,7 @@ History     : - 2016-04-08 작성자 : 조민호
 <script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
 <script src="../lib/js/common.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=35281aceab086c0a7cccadc0b4963623&libraries=services"></script>
 <script>
 	$('#jb-tabs').tabs(); // 탭 기능 추가.
 
@@ -158,12 +70,32 @@ History     : - 2016-04-08 작성자 : 조민호
 	var swLon = parseURL.split('&')[2].split('=')[1];
 	var neLat = parseURL.split('&')[3].split('=')[1];
 	var neLon = parseURL.split('&')[4].split('=')[1];
+	var contents;
+	
+	searchMatchList();
+	
+	$('#3ball').bind('click', function(){
+		eventCd = 'THREE';
+		searchMatchList();
+	});
+	$('#4ball').bind('click', function(){
+		eventCd = 'FOUR';
+		searchMatchList();
+	});
+	$('#poketBall').bind('click', function(){
+		eventCd = 'POOL';
+		searchMatchList();
+	});
+	$('#moveMapView').bind('click', function(){
+		location.href='matchMap.html';
+	});
 	
 	// 매치 조회
-	$.ajax({
-		url: baseUrl + '/mapMatchList.do',
-		method:'GET',
-		dataType:'json',
+	function searchMatchList() {
+		$.ajax({
+			url: baseUrl + '/mapMatchList.do',
+			method:'GET',
+			dataType:'json',
 			headers: { 
 				'Accept' : 'application/json',
 				'Content-Type' : 'application/json'
@@ -176,13 +108,110 @@ History     : - 2016-04-08 작성자 : 조민호
 				neLongitude 	: neLon
 			},
 			success : function(result) {
-				console.log('result :: ' + result);
+				$('#jb-tab-1').empty();
+
+				console.log('result :: ' + result); 
+				console.log('result 갯수 :: ' + result.length);
+				contents = '';
+				var rankPoint;
+				var creditPoint;
+				
+				$(result).each(function(i){
+				
+					var geocoder = new daum.maps.services.Geocoder();
+	   				var coord = new daum.maps.LatLng(Number(result[i].placeLatitude), Number(result[i].placeLongitude));
+		   			var callback = function(status, addr) {
+		   			    if (status === daum.maps.services.Status.OK) {
+		   			        console.log('지번 주소 : ' + addr[0].jibunAddress.name);
+				   			$('#address'+i).append(addr[0].jibunAddress.name);
+		   			    }
+		   			};
+		   			geocoder.coord2detailaddr(coord, callback);
+					
+		   			if(result[i].hostPointList.length > 0) {
+						$(result[i].hostPointList).each(function(index){
+							if(result[i].hostPointList[index].pointTypeCd == 'RANK') {
+								rankPoint = result[i].hostPointList[index].point;
+							}
+							if(result[i].hostPointList[index].pointTypeCd == 'CREDIT') {
+								creditPoint = result[i].hostPointList[index].point;
+							}
+						});
+					}
+					//console.log(result[i]);
+					contents += '<table style="display:block; border:4px solid #E3E3E3; cellspacing:0; cellpadding:0; width:100%;">' +
+					'				<tr>' +
+					'					<td align=center width=150 height=100>' +
+					'						<img src="../lib/images/home/my.png" width="100%" />' +
+					'					</td>' +
+					'					<td><br>' +
+					'						<table style="border:0; cellspacing:0; cellpadding:1;">' +
+					'							<tr>' +
+					'								<td width=15% valign=middle><img src="../lib/images/home/my.png" width="30%" /></td>' +
+					'								<td width=45% valign=middle>' +
+					'									<font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">' +
+															result[i].hostUser.name + //닉네임 
+					'									</font>' +
+					'								</td>' +
+					'								<td width=15% valign=middle>' +
+					'									<img src="../lib/images/home/pin.png" width="30%">' +
+					'								</td>' +
+					'								<td width=25% valign=middle>' +
+					'									<font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">' +
+															creditPoint + // 신뢰점수 
+					'									</font>' +
+					'								</td>' +
+					'							</tr>' +
+					'							<tr>' +
+					'								<td align=left valign=middle>' +
+					'									<img src="../lib/images/home/trophy.png" width="30%" />' +
+					'								</td>' +
+					'								<td align=left valign=middle>' +
+					'									<font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">' +
+															rankPoint + '(승률  50% : 승/무/패)' +// 랭크점수			
+					'									</font>' +
+					'								</td>' +
+					'							</tr>' +
+					'							<tr>' +
+					'								<td align=left valign=middle>' +
+					'									<img src="../lib/images/home/pin.png" width="30%" />' +
+					'								</td>' +
+					'								<td align=left valign=middle>' +
+					'									<font id="address'+i+'" style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">' +
+																		// 주소
+					'									</font>' +
+					'								</td>' +
+					'							</tr>' +
+					'							<tr>' +
+					'								<td align=left valign=middle>' +
+					'									<img src="../lib/images/home/watch.png" width="30%" />' +
+					'								</td>' +
+					'								<td align=left valign=middle>' +
+					'									<font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">' +
+															'11:30~14:00'	 + // 매칭 희망시간 
+					'									</font>' +
+					'								</td>' +
+					'							</tr>' +
+					'							<tr>' +
+					'								<td align=left valign=middle>' +
+					'									<img src="../lib/images/home/dama.png" width="20%"/>' +
+					'								</td>' +
+					'								<td align=left valign=middle>' +
+					'									<font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">' +
+															result[i].targetStartLevel + '이상' +  // 희망 실력
+					'									</font>' +
+					'								</td>' +
+					'							</tr>' +
+					'						</table><br>' +
+					'					</td>' +
+					'				</tr>' +
+					'			</table>';
+				});
+				$('#jb-tab-1').append(contents);
+				
 			}
 		});
-	
-	$('#moveMapView').bind('click', function(){
-		location.href='matchMap.html';
-	});
+	}
 	
 </script>
 </body>

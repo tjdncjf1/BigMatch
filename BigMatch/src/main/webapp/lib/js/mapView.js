@@ -325,8 +325,11 @@
 	    // 영역의 북동쪽 좌표를 얻어옵니다 
 	    var neLatLng = bounds.getNorthEast();
 	    
-	    location.href = 'map_list.html?eventTypeCd=' + $('input[name="viewChoice"]:checked:checked').val() + 
-	    				'&swLatitude=' + swLatLng.getLat() + '&swLongitude=' + swLatLng.getLng() +
-	    				'&neLatitude=' + neLatLng.getLat() + '&neLongitude=' + neLatLng.getLng();
+	    location.href = 'map_list.html?' +
+	    				'eventTypeCd=' + $('input[name="viewChoice"]:checked:checked').val() +
+	    				'&swLatitude=' + swLatLng.getLat() + 
+	    				'&swLongitude=' + swLatLng.getLng() +
+	    				'&neLatitude=' + neLatLng.getLat() + 
+	    				'&neLongitude=' + neLatLng.getLng();
 	    
 	}
