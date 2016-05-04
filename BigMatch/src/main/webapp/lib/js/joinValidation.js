@@ -35,7 +35,7 @@ $(function(){
             	required:true, 
             	equalTo:'#password'
             	},               
-            name: {
+            nickname: {
             	required:true, 
             	minlength: 4
             }
@@ -54,7 +54,7 @@ $(function(){
                 required: '암호확인을 입력하시오.',
                 equalTo:'암호를 다시 확인하세요' 
 			},
-			name: {
+			nickname: {
 				required:'닉네임을 입력하시오.',
 				minlength:'닉네임이 짧습니다.'
 			}
@@ -76,7 +76,7 @@ $(function(){
         		data : JSON.stringify({
         			userId   : $('#userId').val(),
         			password : resultData,
-        			name     : $('#name').val(),
+        			nickname : $('#nickname').val(),
         			gender   : $('input[name="gender"]:checked:checked').val()
         		}),
         		success : function(event) {
