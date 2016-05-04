@@ -91,20 +91,24 @@ table {
 		<table class="tg">
 			<tr>
 				<th class="tg-01">이메일 &nbsp;&nbsp;</th>
-				<th class="tg-02" colspan="6"><input type="email" data-clear-btn="false" name="email-1" id="email-1" value="">
+				<th class="tg-02" colspan="6"><input type="email" data-clear-btn="false" name="email-1" id="email-1" value="" readonly="readonly">
 				</th>
 			</tr>
 			<tr>
-				<th class="tg-01">비밀번호 &nbsp;&nbsp;</th>
+				<th class="tg-01">기존 비밀번호 &nbsp;&nbsp;</th>
+				<th class="tg-02" colspan="6"><input type="password" data-clear-btn="false" name="password-0" id="password-1" value="" autocomplete="off" placeholder="********"></th>
+			</tr>
+			<tr>
+				<th class="tg-01">변경 비밀번호 &nbsp;&nbsp;</th>
 				<th class="tg-02" colspan="6"><input type="password" data-clear-btn="false" name="password-1" id="password-1" value="" autocomplete="off"></th>
 			</tr>
 			<tr>
-				<th class="tg-01">비밀번호 확인 &nbsp;&nbsp;</th>
+				<th class="tg-01">비밀번호 확인  &nbsp;&nbsp;</th>
 				<th class="tg-02" colspan="6"><input type="password" data-clear-btn="false" name="password-2" id="password-1" value="" autocomplete="off"></th>
 			</tr>
 			<tr>
 				<th class="tg-01">닉네임 &nbsp;&nbsp;</th>
-				<th class="tg-02" colspan="6"><input type="text" name="nickname-1" id="text-1" value=""></th>
+				<th class="tg-02" colspan="6"><input type="text" name="nickname-1" id="text-1" value="" readonly="readonly"></th>
 			</tr>
 			<tr>
 				<th class="tg-01">이름 &nbsp;&nbsp;</th>
@@ -112,21 +116,21 @@ table {
 			</tr>
 			<tr>
 				<th class="tg-01">휴대전화 &nbsp;&nbsp;</th>
-				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel-1" id="tel-1" value=""></th>
+				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel-1" id="tel-1" value="" placeholder="010"></th>
 				<th class="tg-04">-</th>
-				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel-2" id="tel-1" value=""></th>
+				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel-2" id="tel-1" value="" placeholder="0000"></th>
 				<th class="tg-04">-</th>
-				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel-3" id="tel-1" value=""></th>
+				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel-3" id="tel-1" value="" placeholder="0000"></th>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<th class="tg-01">생년월일 &nbsp;&nbsp;</th>
-				<th class="tg-03"><input type="datetime" data-clear-btn="false" name="datetime-1" id="datetime-1" value=""></th>
+				<th class="tg-03"><input type="datetime" data-clear-btn="false" name="datetime-1" id="datetime-1" value="" placeholder="2000"></th>
 				<th class="tg-04">년</th>
-				<th class="tg-03"><input type="datetime" data-clear-btn="false" name="datetime-2" id="datetime-1" value=""></th>
+				<th class="tg-03"><input type="datetime" data-clear-btn="false" name="datetime-2" id="datetime-1" value="" placeholder="01"></th>
 				<th class="tg-04">월</th>
-				<th class="tg-03"><input type="datetime" data-clear-btn="false" name="datetime-3" id="datetime-1" value=""></th>
+				<th class="tg-03"><input type="datetime" data-clear-btn="false" name="datetime-3" id="datetime-1" value="" placeholder="01"></th>
 				<th class="tg-04">일</th>
-			</tr>
+			</tr> -->
 		</table>
 		
 		<div align="center" id="btbar">
@@ -138,6 +142,7 @@ table {
 		</div>
 		<br>
 	</form>
+
 	
 	<script src="../lib/jquery/jquery.min.js"></script>
 	<script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
@@ -167,9 +172,9 @@ table {
    				$('input[name=tel-1]').attr('value',result.phoneNo2);
    				$('input[name=tel-2]').attr('value',result.phoneNo3);
    				$('input[name=tel-3]').attr('value',result.phoneNo4);
-   				$('input[name=datetime-1]').attr('value',result.birthYear);
+   				/* $('input[name=datetime-1]').attr('value',result.birthYear);
    				$('input[name=datetime-2]').attr('value',result.birthMonth);
-   				$('input[name=datetime-3]').attr('value',result.birthDay);
+   				$('input[name=datetime-3]').attr('value',result.birthDay); */
    			}
 		});
 	</script>
