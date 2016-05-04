@@ -51,6 +51,19 @@ if ((now.getHours()+24) >= 24) {
 }
 
 
+//var timeSelect = 
+//	'<div class="ui-field-contain">'
+//	    +'<select name="selectTime" id="select-custom-1" data-native-menu="false">'
+//	    +'    <option value="'+now.getHours()+'">'+nowH+' ~ '+after3H+'</option>'
+//	    +'    <option value="'+(now.getHours()+3)+'">'+after3H+' ~ '+after6H+'</option>'
+//		+'    <option value="'+(now.getHours()+6)+'">'+after6H+' ~ '+after9H+'</option>'
+//		+'    <option value="'+(now.getHours()+9)+'">'+after9H+' ~ '+after12H+'</option>'
+//		+'    <option value="'+(now.getHours()+12)+'">'+after12H+' ~ '+after15H+'</option>'
+//		+'    <option value="'+(now.getHours()+15)+'">'+after15H+' ~ '+after18H+'</option>'
+//		+'    <option value="'+(now.getHours()+18)+'">'+after18H+' ~ '+after21H+'</option>'
+//		+'    <option value="'+(now.getHours()+21)+'">'+after21H+' ~ '+after24H+'</option>'
+//		+'</select>'
+//		+'</div>';
 var timeSelect = 
 	'<div class="ui-field-contain">'
 	    +'<select name="selectTime" id="select-custom-1" data-native-menu="false">'

@@ -138,32 +138,52 @@ History     : - 2016-04-08 작성자 : 조민호
     </div>
    
     <!--하단 고정 버튼 생성 (map 으로 이동)-->
-    <div style="position: fixed; bottom: 5px; right: 5px"  >
-         <img src="../lib/images/home/map.png"  width=20% align="right"/>
+    <div id="moveMapView" style="position: absolute; bottom: 2%; right: -24%"  >
+         <img src="../lib/images/home/map.png"  width=20%/>
     </div>
+    
 <script src="../lib/jquery/jquery.js"></script>
 <script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+<script src="../lib/js/common.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
- 	$(function () {
-		$('#jb-tabs').tabs(); // 탭 기능 추가.
-		
-		// 매치 조회
-		$.ajax({
-			url: '/match.do',
-			method: 'GET',
-			dataType: 'json',
+	$('#jb-tabs').tabs(); // 탭 기능 추가.
+
+	console.log("주소 ::: " + location.href.split('?')[1]);
+	var parseURL = location.href.split('?')[1];
+	console.log("이벤트 타입 ::: " + parseURL.split('&')[0].split('=')[1]);
+	var eventCd = parseURL.split('&')[0].split('=')[1];
+	console.log("남서쪽 위도 ::: " + parseURL.split('&')[1].split('=')[1]);
+	var swLat = parseURL.split('&')[1].split('=')[1];
+	var swLon = parseURL.split('&')[2].split('=')[1];
+	var neLat = parseURL.split('&')[3].split('=')[1];
+	var neLon = parseURL.split('&')[4].split('=')[1];
+	
+	// 매치 조회
+	$.ajax({
+		url: baseUrl + '/mapMatchList.do',
+		method:'GET',
+		dataType:'json',
 			headers: { 
-    			"Accept" : "application/json",
-    			"Content-Type" : "application/json"
-    		},
-    		success : function(event) {
-				console.log(event);
-				console.log('성공');
-    		}
+				'Accept' : 'application/json',
+				'Content-Type' : 'application/json'
+			},
+			data : {
+				eventTypeCd		: eventCd,
+				swLatitude 		: swLat,
+				swLongitude 	: swLon,
+				neLatitude 		: neLat,
+				neLongitude 	: neLon
+			},
+			success : function(result) {
+				console.log('result :: ' + result);
+			}
 		});
-		
-	}); 
+	
+	$('#moveMapView').bind('click', function(){
+		location.href='matchMap.html';
+	});
+	
 </script>
 </body>
 

@@ -96,14 +96,11 @@
 	var locMarker;
 	var addrToAddMatch = '';
 	
-	
-	
 	var sendAddr = '<div align="center"><input type="button" onclick="popClose();" value="이 위치 전송"></a></div>';
 
 	var centerMarkerContent = sendAddr;
 
 	var	centerMarkerContentPosition = map.getCenter();
-	
 			
 	//중심 마커가 표시될 위치입니다 
 	var centerMarkerPosition = map.getCenter();
@@ -175,19 +172,19 @@
 				addr = result[0].jibunAddress.name;
 				if (status === daum.maps.services.Status.OK) {
 		 	 		console.log(result[0].roadAddress.name);
-			    		console.log(result[0].jibunAddress.name); 
-				}   
+			    	console.log(result[0].jibunAddress.name); 
+				}
 			});
 		});
 			
 		function searchAddrFromCoords(coords, callback) {
-		// 좌표로 행정동 주소 정보를 요청합니다
-		geocoder.coord2addr(coords, callback);         
+			// 좌표로 행정동 주소 정보를 요청합니다
+			geocoder.coord2addr(coords, callback);         
 		}
 		
 		function searchDetailAddrFromCoords(coords, callback) {
-		// 좌표로 법정동 상세 주소 정보를 요청합니다
-		geocoder.coord2detailaddr(coords, callback);
+			// 좌표로 법정동 상세 주소 정보를 요청합니다
+			geocoder.coord2detailaddr(coords, callback);
 		}
 		
 		// 지도 중심 좌표 변화 이벤트를 등록한다

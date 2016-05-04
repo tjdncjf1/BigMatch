@@ -114,8 +114,8 @@
 				position: new daum.maps.LatLng(result[0].placeLatitude, result[0].placeLongitude)
 			});
 			
-			console.log('result[0] ::: ' + result[0].placeLatitude + ', ' + result[0].placeLongitude);
-			
+//			console.log('result[0] ::: ' + result[0].placeLatitude + ', ' + result[0].placeLongitude);
+			// 임시로 1개 이상일 경우 크기 지정. (추후 수정부분)
 			if(result.length > 1) {
 				var content = '<div id="wrapper" style="height:163px">' + 
 				'    			<div id="info" style="height:152px">';
@@ -125,13 +125,14 @@
 			}
 			
 			for(var i = 0; i < result.length; i++) {
-				content += '<div class="list" onclick="moveMatchDetail(43)">' + 
+				content += '<div class="list" onclick="moveMatchDetail(' + result[i].matchingInfoSeq + ')">' + 
 				'            <div class="userImg">' +
 				'                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="100%" height="100%">' +
 				'           </div>' + 
 				'            <div class="desc">' + 
-				'                <div class="matchTitle">한판붙자!</div>' + 
-				'                <div class="jibun matchTitle">(우) 63309 (지번) 영평동 2181</div>' + 
+				'                <div class="matchTitle">매칭 제목 : ' + result[i].matchingTitle + '</div>' + 
+				'                <div class="name matchTitle">이름 : ' + result[i].hostUser.name + '</div>' + 
+				'                <div class="level matchTitle">희망실력 : ' + result[i].targetStartLevel + '</div>' + 
 				'            </div>' + 
 				'        </div>';
 			}
@@ -154,13 +155,14 @@
 			
 			var content = '<div id="wrapper">' + 
 			'    			<div id="info">';
-			content += '<div class="list" onclick="moveMatchDetail(43)">' + 
+			content += '<div class="list" onclick="moveMatchDetail(' + result.matchingInfoSeq + ')">' + 
 			'            <div class="userImg">' +
 			'                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="100%" height="100%">' +
 			'           </div>' + 
 			'            <div class="desc">' + 
-			'                <div class="matchTitle">제주특별자치도 제주시 첨단로 242</div>' + 
-			'                <div class="jibun matchTitle">(우) 63309 (지번) 영평동 2181</div>' + 
+			'                <div class="matchTitle">매칭 제목 : ' + result.matchingTitle + '</div>' + 
+			'                <div class="name matchTitle">이름 : ' + result.hostUser.name + '</div>' + 
+			'                <div class="level matchTitle">희망실력 : ' + result.targetStartLevel + '</div>' + 
 			'            </div>' + 
 			'        </div>';
 			content += '</div></div>';
@@ -171,7 +173,7 @@
 			});
 			
 			// 생성된 마커를 배열에 추가합니다
-//			markers.push({marker, overlay});
+			markers.push({marker, overlay});
 			
 		}
 	}
@@ -295,11 +297,10 @@
 //						console.log('samePositionArr[0] :: ' + samePositionArr[0]);
 //						console.log('samePositionArr[0] 위치:: ' + samePositionArr[0].placeLatitude);
 						for(var i=(result.length)-1; i>=0; i--) {
-							console.log('samePositionArr[0].placeLatitude :: ' + samePositionArr[0].placeLatitude);
-							console.log('result[i].placeLatitude :: ' + result[i].placeLatitude);
+//							console.log('samePositionArr[0].placeLatitude :: ' + samePositionArr[0].placeLatitude);
+//							console.log('result[i].placeLatitude :: ' + result[i].placeLatitude);
 							if(samePositionArr[0].placeLatitude == result[i].placeLatitude &&
 									samePositionArr[0].placeLongitude == result[i].placeLongitude) {
-								console.log('if문으로 들어옴');
 								samePositionArr.push(result[i]);
 								result.splice(i,1);
 							}
@@ -313,4 +314,19 @@
 				setMarkers(map);
 			}
 		});
+	}
+	
+	// 밑에 리스트 이미지 클릭시 페이지 이동
+	function moveListView() {
+		// 지도의 현재 영역을 얻어옵니다 
+	    var bounds = map.getBounds();
+	    // 영역의 남서쪽 좌표를 얻어옵니다 
+	    var swLatLng = bounds.getSouthWest(); 
+	    // 영역의 북동쪽 좌표를 얻어옵니다 
+	    var neLatLng = bounds.getNorthEast();
+	    
+	    location.href = 'map_list.html?eventTypeCd=' + $('input[name="viewChoice"]:checked:checked').val() + 
+	    				'&swLatitude=' + swLatLng.getLat() + '&swLongitude=' + swLatLng.getLng() +
+	    				'&neLatitude=' + neLatLng.getLat() + '&neLongitude=' + neLatLng.getLng();
+	    
 	}
