@@ -19,7 +19,6 @@ History     : - 2016-04-07 작성자 : 조민호
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>add</title>
 <link rel="stylesheet" href="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
-<script src="../lib/jquery/jquery.js"></script>
 <style>
 #title {
 	padding-left: 4%;
@@ -72,11 +71,11 @@ table {
 		<div align="center">
 			<fieldset data-role="controlgroup" data-type="horizontal">
 				<!--<legend>종목</legend>-->
-				<input type="radio" name="eventType" id="radio-choice-h-2a"	value="EVT001" checked="checked"> 
+				<input type="radio" name="eventType" id="radio-choice-h-2a"	value="THREE" checked="checked"> 
 				<label for="radio-choice-h-2a">3 구</label> 
-				<input type="radio"	name="eventType" id="radio-choice-h-2b" value="EVT002"> 
+				<input type="radio"	name="eventType" id="radio-choice-h-2b" value="FOUR"> 
 				<label for="radio-choice-h-2b">4 구</label> 
-				<input type="radio" name="eventType" id="radio-choice-h-2c" value="EVT003"> 
+				<input type="radio" name="eventType" id="radio-choice-h-2c" value="POOL"> 
 				<label for="radio-choice-h-2c">포켓볼</label>
 			</fieldset>
 		</div>
@@ -140,7 +139,7 @@ table {
 		</div>
 	</form>
 	
-
+<script src="../lib/jquery/jquery.js"></script>
 <script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
 <!-- 공통 자바스크립트 -->
 <script src="../lib/js/common.js" ></script> 
@@ -166,52 +165,48 @@ table {
 		
 		$('#regAddr').val(addLoc);		// 주소 등록. 
 		$('#popupMap').popup('close');	// 팝업창 close
-}
+	}
 	
-	$(function() {
+	$('form').bind('submit', function(event) {
+		event.preventDefault(); // 디폴트 이벤트 제거
 		
-		console.log(location.search);
-		//console.log('베이스URL :: ' + baseUrl);
+		console.log($('#matchingTitle').val()); //제목
+		console.log($('input[name="eventType"]:checked:checked').val()); //경기타입
+		console.log($('input[name="memberCount"]:checked:checked').val()); //멤버수
+		console.log($('select[name="level"]').val()); //희망상대실력
+		console.log($('select[name="selectTime"]').val());
+		console.log($('#textarea-6').val()); //간단한 내용
+		console.log(addLat); //간단한 내용
+		console.log(addLng); //간단한 내용
 		
-		$('form').on('submit', function(event) {
-			event.preventDefault(); // 디폴트 이벤트 제거
-			
-			console.log($('#matchingTitle').val()); //제목
-			console.log($('input[name="eventType"]:checked:checked').val()); //경기타입
-			console.log($('input[name="memberCount"]:checked:checked').val()); //멤버수
-			console.log($('select[name="level"]').val()); //희망상대실력
-			console.log($('select[name="selectTime"]').val());
-			console.log($('#textarea-6').val()); //간단한 내용
-			
-			$.ajax({
-				url: baseUrl + '/match.do',
-				method:'POST',
-				dataType:'json',
-				headers: { 
-					'Accept' : 'application/json',
-					'Content-Type' : 'application/json'
-				},
-				data : JSON.stringify({
-					matchingTitle		: $('#matchingTitle').val(),
-					eventTypeCd			: $('input[name="eventType"]:checked:checked').val(),
-					memberCount			: $('input[name="memberCount"]:checked:checked').val(),
-					targetStartLevel	: $('select[name="level"]').val(),
-					timeCd				: $('select[name="selectTime"]').val(),
-					matchingDesc		: $('#textarea-6').val(),
-					placeLatitude		: addLat,
-					placeLongitude		: addLng
-				}),
-				success : function(event) {
-					if(event.result == 'SUCCESS') {
-						alert('매치 등록 성공');
-						location.href = "../main/home.html";
-					} else {
-						alert('매치 등록 실패');
-					}
+		$.ajax({
+			url: baseUrl + '/match.do',
+			method:'POST',
+			dataType:'json',
+			headers: { 
+				'Accept' : 'application/json',
+				'Content-Type' : 'application/json'
+			},
+			data : JSON.stringify({
+				matchingTitle		: $('#matchingTitle').val(),
+				eventTypeCd			: $('input[name="eventType"]:checked:checked').val(),
+				memberCount			: $('input[name="memberCount"]:checked:checked').val(),
+				targetStartLevel	: $('select[name="level"]').val(),
+				timeCd				: $('select[name="selectTime"]').val(),
+				matchingDesc		: $('#textarea-6').val(),
+				placeLatitude		: addLat,
+				placeLongitude		: addLng
+			}),
+			success : function(event) {
+				if(event.result == 'SUCCESS') {
+					alert('매치 등록 성공');
+					location.href = "../main/home.html";
+				} else {
+					alert('매치 등록 실패');
 				}
-			});
-		});		
-	});
+			}
+		});
+	});		
 </script>
 
 </body>
