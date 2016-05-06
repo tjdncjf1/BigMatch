@@ -1,81 +1,90 @@
-var now = new Date();
+	var now = new Date().getHours();
+	
+	if ($('#select-custom-1').val() == '1' ) {
+		if ( now > 3 ) {
+			var able01 = 'disabled="disabled"';
+		} else {
+			var able01 = '';
+		}
+	}
+	if ($('#select-custom-1').val() == '1' ) {
+		if ( now > 6 ) {
+			var able02 = 'disabled="disabled"';
+		} else {
+			var able02 = '';
+		}
+	}
+	if ($('#select-custom-1').val() == '1' ) {
+		if ( now > 9 ) {
+			var able03 = 'disabled="disabled"';
+		} else {
+			var able03 = '';
+		}
+	}
+	if ($('#select-custom-1').val() == '1' ) {
+		if ( now > 12 ) {
+			var able04 = 'disabled="disabled"';
+		} else {
+			var able04 = '';
+		}
+	}
+	if ($('#select-custom-1').val() == '1' ) {
+		if ( now > 15 ) {
+			var able05 = 'disabled="disabled"';
+		} else {
+			var able05 = '';
+		}
+	}
+	if ($('#select-custom-1').val() == '1' ) {
+		if ( now > 18 ) {
+			var able06 = 'disabled="disabled"';
+		} else {
+			var able06 = '';
+		}
+	}
+	if ($('#select-custom-1').val() == '1' ) {
+		if ( now > 21 ) {
+			var able07 = 'disabled="disabled"';
+		} else {
+			var able07 = '';
+		}
+	}
+	if ($('#select-custom-1').val() == '1' ) {
+		if ( now > 24 ) {
+			var able08 = 'disabled="disabled"';
+		} else {
+			var able08 = '';
+		}
+	}
+	
 
-var nowH = now.getHours()+'시';
-
-if ((now.getHours()+3) >= 24) {
-	var after3H = '내일 '+(now.getHours()-21)+'시';
-} else {
-	var after3H = (now.getHours()+3)+'시';
-}
-
-if ((now.getHours()+6) >= 24) {
-	var after6H = '내일 '+(now.getHours()-18)+'시';
-} else {
-	var after6H = (now.getHours()+6)+'시';
-}
-
-if ((now.getHours()+9) >= 24) {
-	var after9H = '내일 '+(now.getHours()-15)+'시';
-} else {
-	var after9H = (now.getHours()+9)+'시';
-}
-
-if ((now.getHours()+12) >= 24) {
-	var after12H = '내일 '+(now.getHours()-12)+'시';
-} else {
-	var after12H = (now.getHours()+12)+'시';
-}
-
-if ((now.getHours()+15) >= 24) {
-	var after15H = '내일 '+(now.getHours()-9)+'시';
-} else {
-	var after15H = (now.getHours()+15)+'시';
-}
-
-if ((now.getHours()+18) >= 24) {
-	var after18H = '내일 '+(now.getHours()-6)+'시';
-} else {
-	var after18H = (now.getHours()+18)+'시';
-}
-
-if ((now.getHours()+21) >= 24) {
-	var after21H = '내일 '+(now.getHours()-3)+'시';
-} else {
-	var after21H = (now.getHours()+21)+'시';
-}
-
-if ((now.getHours()+24) >= 24) {
-	var after24H = '내일 '+(now.getHours())+'시';
-} else {
-	var after24H = (now.getHours()+24)+'시';
-}
-
-
-//var timeSelect = 
-//	'<div class="ui-field-contain">'
-//	    +'<select name="selectTime" id="select-custom-1" data-native-menu="false">'
-//	    +'    <option value="'+now.getHours()+'">'+nowH+' ~ '+after3H+'</option>'
-//	    +'    <option value="'+(now.getHours()+3)+'">'+after3H+' ~ '+after6H+'</option>'
-//		+'    <option value="'+(now.getHours()+6)+'">'+after6H+' ~ '+after9H+'</option>'
-//		+'    <option value="'+(now.getHours()+9)+'">'+after9H+' ~ '+after12H+'</option>'
-//		+'    <option value="'+(now.getHours()+12)+'">'+after12H+' ~ '+after15H+'</option>'
-//		+'    <option value="'+(now.getHours()+15)+'">'+after15H+' ~ '+after18H+'</option>'
-//		+'    <option value="'+(now.getHours()+18)+'">'+after18H+' ~ '+after21H+'</option>'
-//		+'    <option value="'+(now.getHours()+21)+'">'+after21H+' ~ '+after24H+'</option>'
-//		+'</select>'
-//		+'</div>';
-var timeSelect = 
-	'<div class="ui-field-contain">'
-	    +'<select name="selectTime" id="select-custom-1" data-native-menu="false">'
-	    +'    <option value="'+now.getHours()+'">'+nowH+' ~ '+after3H+'</option>'
-	    +'    <option value="'+(now.getHours()+3)+'">'+after3H+' ~ '+after6H+'</option>'
-		+'    <option value="'+(now.getHours()+6)+'">'+after6H+' ~ '+after9H+'</option>'
-		+'    <option value="'+(now.getHours()+9)+'">'+after9H+' ~ '+after12H+'</option>'
-		+'    <option value="'+(now.getHours()+12)+'">'+after12H+' ~ '+after15H+'</option>'
-		+'    <option value="'+(now.getHours()+15)+'">'+after15H+' ~ '+after18H+'</option>'
-		+'    <option value="'+(now.getHours()+18)+'">'+after18H+' ~ '+after21H+'</option>'
-		+'    <option value="'+(now.getHours()+21)+'">'+after21H+' ~ '+after24H+'</option>'
-		+'</select>'
-		+'</div>';
-
-document.write(timeSelect);	
+	var timeSelect = 
+	'<table>'+
+	'<tr>'+
+	'<td>'+
+	'<div class="ui-field-contain">'+
+	'<select name="daySelect" id="select-custom-1" data-native-menu="false">'+
+	'<option value="1">오늘</option>'+
+	'<option value="2">내일</option>'+
+	'</select>'+
+	'</div>'+
+	'</td>'+
+	'<td>'+
+	'<div class="ui-field-contain">'+
+	'<select name="selectTime" id="select-custom-18" data-native-menu="false">'+
+	'<option value="MID_NIGHT" '+ able01 +'>00시 ~ 03시</option>'+
+	'<option value="DAWN" '+ able02 +'>03시 ~ 06시</option>'+
+	'<option value="EARLY_MORNING" '+ able03 +'>06시 ~ 09시</option>'+
+	'<option value="MORNING" '+ able04 +'>09시 ~ 12시</option>'+
+	'<option value="AFTERNOON" '+ able05 +'>12시 ~ 15시</option>'+
+	'<option value="LATE_AFTERNOON" '+ able06 +'>15시 ~ 18시</option>'+
+	'<option value="EVENING" '+ able07 +'>18시 ~ 21시</option>'+
+	'<option value="NIGHT" '+ able08 +'>21시 ~ 24시</option>'+
+	'</select>'+
+	'</div>'+
+	'</td>'+
+	'</tr>'+
+	'</table>';
+	
+	
+	document.write(timeSelect);
