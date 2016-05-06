@@ -71,6 +71,15 @@ table {
 	margin-right: 20%;
 }
 
+.form-group {
+	max-width: 400px;
+	padding: 15px;
+	margin: 15px;
+}
+#modifyForm label.error {
+	color: red;
+}
+
 </style>
 
 </head>
@@ -82,45 +91,48 @@ table {
         <h1>내 정보</h1>
     </div>
     
-    <form>
     
+    <form id="modifyForm">
+<!--     <div align="center" class="circle_div"> -->
     <div align="center" class="circle_div">
     	<img alt="image" width="100%" height="100%" src="../lib/images/home/profile.jpg">
+    	 <!-- <img id="UploadedImg" src="../lib/images/home/profile.jpg" width="100%" height="100%">
+    	 <input type='file' onchange="readURL(this);" style='position：absolute; margin-left:-80px; width:62px; height:18px; filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor:pointer;' /> -->
     </div>
 
 		<table class="tg">
 			<tr>
 				<th class="tg-01">이메일 &nbsp;&nbsp;</th>
-				<th class="tg-02" colspan="6"><input type="email" data-clear-btn="false" name="email-1" id="email-1" value="" readonly="readonly">
+				<th class="tg-02" colspan="6"><input type="email" data-clear-btn="false" name="email" id="email" readonly="readonly">
 				</th>
 			</tr>
-			<tr>
+<!-- 			<tr>
 				<th class="tg-01">기존 비밀번호 &nbsp;&nbsp;</th>
-				<th class="tg-02" colspan="6"><input type="password" data-clear-btn="false" name="password-0" id="password-1" value="" autocomplete="off" placeholder="********"></th>
-			</tr>
+				<th class="tg-02" colspan="6"><input type="password" data-clear-btn="false" name="password-0" autocomplete="off" placeholder="********"></th>
+			</tr> -->
 			<tr>
 				<th class="tg-01">변경 비밀번호 &nbsp;&nbsp;</th>
-				<th class="tg-02" colspan="6"><input type="password" data-clear-btn="false" name="password-1" id="password-1" value="" autocomplete="off"></th>
+				<th class="tg-02" colspan="6"><input type="password" data-clear-btn="false" name="password" id="password"autocomplete="off" placeholder="********"></th>
 			</tr>
 			<tr>
 				<th class="tg-01">비밀번호 확인  &nbsp;&nbsp;</th>
-				<th class="tg-02" colspan="6"><input type="password" data-clear-btn="false" name="password-2" id="password-1" value="" autocomplete="off"></th>
+				<th class="tg-02" colspan="6"><input type="password" data-clear-btn="false" name="confirmPassword" id="confirmPassword" autocomplete="off" placeholder="********"></th>
 			</tr>
 			<tr>
 				<th class="tg-01">닉네임 &nbsp;&nbsp;</th>
-				<th class="tg-02" colspan="6"><input type="text" name="nickname-1" id="text-1" value="" readonly="readonly"></th>
+				<th class="tg-02" colspan="6"><input type="text" name="nickname" readonly="readonly"></th>
 			</tr>
 			<tr>
 				<th class="tg-01">이름 &nbsp;&nbsp;</th>
-				<th class="tg-02" colspan="6"><input type="text" name="name-1" id="text-1" value=""></th>
+				<th class="tg-02" colspan="6"><input type="text" name="name"></th>
 			</tr>
 			<tr>
 				<th class="tg-01">휴대전화 &nbsp;&nbsp;</th>
-				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel-1" id="tel-1" value="" placeholder="010"></th>
+				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel_01" placeholder="010"></th>
 				<th class="tg-04">-</th>
-				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel-2" id="tel-1" value="" placeholder="0000"></th>
+				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel_02" placeholder="0000"></th>
 				<th class="tg-04">-</th>
-				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel-3" id="tel-1" value="" placeholder="0000"></th>
+				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel_03" placeholder="0000"></th>
 			</tr>
 			<!-- <tr>
 				<th class="tg-01">생년월일 &nbsp;&nbsp;</th>
@@ -144,42 +156,127 @@ table {
 	</form>
 
 	
-	<script src="../lib/jquery/jquery.min.js"></script>
+	<script src="../lib/jquery/jquery.js"></script>
 	<script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../lib/js/jquery.validate.js" ></script>
 	<script src="../lib/js/common.js"></script>
-
+	<!-- pw 암호화 -->
+	<script src="../lib/js/sha-256.js" ></script> 
 	<script type="text/javascript">
 
+/* 	function readURL(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	            $('#UploadedImg').attr('src', e.target.result);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	
+
+	function file_check() {
+        isCheck = false;
+        filename    = document.regform.file1.value;
+        file_len    = filename.length;
+        file_gubun  = filename.substr(file_len - 3, file_len);
+
+        if (file_gubun.toLowerCase() == "jpg" || file_gubun.toLowerCase() == "gif")
+        {
+            isCheck = true;
+        }
+        if (isCheck == false)
+        {
+            alert("확장자가 jpg, gif 인 파일만 업로드가 가능합니다.");
+            document.regform.file1.select();
+            document.selection.clear();
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+	} */
+	
 	<!--  loacl storage 에 저장된 userseq  -->
 	var userseq = localStorage.getItem('userseq');
 	console.log('userseq : '+userseq);
 	
-		$.ajax({
-			url			: baseUrl + '/userInfo.do/' + userseq,
-			type		: 'get',
-			dataType	: 'json',
-			headers		: { 
-   				"Accept" : "application/json",
-   				"Content-Type" : "application/json"
-   			},
-   			data : JSON.stringify({
-   				
-    		}),
-   			success		: function(result) {
-   				console.log(result);
-   				$('input[name=email-1]').attr('value',result.userId);
-   				$('input[name=password-1]').attr('value',result.password); 
-   				$('input[name=password-2]').attr('value',result.password); 
-   				$('input[name=nickname-1]').attr('value',result.name); 
-   				$('input[name=name-1]').attr('value',result.nameEn);
-   				$('input[name=tel-1]').attr('value',result.phoneNo2);
-   				$('input[name=tel-2]').attr('value',result.phoneNo3);
-   				$('input[name=tel-3]').attr('value',result.phoneNo4);
-   				/* $('input[name=datetime-1]').attr('value',result.birthYear);
-   				$('input[name=datetime-2]').attr('value',result.birthMonth);
-   				$('input[name=datetime-3]').attr('value',result.birthDay); */
-   			}
-		});
+	$.ajax({
+		url			: baseUrl + '/userInfo.do/' + userseq,
+		type		: 'GET',
+		headers		: { 
+  				"Accept" : "application/json",
+  				"Content-Type" : "application/json"
+  		},
+  		success		: function(result) {
+			console.log(result);
+			$('input[name=email]').val(result.userId);
+			$('input[name=nickname]').val(result.nickname); 
+			$('input[name=name]').val(result.name);
+			$('input[name=tel_01]').val(result.phoneNo2);
+			$('input[name=tel_02]').val(result.phoneNo3);
+			$('input[name=tel_03]').val(result.phoneNo4);
+		}
+	});
+
+	// 패스워드 정규식.
+	$.validator.addMethod("passwordCk",  function( value, element ) {
+		return this.optional(element) ||  /^.*(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/.test(value);
+	}, '영문,숫자,특수문자 포함'); 
+	
+	$('#modifyForm').validate({
+		rules: {
+			password: {
+            	required: false,
+				minlength: 8,
+				passwordCk: true
+            },
+            confirmPassword: {
+            	required:false, 
+            	equalTo:'#password'
+            }               
+        },
+        messages: {
+            password: {
+				minlength: '8자리 이상 입력하세요.'
+            },
+            confirmPassword: {
+                equalTo:'암호를 다시 확인하세요' 
+			}
+        },
+        submitHandler: function (){ //유효성 검사를 통과시 전송
+        	//암호화 과정
+        	var rawData = $('input[name=password]').val();	// -> 입력받은 암호값
+        	console.log('입력받은 비밀번호 : ' + rawData);
+        	var resultData = sha256(rawData);					// -> 변환된 암호값
+        	console.log('암호화된 비밀번호 : ' + resultData);
+    		$.ajax({
+    			url		 : baseUrl + '/userInfo.do/' + userseq,
+    			type	 : 'PUT',
+    			dataType : 'JSON',
+    			headers	 : { 
+    				"Accept" : "application/json",
+    	  			"Content-Type" : "application/json"
+    	  		},
+    	  		data	 : JSON.stringify({
+        			password : resultData,
+        			name 	 : $('input[name=name]').val(),
+    				phoneNo2 : $('input[name=tel_01]').val(),
+    				phoneNo3 : $('input[name=tel_02]').val(),
+    				phoneNo4 : $('input[name=tel_03]').val()
+    	  		}),
+    	  		success		: function(result) {
+    				console.log(result);
+    			}
+    		});
+        }
+        /* invalidHandler: function() { // 모두 입력 안했을 시
+			alert('모두 입력해주세요.');
+		} */
+       
+    });
+	
 	</script>
 
 </body>

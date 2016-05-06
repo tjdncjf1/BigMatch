@@ -108,7 +108,7 @@
 		
 		if(Array.isArray(result)) {
 //			console.log('result array :: ' + result[0].placeLatitude);
-//			console.log('위치 :: ' + result[0].placeLatitude + ', ' + result[0].placeLongitude);
+			console.log('위치 :: ' + result[0].placeLatitude + ', ' + result[0].placeLongitude);
 			// 마커를 생성합니다
 			marker = new daum.maps.Marker({
 				position: new daum.maps.LatLng(result[0].placeLatitude, result[0].placeLongitude)

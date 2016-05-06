@@ -2,7 +2,7 @@
 <!-- 
 Program     :addMatch.html
 Date        : 2016-04-07
-Description : 매칭 들록 UI
+Description : 매칭 등록 UI
 Modify      : 정승택
 History     : - 2016-04-07 작성자 : 조민호 
                 * UI 수정  포기 ㅠㅠ
@@ -79,11 +79,11 @@ table {
 		<div align="center">
 			<fieldset data-role="controlgroup" data-type="horizontal">
 				<!--<legend>종목</legend>-->
-				<input type="radio" name="eventType" id="radio-choice-h-2a"	value="EVT001" checked="checked"> 
+				<input type="radio" name="eventType" id="radio-choice-h-2a"	value="THREE" checked="checked"> 
 				<label for="radio-choice-h-2a">3 구</label> 
-				<input type="radio"	name="eventType" id="radio-choice-h-2b" value="EVT002"> 
+				<input type="radio"	name="eventType" id="radio-choice-h-2b" value="FOUR"> 
 				<label for="radio-choice-h-2b">4 구</label> 
-				<input type="radio" name="eventType" id="radio-choice-h-2c" value="EVT003"> 
+				<input type="radio" name="eventType" id="radio-choice-h-2c" value="POOL"> 
 				<label for="radio-choice-h-2c">포켓볼</label>
 			</fieldset>
 		</div>
@@ -101,7 +101,6 @@ table {
 
 		<div id="level" style="width: 92%">
 			<select name="level" id="select-choice-a" data-native-menu="false">
-				<option>희망상대실력</option>
 				<option value="30">30이하</option>
 				<option value="50">50</option>
 				<option value="80">80</option>
@@ -144,10 +143,6 @@ table {
 		</table>
 		</div>
 		
-		
-		
-		
-		
 		<div align="center">
 			<a href="#popupMap" data-rel="popup" data-position-to="window"
 				class="ui-btn ui-corner-all ui-shadow ui-btn-inline">위치등록</a>
@@ -174,81 +169,7 @@ table {
 			<input type="submit" id="registerMatch" data-inline="true" value="등록하기!">
 		</div>
 	</form>
-	
-	
-<script type="text/javascript">
 
-changeOption(1);
-
-function changeOption(value) {
-	
-	if(value == '1') {
-		
- 		console.log('1도착');
- 		
- 		var now = new Date().getHours();
- 		
- 		if( now > 2) {
- 			$('#able01').attr("disabled","disabled");
- 		}
- 		if( now > 5) {
- 			$('#able02').attr("disabled","disabled");
- 		}
- 		if( now > 8) {
- 			$('#able03').attr("disabled","disabled");
- 		}
- 		if( now > 11) {
- 			$('#able04').attr("disabled","disabled");
- 		}
- 		if( now > 14) {
- 			$('#able05').attr("disabled","disabled");
- 		}
- 		if( now > 17) {
- 			$('#able06').attr("disabled","disabled");
- 		}
- 		if( now > 20) {
- 			$('#able07').attr("disabled","disabled");
- 		}
- 		if( now > 23) {
- 			$('#able08').attr("disabled","disabled");
- 		}
- 		
- 		if( now > 2) {
- 			$('#select-custom-18-menu [data-option-index=0]').addClass('ui-state-disabled');
- 		}
- 		if( now > 5) {
- 			$('#select-custom-18-menu [data-option-index=1]').addClass('ui-state-disabled');
- 		}
- 		if( now > 8) {
- 			$('#select-custom-18-menu [data-option-index=2]').addClass('ui-state-disabled');
- 		}
- 		if( now > 11) {
- 			$('#select-custom-18-menu [data-option-index=3]').addClass('ui-state-disabled');
- 		}
- 		if( now > 14) {
- 			$('#select-custom-18-menu [data-option-index=4]').addClass('ui-state-disabled');
- 		}
- 		if( now > 17) {
- 			$('#select-custom-18-menu [data-option-index=5]').addClass('ui-state-disabled');
- 		}
- 		if( now > 20) {
- 			$('#select-custom-18-menu [data-option-index=6]').addClass('ui-state-disabled');
- 		}
- 		if( now > 23) {
- 			$('#select-custom-18-menu [data-option-index=7]').addClass('ui-state-disabled');
- 		}
- 				
-	}
-	
-	if(value == '2') {
-
-		$('ul>li').removeClass();
-	}
-	
-};
-
-
-</script>
 <script src="../lib/jquery/jquery.js"></script>
 <script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
 <!-- 공통 자바스크립트 -->
@@ -316,8 +237,76 @@ function changeOption(value) {
 				}
 			}
 		});
-	});		
-</script>
+	});	
+	
+	changeOption(1);
 
+	function changeOption(value) {
+		
+		if(value == '1') {
+			
+	 		console.log('1도착');
+	 		
+	 		var now = new Date().getHours();
+	 		
+	 		if( now > 2) {
+	 			$('#able01').attr("disabled","disabled");
+	 		}
+	 		if( now > 5) {
+	 			$('#able02').attr("disabled","disabled");
+	 		}
+	 		if( now > 8) {
+	 			$('#able03').attr("disabled","disabled");
+	 		}
+	 		if( now > 11) {
+	 			$('#able04').attr("disabled","disabled");
+	 		}
+	 		if( now > 14) {
+	 			$('#able05').attr("disabled","disabled");
+	 		}
+	 		if( now > 17) {
+	 			$('#able06').attr("disabled","disabled");
+	 		}
+	 		if( now > 20) {
+	 			$('#able07').attr("disabled","disabled");
+	 		}
+	 		if( now > 23) {
+	 			$('#able08').attr("disabled","disabled");
+	 		}
+	 		
+	 		if( now > 2) {
+	 			$('#select-custom-18-menu [data-option-index=0]').addClass('ui-state-disabled');
+	 		}
+	 		if( now > 5) {
+	 			$('#select-custom-18-menu [data-option-index=1]').addClass('ui-state-disabled');
+	 		}
+	 		if( now > 8) {
+	 			$('#select-custom-18-menu [data-option-index=2]').addClass('ui-state-disabled');
+	 		}
+	 		if( now > 11) {
+	 			$('#select-custom-18-menu [data-option-index=3]').addClass('ui-state-disabled');
+	 		}
+	 		if( now > 14) {
+	 			$('#select-custom-18-menu [data-option-index=4]').addClass('ui-state-disabled');
+	 		}
+	 		if( now > 17) {
+	 			$('#select-custom-18-menu [data-option-index=5]').addClass('ui-state-disabled');
+	 		}
+	 		if( now > 20) {
+	 			$('#select-custom-18-menu [data-option-index=6]').addClass('ui-state-disabled');
+	 		}
+	 		if( now > 23) {
+	 			$('#select-custom-18-menu [data-option-index=7]').addClass('ui-state-disabled');
+	 		}
+	 				
+		}
+		
+		if(value == '2') {
+
+			$('ul>li').removeClass();
+		}
+		
+	};
+</script>
 </body>
 </html>

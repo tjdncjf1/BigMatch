@@ -190,33 +190,13 @@ body {
 				</div>
 				
 				<!-- href="../matchlist/addMatch.html" -->
-				<a class="ui-btn ui-shadow"	id="addmatch"  data-ajax="false" data-rel="popup">
+				<a class="ui-btn ui-shadow"	id="addmatch" data-ajax="false">
 					<font style="font-size: 12pt">대전 등록!</font>
 				</a>
 				
-				
-				
-				
-			
-			
 				<a class="ui-btn ui-shadow" href="#">
 					<font style="font-size: 12pt">빠른 대전!</font>
 				</a> 
-				<!--  
-					- 제목 : popup menu(map, list)
-					- 작성자 : 서우철
-					- 추가될 작업 사항 :
-						* 떠있는 icon 밑에 이름 추가할 것.
-						* 뒤에 배경 흐리게 할 것.
-						* 
-					- 추후 작업할 사항으로 변경.
-				-->
-				<!-- 	 
-				<div data-role="popup" id="positionWindow" data-theme="none" data-shadow="false">
-					<a href="../matchlist/matchMap.html"><img alt="mapView" class="popphoto" src="../lib/images/home/map.png" height="40%" width="40%"/></a>
-					<a href="../matchlist/map_list.html"><img alt="listView" class="popphoto" src="../lib/images/home/list.png" height="40%" width="40%"/></a>
-				</div>
-				-->		
 			</div> <!-- swiper-slide -->
 			
 			<!-- my 페이지 -->
@@ -376,16 +356,17 @@ body {
 	}
 	
 	if(location.href.split('?')[1] != undefined) {
-		//console.log('view :: ' + location.href.split('?')[1].split('=')[1]);
-		view = location.href.split('?')[1].split('=')[1];
-	} 
+		console.log('view :: ' + location.href.split('?')[1].split('&')[0].split('=')[1]);
+		view = location.href.split('?')[1].split('&')[0].split('=')[1];
+	}
 	
 	<!--  loacl storage 에 저장된 userseq  -->
 	var userseq = localStorage.getItem('userseq');
 	console.log('userseq : '+userseq);
 	
+	// view(home.html을 리로딩시 처음 보여주는 화면아이디)를 뭐 보여주냐에 따라 ajax 요청.
 	if(view == 1) {
-				
+		
 	} else if(view == 2) {
 		$.ajax({
 			url			: baseUrl + '/userInfo.do/' + userseq,
@@ -401,9 +382,20 @@ body {
 			}
 		});
 	} else if(view == 3) {
-		
+		if(location.href.split('?')[1].split('&')[1] != undefined) {
+			console.log('toastBoolean :: ' + location.href.split('?')[1].split('&')[1].split('=')[1]);
+			$.toast({
+   	   		    //heading: 'Error',
+   	   		    text: '대전 결과를 입력해주세요',
+   	   			position: 'bottom-left',
+   	   		    icon: 'error',
+   	   		  	textAlign: 'center'
+  			});
+			//view = 2;
+		}
 	}
 	
+	// 대전등록 클릭 시
 	$('#addmatch').click(function(){
 		
 		 $.ajax({
@@ -416,37 +408,18 @@ body {
 			success : function(data) {
 				console.log("받아온 결과 data값 : "+data);
 				
-				if(data == "POSSIBLE_ACTION") {
-					//alert('등록 가능');
+				if(data == "POSSIBLE_ACTION") { // 매치등록 가능상태
+					console.log('등록 가능');
 					location.href = "../matchlist/addMatch.html"; 
-				} else if(data == "ALREADY_REGISTERED")	{
-					$.toast({
+				} else if(data == "ALREADY_REGISTERED")	{ // 이미 매치를 등록한 상태
+					 $.toast({
 		   	   		    //heading: 'Error',
 		   	   		    text: '이미 등록한 매칭이 있습니다.',
 		   	   			position: 'bottom-left',
 		   	   		    icon: 'error',
 		   	   			textAlign: 'center'
-   	   				}); 
-					/* Command: toastr["warning"]("Are you the six fingered man?")
-
-					toastr.options = {
-					  "closeButton": true,
-					  "debug": false,
-					  "newestOnTop": false,
-					  "progressBar": false,
-					  "positionClass": "toast-bottom-full-width",
-					  "preventDuplicates": false,
-					  "onclick": null,
-					  "showDuration": "300",
-					  "hideDuration": "1000",
-					  "timeOut": "5000",
-					  "extendedTimeOut": "1000",
-					  "showEasing": "swing",
-					  "hideEasing": "linear",
-					  "showMethod": "fadeIn",
-					  "hideMethod": "fadeOut"
-					} */
-				} else if(data == "ALREADY_APPENDED")	{
+   	   				});
+				} else if(data == "ALREADY_APPENDED")	{ // 이미 다른 매치에 신청한 상태
 					$.toast({
 		   	   		    //heading: 'Error',
 		   	   		    text: '이미 신청한 매칭이 있습니다.',
@@ -454,25 +427,9 @@ body {
 		   	   		    icon: 'error',
 		   	   		  	textAlign: 'center'
    	   				}); 
-					/* Command: toastr["warning"]("Are you the six fingered man?")
-
-					toastr.options = {
-					  "closeButton": true,
-					  "debug": false,
-					  "newestOnTop": false,
-					  "progressBar": false,
-					  "positionClass": "toast-bottom-full-width",
-					  "preventDuplicates": false,
-					  "onclick": null,
-					  "showDuration": "300",
-					  "hideDuration": "1000",
-					  "timeOut": "5000",
-					  "extendedTimeOut": "1000",
-					  "showEasing": "swing",
-					  "hideEasing": "linear",
-					  "showMethod": "fadeIn",
-					  "hideMethod": "fadeOut"
-					} */
+				} else if (data == "APPENDER_EXISTENCE") { // 내가 등록한 매치에 신청자가 있는 상태
+					view=3;
+   	   				location.href='../main/home.html?viewNum=' + view + '&toastBoolean=0';				
 				}
 			}
 		}); 

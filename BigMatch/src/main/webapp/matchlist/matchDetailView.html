@@ -53,22 +53,28 @@ div {margin-left:2%;margin-right:2%}
 		<tr>
 			<td class="tg-baqh" colspan="4"></td> <!-- 매칭 설명 -->
 		</tr>
+		<tr>
+			<td class="tg-baqh" colspan="4"></td> <!-- 전적, 승률 -->
+		</tr>
 	</table>
 	
-	<input type="button" value="신청하기" id="reqMatch" style="position: absolute; top: 55%; left:41%;">
+	<input type="button" value="신청하기" id="reqMatch" style="position: absolute; top: 60%; left:41%;">
 	
 <script src="../lib/js/common.js"></script>
 <script src="../lib/jquery/jquery.js"></script>
 <script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=8332365d3f31965de2e7a8fc335c6877&libraries=services"></script> --> <!-- 다음 로그인 서우철 -->
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=8332365d3f31965de2e7a8fc335c6877&libraries=services"></script><!-- 다음 로그인 서우철 -->
 <!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=35281aceab086c0a7cccadc0b4963623&libraries=services"></script> --> <!-- 카카오톡 로그인 서우철 -->
-<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script> --> <!-- 다음 로그인 임현우 -->
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=9080e1a934aab4b455f480ca93a0c7f5&libraries=services"></script> <!-- 다음 로그인 정승택 -->
+<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script> --><!-- 다음 로그인 임현우 -->
+<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=9080e1a934aab4b455f480ca93a0c7f5&libraries=services"></script>다음 로그인 정승택 -->
 <script type="text/javascript" src="../lib/js/jquery.toast.js"></script>
 <script type="text/javascript">
 	
 	var machingSeq = Number(location.href.split('?')[1].split('=')[1]);
+	console.log("machingSeq :: " + machingSeq);
+	var userseq = localStorage.getItem('userseq');
+	console.log("userseq :: " + userseq);
 	
 	$.ajax({
 		url		  : baseUrl + '/matchDetail.do/' + machingSeq,
@@ -103,16 +109,26 @@ div {margin-left:2%;margin-right:2%}
 	   				$('tr:eq(2) td:eq(1)').append("신뢰포인트 : " + result.hostPointList[index].point + "점"); 
 	   			}
 			});
+			$(result.hostRecordList).each(function(index){
+				if(result.hostRecordList[index].eventTypeCd == result.eventTypeCd) {
+					// 승률, 전적 표시
+	   				$('tr:eq(7) td').append(result.hostRecordList[index].wonCount + '승 ' + 
+	   										result.hostRecordList[index].drawCount + '무 ' +
+	   										result.hostRecordList[index].loseCount + '패(' +
+	   										result.hostRecordList[index].winningRate + '%)'); 
+	   			}
+			});
    			$('tr:eq(5) td').append(result.targetStartLevel); // 희망실력
    			$('tr:eq(6) td').append(result.matchingDesc); // 매칭 설명
+   			
    		}
 	});
 	
 	$('#reqMatch').bind('click', function(){
 		
 		$.ajax({
-	         //url: baseUrl + '/matchDupCheck.do/' +userseq,
-	         url: baseUrl + '/matchDupCheck.do/294',
+	         url: baseUrl + '/matchDupCheck.do/' +userseq,
+	         //url: baseUrl + '/matchDupCheck.do/294',
 	         method:'GET',
 	         headers: { 
 	            "Accept" : "application/json",
@@ -124,16 +140,19 @@ div {margin-left:2%;margin-right:2%}
 	            	console.log('신청 가능');
 	            	appenderRequest();
 	            } else if(data == "ALREADY_REGISTERED") {
-					console.log('이미 매칭 등록');
 					$.toast({
 		   	   		    //heading: 'Error',
-		   	   		    text: '이미 매칭을 등록하셨습니다.',
-		   	   			position: 'mid-center',
+		   	   		    text: '등록한 대전이 있기 때문에 신청이 불가능합니다.',
+		   	   			position: 'bottom-left',
 		   	   		    icon: 'error'
-   	   				})
+   	   				});
 	            } else if(data == "ALREADY_APPENDED") {
-					console.log('이미 매치 신청');
-					appenderRequest();
+					$.toast({
+		   	   		    //heading: 'Error',
+		   	   		    text: '이미 다른 곳에 대전을 신청하셨습니다.',
+		   	   			position: 'bottom-left',
+		   	   		    icon: 'error'
+   	   				});
 	            }
 	         }
 		}); 
@@ -151,14 +170,15 @@ div {margin-left:2%;margin-right:2%}
    	   		data 	  : JSON.stringify({
        			matchingInfoSeq   : machingSeq,
        			appenderOrder	  : 1,
-       			appenderUserSeq   : 294,  // 추후 로컬 스토리지에 있는 userSeq 넣어야됨.
+       			//appenderUserSeq   : 294,  // 추후 로컬 스토리지에 있는 userSeq 넣어야됨.
+       			appenderUserSeq   : userseq,  // 추후 로컬 스토리지에 있는 userSeq 넣어야됨.
        		}),
    	   		success   : function(result) {
    	   			console.log("성공 or 실패 ? :::::::  " + event);
    	   			if(result == 'EXCESSIVE_NUMBER_OF_PEOPLE') {
    	   				$.toast({
 		   	   		    //heading: 'Error',
-		   	   		    text: '더이상 매칭을 신청할 수 없습니다.',
+		   	   		    text: '대전을 신청',
 		   	   			position: 'mid-center',
 		   	   		    icon: 'error'
    	   				});
