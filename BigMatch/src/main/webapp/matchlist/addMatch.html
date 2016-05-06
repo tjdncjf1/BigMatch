@@ -47,10 +47,18 @@ iframe {
 	padding-right: 4%;
 }
 
-table {
-	width: 100%;
+#timeBar {
 	padding-left: 4%;
 	padding-right: 4%;
+}
+
+table {
+	width: 100%;
+}
+
+.ui-field-contain {
+	padding-left: 0px;
+	padding-right: 0px;
 }
 </style>
 </head>
@@ -71,11 +79,11 @@ table {
 		<div align="center">
 			<fieldset data-role="controlgroup" data-type="horizontal">
 				<!--<legend>종목</legend>-->
-				<input type="radio" name="eventType" id="radio-choice-h-2a"	value="THREE" checked="checked"> 
+				<input type="radio" name="eventType" id="radio-choice-h-2a"	value="EVT001" checked="checked"> 
 				<label for="radio-choice-h-2a">3 구</label> 
-				<input type="radio"	name="eventType" id="radio-choice-h-2b" value="FOUR"> 
+				<input type="radio"	name="eventType" id="radio-choice-h-2b" value="EVT002"> 
 				<label for="radio-choice-h-2b">4 구</label> 
-				<input type="radio" name="eventType" id="radio-choice-h-2c" value="POOL"> 
+				<input type="radio" name="eventType" id="radio-choice-h-2c" value="EVT003"> 
 				<label for="radio-choice-h-2c">포켓볼</label>
 			</fieldset>
 		</div>
@@ -105,9 +113,39 @@ table {
 				<option value="300">300이상</option>
 			</select>
 		</div>
-
 		
-		<script src="../lib/js/timeSelect.js"></script>
+		<div id="timeBar" style="width: 92%">		
+		<table>
+			<tr>
+				<td>
+					<div class="ui-field-contain">
+						<select name="selectDay" id="select-custom-1" data-native-menu="false" onchange="changeOption(this.value)">
+						<option value="1">오늘</option>
+						<option value="2">내일</option>
+						</select>
+					</div>
+				</td>
+				<td>
+					<div class="ui-field-contain">
+						<select name="selectTime" id="select-custom-18"
+							data-native-menu="false">
+							<option id="able01" value="MID_NIGHT">00시 ~ 03시</option>
+							<option id="able02" value="DAWN">03시 ~ 06시</option>
+							<option id="able03" value="EARLY_MORNING">06시 ~ 09시</option>
+							<option id="able04" value="MORNING">09시 ~ 12시</option>
+							<option id="able05" value="AFTERNOON">12시 ~ 15시</option>
+							<option id="able06" value="LATE_AFTERNOON">15시 ~ 18시</option>
+							<option id="able07" value="EVENING">18시 ~ 21시</option>
+							<option id="able08" value="NIGHT">21시 ~ 24시</option>
+						</select>
+					</div>
+				</td>
+			</tr>
+		</table>
+		</div>
+		
+		
+		
 		
 		
 		<div align="center">
@@ -124,8 +162,6 @@ table {
 		<div id="addrBar" align="center">
 			<input type="text" id="regAddr" width="20px" value="" readonly="readonly">
 		</div>
-			
-		
 
 <!--------------------------------------------------------------------------------------->
 
@@ -139,6 +175,80 @@ table {
 		</div>
 	</form>
 	
+	
+<script type="text/javascript">
+
+changeOption(1);
+
+function changeOption(value) {
+	
+	if(value == '1') {
+		
+ 		console.log('1도착');
+ 		
+ 		var now = new Date().getHours();
+ 		
+ 		if( now > 2) {
+ 			$('#able01').attr("disabled","disabled");
+ 		}
+ 		if( now > 5) {
+ 			$('#able02').attr("disabled","disabled");
+ 		}
+ 		if( now > 8) {
+ 			$('#able03').attr("disabled","disabled");
+ 		}
+ 		if( now > 11) {
+ 			$('#able04').attr("disabled","disabled");
+ 		}
+ 		if( now > 14) {
+ 			$('#able05').attr("disabled","disabled");
+ 		}
+ 		if( now > 17) {
+ 			$('#able06').attr("disabled","disabled");
+ 		}
+ 		if( now > 20) {
+ 			$('#able07').attr("disabled","disabled");
+ 		}
+ 		if( now > 23) {
+ 			$('#able08').attr("disabled","disabled");
+ 		}
+ 		
+ 		if( now > 2) {
+ 			$('#select-custom-18-menu [data-option-index=0]').addClass('ui-state-disabled');
+ 		}
+ 		if( now > 5) {
+ 			$('#select-custom-18-menu [data-option-index=1]').addClass('ui-state-disabled');
+ 		}
+ 		if( now > 8) {
+ 			$('#select-custom-18-menu [data-option-index=2]').addClass('ui-state-disabled');
+ 		}
+ 		if( now > 11) {
+ 			$('#select-custom-18-menu [data-option-index=3]').addClass('ui-state-disabled');
+ 		}
+ 		if( now > 14) {
+ 			$('#select-custom-18-menu [data-option-index=4]').addClass('ui-state-disabled');
+ 		}
+ 		if( now > 17) {
+ 			$('#select-custom-18-menu [data-option-index=5]').addClass('ui-state-disabled');
+ 		}
+ 		if( now > 20) {
+ 			$('#select-custom-18-menu [data-option-index=6]').addClass('ui-state-disabled');
+ 		}
+ 		if( now > 23) {
+ 			$('#select-custom-18-menu [data-option-index=7]').addClass('ui-state-disabled');
+ 		}
+ 				
+	}
+	
+	if(value == '2') {
+
+		$('ul>li').removeClass();
+	}
+	
+};
+
+
+</script>
 <script src="../lib/jquery/jquery.js"></script>
 <script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
 <!-- 공통 자바스크립트 -->
