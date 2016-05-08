@@ -355,6 +355,7 @@ body {
 		location.href="userInfo.html";
 	}
 	
+	// url뒤에 view 값이 있다면 처음 페이지 로딩 시 보여줄 화면이 달라짐.
 	if(location.href.split('?')[1] != undefined) {
 		console.log('view :: ' + location.href.split('?')[1].split('&')[0].split('=')[1]);
 		view = location.href.split('?')[1].split('&')[0].split('=')[1];
