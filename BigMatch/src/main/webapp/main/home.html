@@ -285,7 +285,7 @@ body {
 			                <h3>대전정보 보기</h3>
 			                <p>제목 : 똥쟁이 우철이</p>
 			                아히히히히히히히
-			                <button>수정</button>
+			                <a href="#" onclick="moveMatchingInfo()"><input type="button" value="수정하기"/></a>
 			            </div>
 			
 			
@@ -353,6 +353,12 @@ body {
 	// 내 정보보기 클릭 시 이동.
 	function moveMyInfo() {
 		location.href="userInfo.html";
+	}
+	
+
+	// 수정하기 클릭 시 이동.
+	function moveMatchingInfo() {
+		location.href="../matchlist/updateMatch.html";
 	}
 	
 	// url뒤에 view 값이 있다면 처음 페이지 로딩 시 보여줄 화면이 달라짐.
