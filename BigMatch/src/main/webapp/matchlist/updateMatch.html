@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>add</title>
+<title>update</title>
 <link rel="stylesheet" href="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
 <style>
 #title {
@@ -54,7 +54,7 @@ table {
 	<div data-role="header" data-position="fixed" data-theme="a">
 		<a href="../" data-rel="back"
 			class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
-		<h1>대전 등록</h1>
+		<h1>대전 수정</h1>
 	</div>
 
 	<form>
@@ -67,18 +67,18 @@ table {
 		<div align="center">
 			<fieldset data-role="controlgroup" data-type="horizontal">
 				<!--<legend>종목</legend>-->
-				<input type="radio" name="eventType" id="radio-choice-h-2a"	value="THREE" checked="checked"> 
-				<label for="radio-choice-h-2a">3 구</label> 
+				<input type="radio" name="eventType" id="radio-choice-h-2a"	value="THREE"> 
+				<label id="ui-one" for="radio-choice-h-2a">3 구</label> 
 				<input type="radio"	name="eventType" id="radio-choice-h-2b" value="FOUR"> 
-				<label for="radio-choice-h-2b">4 구</label> 
+				<label id="ui-two" for="radio-choice-h-2b">4 구</label> 
 				<input type="radio" name="eventType" id="radio-choice-h-2c" value="POOL"> 
-				<label for="radio-choice-h-2c">포켓볼</label>
+				<label id="ui-three" for="radio-choice-h-2c">포켓볼</label>
 			</fieldset>
 		</div>
 
 		<div align="center">
 			<fieldset data-role="controlgroup" data-type="horizontal">
-				<input type="radio" name="memberCount" id="1-choice-h-2a" value="1" checked="checked"> 
+				<input type="radio" name="memberCount" id="1-choice-h-2a" value="1"> 
 				<label for="1-choice-h-2a">1 : 1</label>
 				<input type="radio" name="memberCount" id="1-choice-h-2b" value="2">
 				<label for="1-choice-h-2b">2 : 2</label> 
@@ -149,12 +149,11 @@ table {
 <!--------------------------------------------------------------------------------------->
 
 		<div id="description" align="center">
-			<textarea cols="40" rows="8" name="description" id="textarea-6"
-				placeholder="간단한 내용을 입력하세요"></textarea>
+			<textarea cols="40" rows="8" name="description" id="textarea-6" placeholder="간단한 내용을 입력하세요"></textarea>
 		</div>
 
 		<div id="input" align="center">
-			<input type="submit" id="registerMatch" data-inline="true" value="등록하기!">
+			<input type="submit" id="registerMatch" data-inline="true" value="수정하기!">
 		</div>
 	</form>
 
@@ -164,7 +163,7 @@ table {
 <script src="../lib/js/common.js" ></script> 
 <!-- 팝업 -->
 <script src="../lib/js/popup.js" ></script>
-
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script>
 <script type="text/javascript">
 	
 	var addLat = ''; // 위도  
@@ -197,25 +196,8 @@ table {
 		console.log($('#textarea-6').val()); //간단한 내용
 		console.log(addLat); //간단한 내용
 		console.log(addLng); //간단한 내용
-		var matchYear ='';
-		var matchMonth ='';
-		var matchDay ='';
-		var now = new Date();
-		var tomorrow = new Date(now.valueOf() + (24*60*60*1000));
 		
-		if (($('select[name="selectDay"]').val())=='1') {
-			console.log('1');
-			matchYear = now.getFullTear();
-			matchMonth = now.getMonth() + 1;
-			matchDay = now.getDate();
-		} else {
-			console.log('2');
-			matchYear = tomorrow.getFullYear();
-			matchMonth = tomorrow.getMonth() + 1;
-			matchDay = tomorrow.getDate();
-		}
-		
-		$.ajax({
+		/* $.ajax({
 			url: baseUrl + '/match.do',
 			method:'POST',
 			dataType:'json',
@@ -228,9 +210,6 @@ table {
 				eventTypeCd			: $('input[name="eventType"]:checked:checked').val(),
 				memberCount			: $('input[name="memberCount"]:checked:checked').val(),
 				targetStartLevel	: $('select[name="level"]').val(),
-				year				: matchYear,
-				month				: matchMonth,
-				date				: matchDay,
 				timeCd				: $('select[name="selectTime"]').val(),
 				matchingDesc		: $('#textarea-6').val(),
 				placeLatitude		: addLat,
@@ -244,7 +223,7 @@ table {
 					alert('매치 등록 실패');
 				}
 			}
-		});
+		}); */
 	});	
 	
 	changeOption(1);
@@ -315,6 +294,88 @@ table {
 		}
 		
 	};
+	
+	
+	
+	$.ajax({
+		url			: baseUrl + '/matchDetail.do/' + 132,
+		type		: 'GET',
+		headers		: { 
+  				"Accept" : "application/json",
+  				"Content-Type" : "application/json"
+  		},
+  		success		: function(result) {
+			console.log(result);
+			$('input[name=matchingTitle]').val(result.matchingTitle);
+			$('input:radio[name=eventType]:radio[value="'+result.eventTypeCd+'"]').attr('checked', true);
+			$('input:radio[name=eventType]:radio[value="'+result.eventTypeCd+'"]').parent().children('label').removeClass();
+			$('input:radio[name=eventType]:radio[value="'+result.eventTypeCd+'"]').parent().children('label').addClass('ui-btn ui-corner-all ui-btn-inherit ui-btn-active ui-radio-on');
+			$('input:radio[name=memberCount]:radio[value="'+result.memberCount+'"]').attr('checked', true);
+			$('input:radio[name=memberCount]:radio[value="'+result.memberCount+'"]').parent().children('label').removeClass();
+			$('input:radio[name=memberCount]:radio[value="'+result.memberCount+'"]').parent().children('label').addClass('ui-btn ui-corner-all ui-btn-inherit ui-btn-active ui-radio-on');
+			$('select[name=level]').val(result.targetStartLevel);
+			if(result.targetStartLevel=='300') {
+				$('select[name=level]').parent().children().children().html(result.targetStartLevel+'이상');	
+			} else if (result.targetStartLevel=='30') {
+				$('select[name=level]').parent().children().children().html(result.targetStartLevel+'이하');
+			} else {
+				$('select[name=level]').parent().children().children().html(result.targetStartLevel);
+			}
+			if( result.date == new Date().getDate() ) {
+				console.log("오늘 등록");
+				$('input[name=selectDay]').val("1");
+				$('select[name=selectDay]').parent().children().children().html('오늘');
+			} else {
+				console.log("내일 등록");
+				$('input[name=selectDay]').val("2");
+				$('select[name=selectDay]').parent().children().children().html('내일');
+			}
+			
+			$('input[name=selectTime]').val(result.timeCd);
+			switch(result.timeCd) {
+				case 'DAWN' :
+					$('select[name=selectTime]').parent().children().children().html('00시 ~ 03시');
+					break;
+				case 'EARLY_MORNING' :
+					$('select[name=selectTime]').parent().children().children().html('03시 ~ 06시');
+					break;
+				case 'MORNING' :
+					$('select[name=selectTime]').parent().children().children().html('06시 ~ 09시');
+					break;
+				case 'AFTERNOON' :
+					$('select[name=selectTime]').parent().children().children().html('09시 ~ 12시');
+					break;
+				case 'LATE_AFTERNOON' :
+					$('select[name=selectTime]').parent().children().children().html('12시 ~ 15시');
+					break;
+				case 'LATE_AFTERNOON' :
+					$('select[name=selectTime]').parent().children().children().html('15시 ~ 18시');
+					break;
+				case 'EVENING' :
+					$('select[name=selectTime]').parent().children().children().html('18시 ~ 21시');
+					break;
+				case 'NIGHT' :
+					$('select[name=selectTime]').parent().children().children().html('21시 ~ 24시');
+					break;
+			}
+			var addr;
+			var latV = Number(result.placeLatitude);
+			var lonV = Number(result.placeLongitude);
+			var geocoder = new daum.maps.services.Geocoder();
+			var coord = new daum.maps.LatLng(latV, lonV);
+			var callback = function(status, result) {
+			    if (status === daum.maps.services.Status.OK) {
+			        console.log('지번 주소 : ' + result[0].jibunAddress.name);
+			        addr = result[0].jibunAddress.name;
+			        $('#regAddr').val(addr);
+			    }
+			};
+			geocoder.coord2detailaddr(coord, callback);
+			
+			$('textarea[name=description]').val(result.matchingDesc);
+		}
+	});
+	
 </script>
 </body>
 </html>

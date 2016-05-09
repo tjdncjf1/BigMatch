@@ -1,82 +1,73 @@
 <!DOCTYPE html>
-
-<!-- 
-	Program     : register.html
-	Date        : 2016-04-07
-	Description : 대전을 등록하는 페이지에서 지도로 위치를 등록할 수 있는 지도 소스
-	Modify      : 임현우
-	History     : - 2016-04-07 작성자 : 임현우
-					지도 생성, 마커 생성, 아이콘 생성
-				  - 2016-04-08 작성자 : 임현우
-				  	현재위치 geoLocation
-				  - 2016-04-10 작성자 : 임현우
-				 	중심 마커생성 및 주소 표시 완료! 마지막으로 확인!
-				  - 2016-04-21 작성자 : 서우철
-				    * iframe popup창 close
-				    * html간 데이터 전송 실패(04-21) 
--->
-
 <html>
 <head>
 <meta charset="utf-8">
 <title>지도 주소 등록</title>
 <style>
 .map_wrap {
-   	position:		fixed;
-   	width	:		100%;
-   	height	:		98%;
+   	position		:	fixed;
+   	width			:	100%;
+   	height			:	100%;
 }
-
 .title {
-	font-weight:	bold;
-   	display :		block;
+	font-weight		:	bold;
+   	display			:	block;
 }
- 
 .hAddr {
-   	position:		absolute;
-   	left :			10px;
-   	top:			10px;
-   	border-radius:	2px;
-   	background:		#fff;
-   	background:		rgba(255,255,255,0.8);
-   	z-index:		1;
-   	padding:		5px;
-}
-  
+   	position		:	absolute;
+   	left			:	10px;
+   	top				:	10px;
+   	width			:	92%;
+   	border-radius	:	2px;
+   	background		:	#fff;
+   	background		:	rgba(255,255,255,0.8);
+   	z-index			:	1;
+   	padding			:	5px;
+} 
 #centerAddr {
-   	display:		block;
-   	margin-top:		2px;
-   	font-weight:	normal;
+   	display			:	block;
+   	margin-top		:	2px;
+   	font-weight		:	normal;
 }
-
 .bAddr {
-   	padding:		5px;
-   	text-overflow:	ellipsis;
-   	/* overflow:		hidden; */
-   	white-space:	nowrap;
+   	padding			:	5px;
+   	text-overflow	:	ellipsis;
+   	/* overflow		:		hidden; */
+   	white-space		:	nowrap;
+}
+table{
+	width: 100%;
 }
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 </head>
 <body>
 
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script	src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
 <div class="map_wrap">
-    <div id="map" style="width:98%;height:100%;position:relative; overflow:visible;"></div>
+    <div id="map" style="width:100%;height:100%;position:relative; overflow:visible;"></div>
      <div class="hAddr">
-     	<img src="../lib/images/map/location-click.png" onclick="nowLocationClick()">
+     <table>
+     	<tr>
+     		<td width="40px"><img src="../lib/images/map/location-click.png" onclick="nowLocationClick()"></td>
+     		<td><input type="text" id="putText" onkeyup="searchMap()"></td>
+     	</tr>
+     </table>
     </div>
 </div>
 
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script	src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
 <script type="text/javascript">
 	function nowLocationClick() {
 			nowLocation();	
 	}
 </script>
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=8332365d3f31965de2e7a8fc335c6877&libraries=services"></script> <!-- 다음 로그인 서우철 -->
+<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=8332365d3f31965de2e7a8fc335c6877&libraries=services"></script> --> <!-- 다음 로그인 서우철 -->
 <!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=35281aceab086c0a7cccadc0b4963623&libraries=services"></script> --> <!-- 카카오톡 로그인 서우철 -->
-<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script> --> <!-- 다음 로그인 임현우 -->
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script> <!-- 다음 로그인 임현우  -->
+
 <!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=9080e1a934aab4b455f480ca93a0c7f5&libraries=services"></script> --> <!-- 다음 로그인 정승택 -->
 
 <script type="text/javascript">
@@ -91,46 +82,9 @@
 	
 	//지도를 생성합니다    
 	var map = new daum.maps.Map(mapContainer, mapOption);
-	//지도가 생성됐을때 현재위치 중심 추적 함수
+
 	
-	// 장소 검색 객체를 생성합니다
-	var ps = new daum.maps.services.Places();
-	
-	// 키워드로 장소를 검색합니다
-	ps.keywordSearch('당구장', placesSearchCB); 
-	
-	// 키워드 검색 완료 시 호출되는 콜백함수 입니다
-	function placesSearchCB (status, data, pagination) {
-	    if (status === daum.maps.services.Status.OK) {
 
-	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-	        // LatLngBounds 객체에 좌표를 추가합니다
-	        var bounds = new daum.maps.LatLngBounds();
-
-	        for (var i=0; i<data.places.length; i++) {
-	            displayMarker(data.places[i]);    
-	        }       
-
-	    } 
-	}
-
-	// 지도에 마커를 표시하는 함수입니다
-	function displayMarker(place) {
-	    
-	    // 마커를 생성하고 지도에 표시합니다
-	    var marker = new daum.maps.Marker({
-	        map: map,
-	        position: new daum.maps.LatLng(place.latitude, place.longitude) 
-	    });
-
-	    // 마커에 클릭이벤트를 등록합니다
-	    daum.maps.event.addListener(marker, 'click', function() {
-	        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-	        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.title + '</div>');
-	        infowindow.open(map, marker);
-	    });
-	}
-	
 	nowLocation();
 	/*----- 지도 생성 end -----*/
 	
@@ -319,7 +273,54 @@
 		
 	}
 	
-</script>
+	function searchMap() {
+		
+		var keyword = $('#putText').val();
+		
+		// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+		var infowindow = new daum.maps.InfoWindow({zIndex:1});
+		// 장소 검색 객체를 생성합니다
+		var ps = new daum.maps.services.Places(); 
 
+		// 키워드로 장소를 검색합니다
+		ps.keywordSearch(keyword, placesSearchCB); 
+
+		// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+		function placesSearchCB (status, data, pagination) {
+		    if (status === daum.maps.services.Status.OK) {
+
+		        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+		        // LatLngBounds 객체에 좌표를 추가합니다
+		        var bounds = new daum.maps.LatLngBounds();
+
+		        for (var i=0; i<data.places.length; i++) {
+		            displayMarker(data.places[i]);    
+		            bounds.extend(new daum.maps.LatLng(places.latitude, data.places.longitude));
+		        }       
+
+		        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+		        map.setBounds(bounds);
+		    } 
+		}
+
+		// 지도에 마커를 표시하는 함수입니다
+		function displayMarker(place) {
+		    
+		    // 마커를 생성하고 지도에 표시합니다
+		    var marker = new daum.maps.Marker({
+		        map: map,
+		        position: new daum.maps.LatLng(place.latitude, place.longitude) 
+		    });
+
+		    // 마커에 클릭이벤트를 등록합니다
+		    daum.maps.event.addListener(marker, 'click', function() {
+		        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+		        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.title + '</div>');
+		        infowindow.open(map, marker);
+		    });
+		}
+	}
+	
+</script>
 </body>
 </html>
