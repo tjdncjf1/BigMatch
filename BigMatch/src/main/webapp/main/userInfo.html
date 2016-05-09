@@ -66,7 +66,7 @@ table {
 	margin-right: 8%;
 }
 
-#btbar {
+.btbar {
 	margin-left: 20%;
 	margin-right: 20%;
 }
@@ -94,22 +94,22 @@ table {
     
     <form id="modifyForm">
 <!--     <div align="center" class="circle_div"> -->
-    <div align="center" class="circle_div">
-    	<img alt="image" width="100%" height="100%" src="../lib/images/home/profile.jpg">
-    	 <!-- <img id="UploadedImg" src="../lib/images/home/profile.jpg" width="100%" height="100%">
-    	 <input type='file' onchange="readURL(this);" style='position：absolute; margin-left:-80px; width:62px; height:18px; filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor:pointer;' /> -->
+    <div align="center" id="holder">
+    	<!-- <img alt="image" width="100%" height="100%" src="../lib/images/home/profile.jpg"> -->
+    	 <!-- <img id="UploadedImg" src="../lib/images/home/profile.jpg" width="100%" height="100%"> -->
     </div>
 
 		<table class="tg">
+    	 	<tr>
+				<th class="tg-01"></th>
+	    	 	<th class="tg-02" colspan="6"><input type='file' onchange="readURL(this);" style='position：absolute; width:60%; height:18px; filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor:pointer;' /></th>
+	    	 	<!-- <th class="tg-02" colspan="6"><input type='file' onchange="readURL(this);" style='position：absolute; width:60%; height:18px; filter:alpha(opacity=0); cursor:pointer;' /></th> -->
+			</tr>
 			<tr>
 				<th class="tg-01">이메일 &nbsp;&nbsp;</th>
 				<th class="tg-02" colspan="6"><input type="email" data-clear-btn="false" name="email" id="email" readonly="readonly">
 				</th>
 			</tr>
-<!-- 			<tr>
-				<th class="tg-01">기존 비밀번호 &nbsp;&nbsp;</th>
-				<th class="tg-02" colspan="6"><input type="password" data-clear-btn="false" name="password-0" autocomplete="off" placeholder="********"></th>
-			</tr> -->
 			<tr>
 				<th class="tg-01">변경 비밀번호 &nbsp;&nbsp;</th>
 				<th class="tg-02" colspan="6"><input type="password" data-clear-btn="false" name="password" id="password"autocomplete="off" placeholder="********"></th>
@@ -134,28 +134,18 @@ table {
 				<th class="tg-04">-</th>
 				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel_03" placeholder="0000"></th>
 			</tr>
-			<!-- <tr>
-				<th class="tg-01">생년월일 &nbsp;&nbsp;</th>
-				<th class="tg-03"><input type="datetime" data-clear-btn="false" name="datetime-1" id="datetime-1" value="" placeholder="2000"></th>
-				<th class="tg-04">년</th>
-				<th class="tg-03"><input type="datetime" data-clear-btn="false" name="datetime-2" id="datetime-1" value="" placeholder="01"></th>
-				<th class="tg-04">월</th>
-				<th class="tg-03"><input type="datetime" data-clear-btn="false" name="datetime-3" id="datetime-1" value="" placeholder="01"></th>
-				<th class="tg-04">일</th>
-			</tr> -->
 		</table>
 		
-		<div align="center" id="btbar">
+		<div align="center" class="btbar">
 			<input id="updateBt" width="50%" type="submit" value="내정보 수정">
 		</div>
 		<br>
-		<div align="center" id="logoutBar">
-			로그아웃
+		<div align="center" class="btbar">
+			<input id="logoutBt" width="50%" type="submit" value="로그아웃">
 		</div>
 		<br>
 	</form>
 
-	
 	<script src="../lib/jquery/jquery.js"></script>
 	<script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	<script src="../lib/js/jquery.validate.js" ></script>
@@ -164,12 +154,22 @@ table {
 	<script src="../lib/js/sha-256.js" ></script> 
 	<script type="text/javascript">
 
-/* 	function readURL(input) {
+ 	function readURL(input) {
 	    if (input.files && input.files[0]) {
 	        var reader = new FileReader();
 	        reader.onload = function (e) {
+	        	var img = new Image();
+	        	img.src = e.target.result;
+	        	if(img.width > 150) {
+	        		img.width = 100;
+	        	}
+	        	if(img.height > 150) {
+	        		img.height = 100;
+	        	}
+	        	holder.innerHTML = '';
+	        	holder.appendChild(img);
 	            $('#UploadedImg').attr('src', e.target.result);
-	        }
+	        };
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
@@ -181,22 +181,18 @@ table {
         file_len    = filename.length;
         file_gubun  = filename.substr(file_len - 3, file_len);
 
-        if (file_gubun.toLowerCase() == "jpg" || file_gubun.toLowerCase() == "gif")
-        {
+        if (file_gubun.toLowerCase() == "jpg" || file_gubun.toLowerCase() == "gif") {
             isCheck = true;
         }
-        if (isCheck == false)
-        {
+        if (isCheck == false) {
             alert("확장자가 jpg, gif 인 파일만 업로드가 가능합니다.");
             document.regform.file1.select();
             document.selection.clear();
             return false;
-        }
-        else
-        {
+        } else {
             return true;
         }
-	} */
+	} 
 	
 	<!--  loacl storage 에 저장된 userseq  -->
 	var userseq = localStorage.getItem('userseq');
@@ -276,6 +272,13 @@ table {
 		} */
        
     });
+	
+	// 로그아웃
+	$('#logoutBt').bind('click', function(){
+		localStorage.removeItem('userseq');
+		location.href='../user/login.html';
+	});
+	
 	
 	</script>
 

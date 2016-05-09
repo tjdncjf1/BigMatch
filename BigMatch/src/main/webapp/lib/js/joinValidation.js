@@ -18,16 +18,21 @@ $.validator.addMethod("passwordCk",  function( value, element ) {
 
 $.validator.addMethod('emailCheck', function(email) {
 	$.ajax({
-		url: baseUrl + '/emailCheck.do',
-		type: 'post',
-		data: {
-			userEmail: $('#email').val()
+		url: baseUrl + '/dupCheck.do',
+		method: 'POST',
+		dataType:'JSON',
+		headers: { 
+			"Accept" : "application/json",
+			"Content-Type" : "application/json"
 		},
-//		cache:false,
-//		async:false,
+		data: JSON.stringify({
+			userId: $('#userId').val()
+		}),
+		cache:false,
+		async:false,
 		success: function(answer) {
-//			console.log(answer);
-			result = answer.jsonResult.data.length == 1 ? false : true;
+			console.log("answer :: " + answer);
+			result = answer.result == 'SUCCESS' ? true : false;
 //			console.log(result);
 		}
 	});
@@ -37,16 +42,21 @@ $.validator.addMethod('emailCheck', function(email) {
 
 $.validator.addMethod('nickNameCheck', function(email) {
 	$.ajax({
-		url: baseUrl + '/emailCheck.do',
-		type: 'post',
-		data: {
-			userEmail: $('#email').val()
+		url: baseUrl + '/dupCheck.do',
+		method: 'POST',
+		dataType:'JSON',
+		headers: { 
+			"Accept" : "application/json",
+			"Content-Type" : "application/json"
 		},
-//		cache:false,
-//		async:false,
+		data: JSON.stringify({
+			nickname: $('#nickname').val()
+		}),
+		cache:false,
+		async:false,
 		success: function(answer) {
-//			console.log(answer);
-			result = answer.jsonResult.data.length == 1 ? false : true;
+			console.log("answer :: " + answer);
+			result = answer.result == 'SUCCESS' ? true : false;
 //			console.log(result);
 		}
 	});
@@ -61,8 +71,8 @@ $('#registerForm').validate({
 	rules: {
 		userId:{
 			required:true,
-			email:true
-//			emailCheck: true
+			email:true,
+			emailCheck: true
 		},
         password: {
         	required: true,
@@ -75,15 +85,15 @@ $('#registerForm').validate({
         	},               
         nickname: {
         	required:true, 
-        	minlength: 4
-//        	nickNameCheck: true
+        	minlength: 4,
+        	nickNameCheck: true
         }
     },
     messages: {
     	userId: {
              required:'email을 입력하세요.',
-             email:'올바른 이메일을 입력하시오.'
-//             emailCheck : '입력하신 email은 이미 존재하는 이메일입니다.'
+             email:'올바른 이메일을 입력하시오.',
+             emailCheck : '입력하신 email은 이미 존재하는 이메일입니다.'
         },
         password: {
         	required: '암호를 입력하세요',
@@ -95,8 +105,8 @@ $('#registerForm').validate({
 		},
 		nickname: {
 			required:'닉네임을 입력하시오.',
-			minlength:'닉네임이 짧습니다.'
-//			nickNameCheck : '입력하신 닉네임은 이미 존재하는 닉네임입니다.';
+			minlength:'닉네임이 짧습니다.',
+			nickNameCheck : '입력하신 닉네임은 이미 존재하는 닉네임입니다.'
 		}
     },
     submitHandler: function (){ //유효성 검사를 통과시 전송

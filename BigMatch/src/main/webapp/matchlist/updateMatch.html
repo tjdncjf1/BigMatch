@@ -298,7 +298,7 @@ table {
 	
 	
 	$.ajax({
-		url			: baseUrl + '/matchDetail.do/' + 132,
+		url			: baseUrl + '/matchDetail.do/' + 133,
 		type		: 'GET',
 		headers		: { 
   				"Accept" : "application/json",
@@ -323,11 +323,11 @@ table {
 			}
 			if( result.date == new Date().getDate() ) {
 				console.log("오늘 등록");
-				$('input[name=selectDay]').val("1");
+				$('select[name=selectDay]').val("1");
 				$('select[name=selectDay]').parent().children().children().html('오늘');
 			} else {
 				console.log("내일 등록");
-				$('input[name=selectDay]').val("2");
+				$('select[name=selectDay]').val("2");
 				$('select[name=selectDay]').parent().children().children().html('내일');
 			}
 			

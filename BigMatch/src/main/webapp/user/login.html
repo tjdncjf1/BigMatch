@@ -73,46 +73,36 @@ body {
 <!-- pw 암호화 -->
 <script src="../lib/js/sha-256.js" ></script> 
 <script type="text/javascript">
-
-$(function(){
-	
-	$('#login').click(function(){
-		//암호화 과정
-		var rawData = $('#password').val();			// -> 입력받은 암호값
-		console.log(rawData);
-		var resultData = sha256(rawData);			// -> 변환된 암호값
-		console.log(resultData);
-		$.ajax({
-			url: baseUrl + '/login.do',
-			method:'POST',
-			dataType:'json',
-			headers: { 
-				"Accept" : "application/json",
-				"Content-Type" : "application/json"
-			},
-			data : JSON.stringify({
-				userId   : $('#userId').val(),
-				password : resultData
-			}),
-			success : function(data) 
-			{
-				console.log("받아온 data값 : "+data);
-				if(data.result == "FAILURE") 
-				{
-					alert('로그인 실패!');
-				} 
-				else 
-				{
-					alert('로그인 성공!');
-					// 로그인 성공시 로컬 스토리지에 저장  key /value -> usserseq / 각각 seq 값
-					localStorage.setItem('userseq', data);
-					console.log("local에 저장된 값 : "+localStorage.getItem('userseq'));
-					location.href = "../main/home.html";
-					
-					// 로컬 스토리지에 저장된 값 불러오기
-				} 
-			}
-		});
+$('#login').click(function(){
+	//암호화 과정
+	var rawData = $('#password').val();			// -> 입력받은 암호값
+	console.log(rawData);
+	var resultData = sha256(rawData);			// -> 변환된 암호값
+	console.log(resultData);
+	$.ajax({
+		url: baseUrl + '/login.do',
+		method:'POST',
+		dataType:'JSON',
+		headers: { 
+			"Accept" : "application/json",
+			"Content-Type" : "application/json"
+		},
+		data : JSON.stringify({
+			userId   : $('#userId').val(),
+			password : resultData
+		}),
+		success : function(data) {
+			console.log("받아온 data값 : "+data);
+			if(data == "FAILURE") {
+				alert('로그인 실패!');
+			} else {
+				alert('로그인 성공!');
+				// 로그인 성공시 로컬 스토리지에 저장  key /value -> usserseq / 각각 seq 값
+				localStorage.setItem('userseq', data);
+				console.log("local에 저장된 값 : "+localStorage.getItem('userseq'));
+				location.href = "../main/home.html";
+			} 
+		}
 	});
 });
 </script>
