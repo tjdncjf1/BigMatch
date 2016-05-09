@@ -22,7 +22,7 @@ $(function(){
 			} else if (index == 2) {
 				return '<span class="' + className + '"><div align="center"><img src="../lib/images/home/home.png"></div></span>';
 			} else if (index == 3) {
-				return '<span class="' + className + '"><div align="center"><img src="../lib/images/home/my.png"></div></span>';
+				return '<span class="' + className + '"><div align="center"><img src="../lib/images/home/match.png"></div></span>';
 			} else {
 				return '<span class="' + className + '"><div align="center"><img src="../lib/images/home/more.png"></div></span>';
 			}
