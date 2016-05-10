@@ -205,7 +205,7 @@ table {
 		
 		if (($('select[name="selectDay"]').val())=='1') {
 			console.log('1');
-			matchYear = now.getFullTear();
+			matchYear = now.getFullYear();
 			matchMonth = now.getMonth() + 1;
 			matchDay = now.getDate();
 		} else {
@@ -258,7 +258,7 @@ table {
 	 		var now = new Date().getHours();
 	 		
 	 		if( now > 2) {
-	 			$('#able01').attr("disabled","disabled");
+	 			$('#able01').selectmenu("disable");
 	 		}
 	 		if( now > 5) {
 	 			$('#able02').attr("disabled","disabled");
