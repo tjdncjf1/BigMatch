@@ -90,21 +90,16 @@ table {
         <a href="../" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
         <h1>내 정보</h1>
     </div>
+    <br/>
     
-    
-    <form id="modifyForm">
-<!--     <div align="center" class="circle_div"> -->
-    <div align="center" id="holder">
-    	<!-- <img alt="image" width="100%" height="100%" src="../lib/images/home/profile.jpg"> -->
-    	 <!-- <img id="UploadedImg" src="../lib/images/home/profile.jpg" width="100%" height="100%"> -->
-    </div>
+	    <!-- <div align="center" class="circle_div" id="holder"> -->
+	    <div align="center" id="holder">
+	    	<!-- <img alt="image" width="100%" height="100%" src="../lib/images/home/profile.jpg"> -->
+	    	 <img id="uploadedImg" src="../lib/images/home/profile.jpg" onclick='document.all.file1.click(); document.all.file2.value=document.all.file1.value' 
+	    	 style="width:20%; height:20%;">
+	    </div>
 
 		<table class="tg">
-    	 	<tr>
-				<th class="tg-01"></th>
-	    	 	<th class="tg-02" colspan="6"><input type='file' onchange="readURL(this);" style='position：absolute; width:60%; height:18px; filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor:pointer;' /></th>
-	    	 	<!-- <th class="tg-02" colspan="6"><input type='file' onchange="readURL(this);" style='position：absolute; width:60%; height:18px; filter:alpha(opacity=0); cursor:pointer;' /></th> -->
-			</tr>
 			<tr>
 				<th class="tg-01">이메일 &nbsp;&nbsp;</th>
 				<th class="tg-02" colspan="6"><input type="email" data-clear-btn="false" name="email" id="email" readonly="readonly">
@@ -128,28 +123,33 @@ table {
 			</tr>
 			<tr>
 				<th class="tg-01">휴대전화 &nbsp;&nbsp;</th>
-				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel_01" placeholder="010"></th>
+				<th class="tg-03"><input type="tel" data-clear-btn="false" name="phoneNo2" placeholder="010"></th>
 				<th class="tg-04">-</th>
-				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel_02" placeholder="0000"></th>
+				<th class="tg-03"><input type="tel" data-clear-btn="false" name="phoneNo3" placeholder="0000"></th>
 				<th class="tg-04">-</th>
-				<th class="tg-03"><input type="tel" data-clear-btn="false" name="tel_03" placeholder="0000"></th>
+				<th class="tg-03"><input type="tel" data-clear-btn="false" name="phoneNo4" placeholder="0000"></th>
 			</tr>
 		</table>
 		
 		<div align="center" class="btbar">
-			<input id="updateBt" width="50%" type="submit" value="내정보 수정">
+			<form id="modifyForm" name="modifyForm" method="post" enctype="multipart/form-data">
+				<input type="hidden" name='file2' id='file2'>
+		    	<input type='file' name='file1' onchange="readURL(this);" 
+		    	style='display:none;position：absolute; width:60%; height:18px; filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor:pointer;' />
+				<input type="submit" style="width:50%;"  value="내정보 수정">
+			</form>
 		</div>
 		<br>
 		<div align="center" class="btbar">
-			<input id="logoutBt" width="50%" type="submit" value="로그아웃">
+			<input type="submit" id="logoutBt" style="width:50%;" value="로그아웃">
 		</div>
 		<br>
-	</form>
 
 	<script src="../lib/jquery/jquery.js"></script>
 	<script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	<script src="../lib/js/jquery.validate.js" ></script>
 	<script src="../lib/js/common.js"></script>
+	<script src="../lib/js/jquery.form.js"></script>
 	<!-- pw 암호화 -->
 	<script src="../lib/js/sha-256.js" ></script> 
 	<script type="text/javascript">
@@ -160,39 +160,19 @@ table {
 	        reader.onload = function (e) {
 	        	var img = new Image();
 	        	img.src = e.target.result;
-	        	if(img.width > 150) {
-	        		img.width = 100;
-	        	}
-	        	if(img.height > 150) {
-	        		img.height = 100;
-	        	}
-	        	holder.innerHTML = '';
-	        	holder.appendChild(img);
-	            $('#UploadedImg').attr('src', e.target.result);
+	        	
+	        	$(img).bind('click',function(){
+	        		document.all.file1.click(); 
+	        		document.all.file2.value=document.all.file1.value;
+	        	});
+	        	//holder.innerHTML = '';
+	        	//holder.appendChild(img);
+	        	//console.log(img.src);
+	           	$('#uploadedImg').attr('src', img.src);
 	        };
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
-	
-
-	function file_check() {
-        isCheck = false;
-        filename    = document.regform.file1.value;
-        file_len    = filename.length;
-        file_gubun  = filename.substr(file_len - 3, file_len);
-
-        if (file_gubun.toLowerCase() == "jpg" || file_gubun.toLowerCase() == "gif") {
-            isCheck = true;
-        }
-        if (isCheck == false) {
-            alert("확장자가 jpg, gif 인 파일만 업로드가 가능합니다.");
-            document.regform.file1.select();
-            document.selection.clear();
-            return false;
-        } else {
-            return true;
-        }
-	} 
 	
 	<!--  loacl storage 에 저장된 userseq  -->
 	var userseq = localStorage.getItem('userseq');
@@ -258,19 +238,15 @@ table {
     	  		data	 : JSON.stringify({
         			password : resultData,
         			name 	 : $('input[name=name]').val(),
-    				phoneNo2 : $('input[name=tel_01]').val(),
-    				phoneNo3 : $('input[name=tel_02]').val(),
-    				phoneNo4 : $('input[name=tel_03]').val()
+    				phoneNo2 : $('input[name=phoneNo2]').val(),
+    				phoneNo3 : $('input[name=phoneNo3]').val(),
+    				phoneNo4 : $('input[name=phoneNo4]').val()
     	  		}),
     	  		success		: function(result) {
     				console.log(result);
     			}
     		});
         }
-        /* invalidHandler: function() { // 모두 입력 안했을 시
-			alert('모두 입력해주세요.');
-		} */
-       
     });
 	
 	// 로그아웃
