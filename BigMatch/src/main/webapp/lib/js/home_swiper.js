@@ -7,6 +7,9 @@
                    * swiper를 먹이기 위해 속성 부여. 
  * 
  */
+
+
+
 $(function(){
 	var swiper = new Swiper('.swiper-container', {
 		initialSlide: view, // 두번째 페이지(div)가 첫화면으로 띄움(home화면)
@@ -22,7 +25,7 @@ $(function(){
 			} else if (index == 2) {
 				return '<span class="' + className + '"><div align="center"><img src="../lib/images/home/home.png"></div></span>';
 			} else if (index == 3) {
-				return '<span class="' + className + '"><div align="center"><img src="../lib/images/home/match.png"></div></span>';
+				return '<span class="' + className + '" onclick="dupCheckSwipe()"><div align="center"><img src="../lib/images/home/match.png"></div></span>';
 			} else {
 				return '<span class="' + className + '"><div align="center"><img src="../lib/images/home/more.png"></div></span>';
 			}
