@@ -153,7 +153,7 @@ table {
 		</div>
 
 		<div id="input" align="center">
-			<input type="submit" id="registerMatch" data-inline="true" value="수정하기!">
+			<input type="submit" id="updateMatch" data-inline="true" value="수정하기!">
 		</div>
 	</form>
 
@@ -295,10 +295,14 @@ table {
 		
 	};
 	
-	
+	var now = new Date();
+	var tomorrow = new Date(now.valueOf() + (24*60*60*1000));
+	var updateYear = '';
+	var updateMonth = '';
+	var updateDay = '';
 	
 	$.ajax({
-		url			: baseUrl + '/matchDetail.do/' + 133,
+		url			: baseUrl + '/matchDetail.do/' + 134,
 		type		: 'GET',
 		headers		: { 
   				"Accept" : "application/json",
@@ -323,12 +327,18 @@ table {
 			}
 			if( result.date == new Date().getDate() ) {
 				console.log("오늘 등록");
-				$('select[name=selectDay]').val("1");
+				$('input[name=selectDay]').val("1");
 				$('select[name=selectDay]').parent().children().children().html('오늘');
+				updateYear = now.getFullYear();
+				updateMonth = now.getMonth() + 1;
+				updateDay = now.getDate();
 			} else {
 				console.log("내일 등록");
-				$('select[name=selectDay]').val("2");
+				$('input[name=selectDay]').val("2");
 				$('select[name=selectDay]').parent().children().children().html('내일');
+				updateYear = tomorrow.getFullYear();
+				updateMonth = tomorrow.getMonth() + 1;
+				updateDay = tomorrow.getDate();
 			}
 			
 			$('input[name=selectTime]').val(result.timeCd);
@@ -373,9 +383,42 @@ table {
 			geocoder.coord2detailaddr(coord, callback);
 			
 			$('textarea[name=description]').val(result.matchingDesc);
-		}
+		
+  		
+			$('#updateMatch').bind('click', function() {
+				$.ajax({
+					url		 : baseUrl + '/matchDetail.do/' + 134,
+					type	 : 'PUT',
+					dataType : 'JSON',
+					headers	 : { 
+						"Accept" : "application/json",
+			  			"Content-Type" : "application/json"
+			  		},
+			  		data	 : JSON.stringify({
+			  			matchingTitle		: $('#matchingTitle').val(),
+						eventTypeCd			: $('input[name="eventType"]:checked:checked').val(),
+						memberCount			: $('input[name="memberCount"]:checked:checked').val(),
+						targetStartLevel	: $('select[name="level"]').val(),
+						year				: updateYear,
+						month				: updateMonth,
+						date				: updateDay,
+						timeCd				: $('select[name="selectTime"]').val(),
+						matchingDesc		: $('#textarea-6').val(),
+						placeLatitude		: addLat,
+						placeLongitude		: addLng
+			  		}),
+			  		success		: function(result) {
+						console.log(result);
+					}
+				});
+			})
+  		
+  		}
 	});
 	
+	
+	
+		
 </script>
 </body>
 </html>
