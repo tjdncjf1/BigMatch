@@ -16,7 +16,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>home</title>
 <!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"> -->
-<link rel="stylesheet" href="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+<link rel="stylesheet"href="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
 <!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="../lib/swiper/css/swiper.css">
 <!-- record page css -->
@@ -31,17 +31,17 @@
 <style>
 body {
 	margin: 0;
-    padding: 0;
+	padding: 0;
 }
 </style>
 </head>
 <body>
 	<div class="swiper-container">
-        <div class="swiper-wrapper">
-        
-        	<!-- 추천화면 -->
-        	<div class="swiper-slide">
-        		<div data-role="tabs" id="tabs">
+		<div class="swiper-wrapper">
+
+			<!-- 추천화면 -->
+			<div class="swiper-slide">
+				<div data-role="tabs" id="tabs">
 					<div data-role="navbar">
 						<ul>
 							<li><a href="#one" data-ajax="false">one</a></li>
@@ -67,14 +67,15 @@ body {
 						</div>
 					</div>
 				</div>
-        	</div><!-- swiper-slide -->
-        	
-        	<!-- 기록화면 -->
-        	<div class="swiper-slide">
-        		<div data-role="tabs" id="tabs">
+			</div>
+			<!-- swiper-slide -->
+
+			<!-- 기록화면 -->
+			<div class="swiper-slide">
+				<div data-role="tabs" id="tabs">
 					<div data-role="navbar">
 						<ul>
-							<li><a href="#matchRecord" class="ui-link ui-btn ui-tabs-anchor ui-btn-active" data-ajax="false">대전기록</a></li>
+							<li><a href="#matchRecord" data-ajax="false">대전기록</a></li>
 							<li><a href="#rank" data-ajax="false">랭킹</a></li>
 						</ul>
 					</div>
@@ -83,19 +84,35 @@ body {
 					<div id="matchRecord" class="ui-body-d ui-content" style="padding: 0em">
 						<div class="ui-grid-a">
 							<div class="ui-grid-solo">
-								<div class="ui-block-a" id="matchResultList">
-
+								<div class="ui-block-a">
+									<div class="ui-bar ui-bar-a"
+										style="height: 110px; background-color: #3388CC;">
+										<p align="center"
+											style="color: white; margin-top: 0; margin-bottom: 0; font-size: 140%;">
+											<승리>
+										</p>
+										<span> <img alt="img"
+											src="../lib/images/home/3ball.png"
+											style="height: 50%; margin-top: 2%" />
+										</span>
+										<div class="matchInfo">
+											<p class="infoMargin">대전상대 : 서우철</p>
+											<p class="infoMargin">장 소 : 관악구 신림동</p>
+											<p class="infoMargin">시 간 : 2016.03.30</p>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div> <!-- end of #matchRecord -->
-					
+					</div>
+					<!-- end of #matchRecord -->
+
 					<!-- 2016-04-11~12 작업: 서우철 -->
 					<!-- 랭크 -->
 					<div id="rank" class="ui-body-d ui-content">
 						<!-- 간단한 rank 보여주기 part -->
 						<div>
-							<img src="../lib/images/home/goldTrophy.png" id="trophyImg"/>
+							<img src="../lib/images/home/goldTrophy.png" id="trophyImg" />
 						</div>
 						<div>
 							<span class="rankInfo">3구 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 456위 1승 1패 (50%)</span><br/>
@@ -103,7 +120,7 @@ body {
 							<span class="rankInfo" style="right:9%;">포켓볼 &nbsp;&nbsp; 232승 0패 (100%)</span><br/>
 							<input type="button" data-inline="true" value="공유" />
 						</div>
-						
+
 						<!-- 3구, 4구, 포켓볼 radio button part -->
 						<div>
 							<form>
@@ -128,13 +145,17 @@ body {
 								<li>서우철</li>
 							</ol>
 						</div>
-							
-					</div> <!-- end of #rank -->
-				</div> <!-- end of #tabs -->
-        	</div><!-- swiper-slide -->
+						
 
-			<!-- 홈화면 -->        	
-        	<div class="swiper-slide"  id="homePage">
+					</div>
+					<!-- end of #rank -->
+				</div>
+				<!-- end of #tabs -->
+			</div>
+			<!-- swiper-slide -->
+
+			<!-- 홈화면 -->
+			<div class="swiper-slide" id="homePage">
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
 						<a class="ui-shadow ui-btn ui-corner-all" href="userInfo.html">
@@ -167,17 +188,16 @@ body {
 						</a>
 					</div>
 				</div>
-				
-				<a class="ui-btn ui-shadow"	onclick="dupCheckBT()" data-ajax="false">
+
+				<a class="ui-btn ui-shadow" onclick="dupCheckBT()" data-ajax="false">
 					<font style="font-size: 12pt">대전 등록!</font>
+				</a> <a class="ui-btn ui-shadow" href="#"> <font
+					style="font-size: 12pt">빠른 대전!</font>
 				</a>
-				
-				<a class="ui-btn ui-shadow" href="#">
-					<font style="font-size: 12pt">빠른 대전!</font>
-				</a> 
-			</div> <!-- swiper-slide -->
-			
-			<!-- matching 페이지 -->
+			</div>
+			<!-- swiper-slide -->
+
+			<!-- match 페이지 -->
 			<div class="swiper-slide">
 				<div data-role="tabs" id="tabs">
 					<div data-role="navbar">
@@ -209,11 +229,11 @@ body {
 												<tr>
 													<td width=15% valign=middle><img
 														src="../lib/images/home/my.png" width="30%" /></td>
-													<td width=45% valign=middle><font
-														style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
-															이강민(nickname) </font></td>
-													<td width=15% valign=middle><img
-														src="../lib/images/home/pin.png" width="30%"></td>
+													<td width=45% valign=middle>
+													<font id="m_nickName" style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
+															</font></td>
+													<td width=15% valign=middle>
+													<img src="../lib/images/home/pin.png" width="30%"></td>
 													<td width=25% valign=middle><font
 														style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
 															600점 </font></td>
@@ -222,17 +242,17 @@ body {
 												<tr>
 													<td align=left valign=middle><img
 														src="../lib/images/home/pin.png" width="30%" /></td>
-													<td align=left valign=middle><font
-														style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
-															서울시 동작구 어딘가? </font></td>
+													<td align=left valign=middle>
+													<font id="m_location" style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
+															</font></td>
 												</tr>
 
 												<tr>
 													<td valign=middle><img
 														src="../lib/images/home/watch.png" width="30%" /></td>
-													<td valign=middle><font
-														style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
-															11:30~14:00 </font></td>
+													<td valign=middle>
+													<font id="m_time" style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
+															</font></td>
 												</tr>
 
 												<tr>
@@ -240,9 +260,9 @@ body {
 														style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #3E3E3A; line-height: 120%">
 															<img src="../lib/images/home/dama.png" width="20%" />
 													</font></td>
-													<td align=left valign=middle><font
-														style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
-															(희망)다마점수 </font></td>
+													<td align=left valign=middle>
+													<font id="m_dama" style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
+															</font></td>
 												</tr>
 											</table> <br></td>
 									</tr>
@@ -250,8 +270,8 @@ body {
 								</table>
 								<div data-role="collapsible" data-iconpos="right">
 									<h3>대전정보 보기</h3>
-									<p>제목 : 똥쟁이 우철이</p>
-									아히히히히히히히
+									<p>제목 : <font id="m_title"></font></p>
+									<font id="m_desc"></font>
 									<button>수정</button>
 									<button>대전 취소</button>
 								</div>
@@ -385,39 +405,40 @@ body {
 		
 		<!-- 하단에 네비게이션바 -->
 		<div class="swiper-pagination"></div>
-		
-	</div> <!-- swiper-container -->
-<script src="../lib/jquery/jquery.js"></script>
-<script src="../lib/swiper/js/swiper.js"></script>
-<script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
-<!-- 스와이프시 dupcheck event -->
-<script src="../lib/js/dupCheckSwipe.js"></script>
-<script src="../lib/js/dupCheckBT.js"></script>
-<!-- 공통 필드 모아놓은 js -->
-<script src="../lib/js/common.js"></script>
-<!-- swiper 속성 수정한 js -->
-<script src="../lib/js/home_swiper.js"></script>
-<script type="text/javascript" src="../lib/js/jquery.toast.js"></script>
 
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=8332365d3f31965de2e7a8fc335c6877&libraries=services"></script><!-- 다음 로그인 서우철 -->
-<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=35281aceab086c0a7cccadc0b4963623&libraries=services"></script> --> <!-- 카카오톡 로그인 서우철 -->
-<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script> --><!-- 다음 로그인 임현우 -->
-<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=9080e1a934aab4b455f480ca93a0c7f5&libraries=services"></script>다음 로그인 정승택 -->
-
-<script type="text/javascript">
+	</div>
 	
+	
+	
+	<!-- jQuery -->
+	<script src="../lib/jquery/jquery.js"></script>
+	<!-- jQuery Mobile -->
+	<script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+	<!-- Swiper -->
+	<script src="../lib/swiper/js/swiper.js"></script>
+	
+	<!-- dupCheckSwipe 에서 위경도 -> 주소 로 변경하기 위한 키값 -->
+	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=a12c9a4987262c14944666d449d68e5c&libraries=services"></script>
+	
+	
+	<!-- 스와이프시 dupcheck event -->
+	<script src="../lib/js/dupCheckSwipe.js"></script>
+	<script src="../lib/js/dupCheckBT.js"></script>
+	<!-- 공통 필드 모아놓은 js -->
+	<script src="../lib/js/common.js"></script>
+	<!-- swiper 속성 수정한 js -->
+	<script src="../lib/js/home_swiper.js"></script>
+	<!-- dupCheckBT 시 toast -->
+	<script type="text/javascript" src="../lib/js/jquery.toast.js"></script>
+	
+	
+	
+	<script>
 	// 내 정보보기 클릭 시 이동.
 	function moveMyInfo() {
 		location.href="userInfo.html";
 	}
 	
-
-	// 수정하기 클릭 시 이동.
-	function moveMatchingInfo() {
-		location.href="../matchlist/updateMatch.html";
-	}
-	
-	// url뒤에 view 값이 있다면 처음 페이지 로딩 시 보여줄 화면이 달라짐.
 	if(location.href.split('?')[1] != undefined) {
 		console.log('view :: ' + location.href.split('?')[1].split('&')[0].split('=')[1]);
 		view = location.href.split('?')[1].split('&')[0].split('=')[1];
@@ -440,7 +461,7 @@ body {
 					"Content-Type" : "application/json"
 				},
 			success		: function(result) {
-				console.log("home userInfo : " + result);
+				console.log("home userInfo : " + result.nickname);
 				$('#userNik_text').append(result.nickname);
 			}
 		});
@@ -466,124 +487,13 @@ body {
 	$('#morePage').bind("swiperight",function(){
 		dupCheckSwipe();
 	});
-	
-	// 대전등록 클릭 시
-	$('#addmatch').click(function(){
-		
-		 $.ajax({
-			url: baseUrl + '/matchDupCheck.do/' +userseq,
-			method:'GET',
-			headers: { 
-				"Accept" : "application/json",
-				"Content-Type" : "application/json"
-			},
-			success : function(data) {
-				console.log("받아온 결과 data값 : "+data);
-				
-				if(data == "POSSIBLE_ACTION") { // 매치등록 가능상태
-					console.log('등록 가능');
-					location.href = "../matchlist/addMatch.html"; 
-				} else if(data == "ALREADY_REGISTERED")	{ // 이미 매치를 등록한 상태
-					 $.toast({
-		   	   		    //heading: 'Error',
-		   	   		    text: '이미 등록한 매칭이 있습니다.',
-		   	   			position: 'bottom-left',
-		   	   		    icon: 'error',
-		   	   			textAlign: 'center'
-   	   				});
-				} else if(data == "ALREADY_APPENDED")	{ // 이미 다른 매치에 신청한 상태
-					$.toast({
-		   	   		    //heading: 'Error',
-		   	   		    text: '이미 신청한 매칭이 있습니다.',
-		   	   			position: 'bottom-left',
-		   	   		    icon: 'error',
-		   	   		  	textAlign: 'center'
-   	   				}); 
-				} else if (data == "APPENDER_EXISTENCE") { // 내가 등록한 매치에 신청자가 있는 상태
-					view=3;
-   	   				location.href='../main/home.html?viewNum=' + view + '&toastBoolean=0';				
-				}
-			}
-		}); 
-	}); 
-	
-	$.ajax({
-		url: baseUrl + '/matchResultList.do/',
-		method:'GET',
-		headers: { 
-			"Accept" : "application/json",
-			"Content-Type" : "application/json"
-		},
-		data : {
-			userSeq : userseq,
-			page : 1,
-			rows : 10
-		},
-		success : function(data) {
-			$('#matchResultList').empty();			
-			console.log("결과 갯수" + data.rows.length);
-			$(data.rows).each(function(i){
-				
-				var contents = '';
-				var backColor = '';
-				var resultVL = '';
-				var evetImgSrc = '';
-				var oppoNickName = '';
-				var geocoder = new daum.maps.services.Geocoder();
-   				var coord = new daum.maps.LatLng(Number(data.rows[i].matchingInfoVo.placeLatitude), Number(data.rows[i].matchingInfoVo.placeLongitude));
-	   			var callback = function(status, addr) {
-	   			    if (status === daum.maps.services.Status.OK) {
-	   			        //console.log('지번 주소 : ' + addr[0].jibunAddress.name);
-			   			$('#spot'+i).append('장소 : ' + addr[0].jibunAddress.name);
-	   			    }
-	   			};
-	   			geocoder.coord2detailaddr(coord, callback);
-	   			
-	   			if((userseq == data.rows[i].hostUser.userSeq && data.rows[i].resultCd == 'WIN') ||
-	   					(userseq == data.rows[i].appenderUser.userSeq && data.rows[i].resultCd == 'LOSE')) {
-	   				backColor = '#3388CC';
-	   				resultVL = '<승리>';
-	   			} else if((userseq == data.rows[i].hostUser.userSeq && data.rows[i].resultCd == 'LOSE') ||
-	   					(userseq == data.rows[i].appenderUser.userSeq && data.rows[i].resultCd == 'WIN')) {
-	   				backColor = '#EE0E00';
-	   				resultVL = '<패배>';
-	   			} else if(data.rows[i].resultCd == 'DRAW') {
-	   				backColor = '#8080C0';
-	   				resultVL = '<무승부>';
-	   			}
-	   			
-	   			if(data.rows[i].matchingInfoVo.eventTypeCd == 'THREE') {
-	   				evetImgSrc = '../lib/images/home/3ball.png';
-	   			} else if(data.rows[i].matchingInfoVo.eventTypeCd == 'FOUR') {
-	   				evetImgSrc = '../lib/images/home/4ball.png';
-	   			} else if(data.rows[i].matchingInfoVo.eventTypeCd == 'POOL') {
-	   				evetImgSrc = '../lib/images/home/pocketball.png';
-	   			}
-	   			
-	   			if(userseq == data.rows[i].hostUser.userSeq) {
-	   				oppoNickName = data.rows[i].appenderUser.nickname;
-	   			} else if(userseq == data.rows[i].appenderUser.userSeq) {
-	   				oppoNickName = data.rows[i].hostUser.nickname;
-	   			}
-	   			
-	   			contents += '<div class="ui-bar ui-bar-a" style="height: 110px; background-color:' + backColor + '">' +
-				'				<p align="center" style="color:white; margin-top:0; margin-bottom:0; font-size:140%;">' + resultVL + '</p>' +
-				'				<span><img alt="img" src="' + evetImgSrc + '" style="height:50%;"/></span>' +
-				'				<div class="matchInfo">' +
-				'					<p class="infoMargin" id="opponent">대전상대: ' + oppoNickName + '</p>' +
-				'					<p class="infoMargin" id="spot' + i + '"></p>' + 
-				'					<p class="infoMargin" id="matchDay">일자 : ' + data.rows[i].matchingInfoVo.year +'.'+
-									data.rows[i].matchingInfoVo.month +'.'+ data.rows[i].matchingInfoVo.date + '</p>' + 
-				'				</div>' +
-				'			</div>';
-	   			$('#matchResultList').append(contents);
-	   			
-			});
-		}
-	}); 
-	
-	
-	
 </script>
+
+<!-- matchPage -> (ALREADY_REGISTERED)대전 취소 bt click event -->
+<script>
+
+</script>
+
+
 </body>
 </html>
