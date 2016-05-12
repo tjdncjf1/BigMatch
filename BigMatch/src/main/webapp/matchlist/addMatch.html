@@ -186,6 +186,8 @@ table {
 		$('#popupMap').popup('close');	// 팝업창 close
 	}
 	
+	var userseq = localStorage.getItem("userseq");
+	
 	$('form').bind('submit', function(event) {
 		event.preventDefault(); // 디폴트 이벤트 제거
 		
@@ -202,6 +204,7 @@ table {
 		var matchDay ='';
 		var now = new Date();
 		var tomorrow = new Date(now.valueOf() + (24*60*60*1000));
+		
 		
 		if (($('select[name="selectDay"]').val())=='1') {
 			console.log('1');
@@ -225,6 +228,7 @@ table {
 			},
 			data : JSON.stringify({
 				matchingTitle		: $('#matchingTitle').val(),
+				hostUserSeq			: userseq,
 				eventTypeCd			: $('input[name="eventType"]:checked:checked').val(),
 				memberCount			: $('input[name="memberCount"]:checked:checked').val(),
 				targetStartLevel	: $('select[name="level"]').val(),
