@@ -32,8 +32,6 @@ function dupCheckSwipe() {
 				document.getElementById("POSSIBLE_div").style.display = "block";
 				document.getElementById("BASE_div").style.display = "none";
 			} else if (data == "ALREADY_REGISTERED") { // 이미 매치를 등록한 상태
-				
-				console.log("우철이 바보");
 				document.getElementById("POSSIBLE_div").style.display = "none";
 				document.getElementById("BASE_div").style.display = "block";
 				document.getElementById("REGISTERED_div").style.display = "block";
