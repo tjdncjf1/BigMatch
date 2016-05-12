@@ -7,8 +7,6 @@
  * 
  */
 
-
-
 function dupCheckBT(){
 	
 	 $.ajax({
@@ -31,7 +29,7 @@ function dupCheckBT(){
 	   	   			position: 'bottom-left',
 	   	   		    icon: 'error',
 	   	   			textAlign: 'center'
-	   				});
+	   			});
 			} else if(data == "ALREADY_APPENDED")	{ // 이미 다른 매치에 신청한 상태
 				$.toast({
 	   	   		    //heading: 'Error',
@@ -39,10 +37,10 @@ function dupCheckBT(){
 	   	   			position: 'bottom-left',
 	   	   		    icon: 'error',
 	   	   		  	textAlign: 'center'
-	   				}); 
+	   			}); 
 			} else if (data == "APPENDER_EXISTENCE") { // 내가 등록한 매치에 신청자가 있는 상태
 				view=3;
-	   				location.href='../main/home.html?viewNum=' + view + '&toastBoolean=0';				
+	   			location.href='../main/home.html?viewNum=' + view + '&toastBoolean=0';				
 			}
 		}
 	}); 

@@ -12,10 +12,10 @@
 
 /* 트로피 이미지 */
 #trophyImg {
-	position: relative;
-	right: 5%;
-	width: 34%;
-	float: left;
+	/* position: absolute;
+	right: 69%; */
+	width: 50%;
+	/* float: left; */
 }
 
 /* 랭크 간략한기술 부분 */ 
@@ -34,8 +34,9 @@
 }
 /* 3구, 4구, 포켓볼 radio css */
 .ui-controlgroup-controls {
-	position: relative;
-	left: 15%;
+	/* position: absolute; */
+	left: 27%;
+	top:98%;
 }
 /* rank listview */
 .ui-content .ui-listview{
@@ -44,12 +45,14 @@
 
 /* 랭크 트로피 image css */
 .rankTrophy {
-	width: 10%;
+	width: 5%;
 	padding: 3%;
 }
 
 /* listview image contents css */
-.ui-listview>.ui-li-static.ui-li-has-thumb {
+.ui-listview>.ui-li-static {
 	min-height: 0;
-	padding-left: 15%;
+	/* padding-left: 15%; */
+	padding-right: 45%;
+	width: 100%;
 }

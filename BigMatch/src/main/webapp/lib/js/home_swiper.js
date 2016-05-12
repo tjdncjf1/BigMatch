@@ -8,8 +8,6 @@
  * 
  */
 
-
-
 $(function(){
 	var swiper = new Swiper('.swiper-container', {
 		initialSlide: view, // 두번째 페이지(div)가 첫화면으로 띄움(home화면)
@@ -21,9 +19,9 @@ $(function(){
 			if(index == 0) {
 				return '<span class="' + className + '"><div align="center"><img src="../lib/images/home/thumb_up.png"></div></span>';
 			} else if (index == 1) {
-				return '<span class="' + className + '"><div align="center"><img src="../lib/images/home/record.png"></div></span>';
+				return '<span class="' + className + '" onclick="matchResultView()"><div align="center"><img src="../lib/images/home/record.png"></div></span>';
 			} else if (index == 2) {
-				return '<span class="' + className + '"><div align="center"><img src="../lib/images/home/home.png"></div></span>';
+				return '<span class="' + className + '" onclick="searchUserNickName()"><div align="center"><img src="../lib/images/home/home.png"></div></span>';
 			} else if (index == 3) {
 				return '<span class="' + className + '" onclick="dupCheckSwipe()"><div align="center"><img src="../lib/images/home/match.png"></div></span>';
 			} else {
