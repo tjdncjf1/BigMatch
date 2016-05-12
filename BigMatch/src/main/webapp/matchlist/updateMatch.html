@@ -252,10 +252,11 @@ table {
 		
 	};
 	
-	
+	var machingSeq = Number(location.href.split('?')[1].split('=')[1]);
+	console.log("machingSeq :: " + machingSeq);
 	
 	$.ajax({
-		url			: baseUrl + '/matchDetail.do/' + 139,
+		url			: baseUrl + '/matchDetail.do/' + matchingSeq,
 		type		: 'GET',
 		headers		: { 
   				"Accept" : "application/json",

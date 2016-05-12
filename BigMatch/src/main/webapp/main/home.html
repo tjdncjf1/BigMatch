@@ -195,162 +195,83 @@ body {
 						</div>
 
 						<!-- 등록만 한 상태 -->
-						<div id="REGISTERED_div" style="display:none">
-							<div id="matchPush">
-								<table border=0 cellspacing=0 cellpadding=0 width=100%
-									style="display: block; border: 4px solid #E3E3E3;">
-									<tr>
-										<td align=center width=150 height=100><br> <img
-											src="../lib/images/home/my.png" width="100%" /></td>
-										<td><br>
-											<table border=0 cellspacing=0 cellpadding=1>
+                  		<div id="BASE_div" style="display:none">
+                     		<table border=0 cellspacing=0 cellpadding=0 width=100% style="display: block; border: 4px solid #E3E3E3;">
+                        <tr>
+                           <td align=center width=150 height=100><br> <img
+                              src="../lib/images/home/my.png" width="100%" /></td>
+                           <td><br>
+                              <table border=0 cellspacing=0 cellpadding=1>
 
+                                 <tr>
+                                    <td width=15% valign=middle><img
+                                       src="../lib/images/home/my.png" width="30%" /></td>
+                                    <td width=45% valign=middle>
+                                    <font id="m_nickName" style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
+                                          </font></td>
+                                    <td width=15% valign=middle>
+                                    <img src="../lib/images/home/pin.png" width="30%"></td>
+                                    <td width=25% valign=middle><font
+                                       style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
+                                          600점 </font></td>
+                                 </tr>
 
-												<tr>
-													<td width=15% valign=middle><img
-														src="../lib/images/home/my.png" width="30%" /></td>
-													<td width=45% valign=middle>
-													<font id="m_nickName" style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
-															</font></td>
-													<td width=15% valign=middle>
-													<img src="../lib/images/home/pin.png" width="30%"></td>
-													<td width=25% valign=middle><font
-														style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
-															600점 </font></td>
-												</tr>
+                                 <tr>
+                                    <td align=left valign=middle><img
+                                       src="../lib/images/home/pin.png" width="30%" /></td>
+                                    <td align=left valign=middle>
+                                    <font id="m_location" style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
+                                          </font></td>
+                                 </tr>
 
-												<tr>
-													<td align=left valign=middle><img
-														src="../lib/images/home/pin.png" width="30%" /></td>
-													<td align=left valign=middle>
-													<font id="m_location" style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
-															</font></td>
-												</tr>
+                                 <tr>
+                                    <td valign=middle><img
+                                       src="../lib/images/home/watch.png" width="30%" /></td>
+                                    <td valign=middle>
+                                    <a><font id="m_time" style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%"></font></a></td>
+                                 </tr>
 
-												<tr>
-													<td valign=middle><img
-														src="../lib/images/home/watch.png" width="30%" /></td>
-													<td valign=middle>
-													<font id="m_time" style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
-															</font></td>
-												</tr>
+                                 <tr>
+                                    <td align=left valign=middle><font
+                                       style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #3E3E3A; line-height: 120%">
+                                          <img src="../lib/images/home/dama.png" width="20%" />
+                                    </font></td>
+                                    <td align=left valign=middle>
+                                    <font id="m_dama" style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
+                                          </font></td>
+                                 </tr>
+                              </table> <br></td>
+                        </tr>
 
-												<tr>
-													<td align=left valign=middle><font
-														style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #3E3E3A; line-height: 120%">
-															<img src="../lib/images/home/dama.png" width="20%" />
-													</font></td>
-													<td align=left valign=middle>
-													<font id="m_dama" style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
-															</font></td>
-												</tr>
-											</table> <br></td>
-									</tr>
+                     </table>
+                     <div data-role="collapsible" data-iconpos="right">
+                        <h3>대전정보 보기</h3>
+                        <p>제목 : <font id="m_title"></font></p>
+                        <br>
+                        <font id="m_desc"></font>
+                     </div>
+                     
+                     <div id="REGISTERED_div" align="center">
+                           <button>수정</button>
+                           <button id="m_deleteMatch" >등록 대전 삭제</button>
+                     </div>
+                     
+                     <div id="EXISTENCE_div" align="center">
+                          <button id="m_cancleMatch" style=" width: 30%;">매칭 거절하기</button>
+                          <button style=" width: 30%;">상대와 대화하기</button>
+                          <p>결과입력하기</p>
+                          <button data-role="none">승 리</button>
+                          <button data-role="none">무승부</button>
+                          <button data-role="none">패 배</button>
+                      </div>
+                  
+                  </div>
 
-								</table>
-								<div data-role="collapsible" data-iconpos="right">
-									<h3>대전정보 보기</h3>
-									<p>제목 : <font id="m_title"></font></p>
-									<font id="m_desc"></font>
-									<button>수정</button>
-									<button>대전 취소</button>
-								</div>
+               </div>
 
-							</div>
-						</div>
-
-						<!-- 등록자 + 신청자 -->
-						<div id="EXISTENCE_div" style="display:none">
-						    <table border=0 cellspacing=0 cellpadding=0 width=100% style="display: block; border: 4px solid #E3E3E3;">
-						        <tr>
-						            <td align=center width=150 height=100>
-						                <br>
-						                <img src="../lib/images/home/my.png" width="100%" />
-						            </td>
-						            <td>
-						                <br>
-						                <table border=0 cellspacing=0 cellpadding=1>
-						
-						
-						                    <tr>
-						                        <td width=15% valign=middle><img src="../lib/images/home/my.png" width="30%" /></td>
-						                        <td width=45% valign=middle>
-						                            <font style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
-																		이강민(nickname) 
-																	</font>
-						                        </td>
-						                        <td width=15% valign=middle><img src="../lib/images/home/pin.png" width="30%"></td>
-						                        <td width=25% valign=middle>
-						                            <font style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
-																		600점 
-																	</font>
-						                        </td>
-						                    </tr>
-						
-						                    <tr>
-						                        <td align=left valign=middle>
-						                            <img src="../lib/images/home/pin.png" width="30%" />
-						                        </td>
-						                        <td align=left valign=middle>
-						                            <font style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
-																		서울시 동작구 어딘가? 
-																	</font>
-						                        </td>
-						                    </tr>
-						
-						                    <tr>
-						                        <td valign=middle>
-						                            <img src="../lib/images/home/watch.png" width="30%" />
-						                        </td>
-						                        <td valign=middle>
-						                            <font style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
-																		11:30~14:00 
-																	</font>
-						                        </td>
-						                    </tr>
-						
-						                    <tr>
-						                        <td align=left valign=middle>
-						                            <font style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #3E3E3A; line-height: 120%">
-																		<img src="../lib/images/home/dama.png" width="20%" />
-																	</font>
-						                        </td>
-						                        <td align=left valign=middle>
-						                            <font style="font-family: 맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size: 9pt; color: #8E8E8E; line-height: 120%">
-																		(희망)다마점수 
-																	</font>
-						                        </td>
-						                    </tr>
-						                </table>
-						                <br>
-						            </td>
-						        </tr>
-						
-						    </table>
-						    <div data-role="collapsible" data-iconpos="right">
-						        <h3>대전정보 보기</h3>
-						        <p>제목 : 똥쟁이 우철이</p>
-						        아히히히히히히히
-						    </div>
-						
-						
-						
-						    <div align="center">
-						        <button style=" width: 30%;">대전 거절하기</button>
-						        <button style=" width: 30%;">상대와 대화하기</button>
-						        <p>결과입력하기</p>
-						        <button data-role="none">승 리</button>
-						        <button data-role="none">무승부</button>
-						        <button data-role="none">패 배</button>
-						    </div>
-						
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-			<!-- // mathch end -->
+            </div>
+         </div>
+         <!-- // mathch end -->
 
 			<!-- swiper-slide -->
 
@@ -387,9 +308,11 @@ body {
 		<div class="swiper-pagination"></div>
 		
 	</div> <!-- swiper-container -->
+	
 <script src="../lib/jquery/jquery.js"></script>
 <script src="../lib/swiper/js/swiper.js"></script>
 <script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+<script src="../lib/js/home_matchInfo.js"></script>
 <!-- 스와이프시 dupcheck event -->
 <script src="../lib/js/dupCheckSwipe.js"></script>
 <script src="../lib/js/dupCheckBT.js"></script>
@@ -500,6 +423,9 @@ body {
 	});
 	/////////////////////////////////////
 	
+	$('#updateBt').bind('click', function(){
+		moveMatchingInfo();
+	});
 		
 	
 	

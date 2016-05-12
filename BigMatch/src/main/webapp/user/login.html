@@ -21,9 +21,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>가입</title>
 <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"	href="lib/bootstrap/css/bootstrap.css">
+<link rel="stylesheet"	href="../lib/bootstrap/css/bootstrap.css">
 <!-- 부가적인 테마 -->
-<link rel="stylesheet"	href="lib/bootstrap/css/bootstrap-theme.css">
+<link rel="stylesheet"	href="../lib/bootstrap/css/bootstrap-theme.css">
 <style type="text/css">
 body {
   padding-top: 40px;
@@ -65,13 +65,13 @@ body {
 		</div>
 	</form>
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-<script src="lib/jquery/jquery.js"></script>
+<script src="../lib/jquery/jquery.js"></script>
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script	src="lib/bootstrap/js/bootstrap.js"></script>
+<script	src="../lib/bootstrap/js/bootstrap.js"></script>
 <!-- 공통 자바스크립트 -->
-<script src="lib/js/common.js" ></script> 
+<script src="../lib/js/common.js" ></script> 
 <!-- pw 암호화 -->
-<script src="lib/js/sha-256.js" ></script> 
+<script src="../lib/js/sha-256.js" ></script> 
 <script type="text/javascript">
 $('#login').click(function(){
 	//암호화 과정
@@ -100,7 +100,7 @@ $('#login').click(function(){
 				// 로그인 성공시 로컬 스토리지에 저장  key /value -> usserseq / 각각 seq 값
 				localStorage.setItem('userseq', data);
 				console.log("local에 저장된 값 : "+localStorage.getItem('userseq'));
-				location.href = "main/home.html";
+				location.href = "../main/home.html";
 			} 
 		}
 	});
