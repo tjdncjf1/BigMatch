@@ -3626,7 +3626,7 @@ fieldset.ui-controlgroup {
 	-webkit-border-bottom-left-radius: inherit;
 	border-bottom-left-radius: inherit;
 	 /* 수정 : 서우철 */	
-	padding-right:45%;
+	/* padding-right:45%; */
 }
 .ui-listview > li.ui-li-has-alt > a.ui-btn {
 	-webkit-border-top-right-radius: 0;
