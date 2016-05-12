@@ -16,7 +16,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>home</title>
 <!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"> -->
-<link rel="stylesheet"href="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
+<link rel="stylesheet" href="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
 <!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="../lib/swiper/css/swiper.css">
 <!-- record page css -->
@@ -31,17 +31,17 @@
 <style>
 body {
 	margin: 0;
-	padding: 0;
+    padding: 0;
 }
 </style>
 </head>
 <body>
 	<div class="swiper-container">
-		<div class="swiper-wrapper">
-
-			<!-- 추천화면 -->
-			<div class="swiper-slide">
-				<div data-role="tabs" id="tabs">
+        <div class="swiper-wrapper">
+        
+        	<!-- 추천화면 -->
+        	<div class="swiper-slide" id="recommend">
+        		<div data-role="tabs" id="tabs">
 					<div data-role="navbar">
 						<ul>
 							<li><a href="#one" data-ajax="false">one</a></li>
@@ -67,16 +67,15 @@ body {
 						</div>
 					</div>
 				</div>
-			</div>
-			<!-- swiper-slide -->
-
-			<!-- 기록화면 -->
-			<div class="swiper-slide">
-				<div data-role="tabs" id="tabs">
+        	</div><!-- swiper-slide -->
+        	
+        	<!-- 기록화면 -->
+        	<div class="swiper-slide" id="record">
+        		<div data-role="tabs" id="tabs">
 					<div data-role="navbar">
 						<ul>
-							<li><a href="#matchRecord" data-ajax="false">대전기록</a></li>
-							<li><a href="#rank" data-ajax="false">랭킹</a></li>
+							<li id="moveMatchResult"><a href="#matchRecord" class="ui-link ui-btn ui-tabs-anchor ui-btn-active" data-ajax="false">대전기록</a></li>
+							<li id="moveRanking"><a href="#rank" data-ajax="false">랭킹</a></li>
 						</ul>
 					</div>
 					
@@ -84,78 +83,58 @@ body {
 					<div id="matchRecord" class="ui-body-d ui-content" style="padding: 0em">
 						<div class="ui-grid-a">
 							<div class="ui-grid-solo">
-								<div class="ui-block-a">
-									<div class="ui-bar ui-bar-a"
-										style="height: 110px; background-color: #3388CC;">
-										<p align="center"
-											style="color: white; margin-top: 0; margin-bottom: 0; font-size: 140%;">
-											<승리>
-										</p>
-										<span> <img alt="img"
-											src="../lib/images/home/3ball.png"
-											style="height: 50%; margin-top: 2%" />
-										</span>
-										<div class="matchInfo">
-											<p class="infoMargin">대전상대 : 서우철</p>
-											<p class="infoMargin">장 소 : 관악구 신림동</p>
-											<p class="infoMargin">시 간 : 2016.03.30</p>
-										</div>
-									</div>
+								<div class="ui-block-a" id="matchResultList">
+
 								</div>
 							</div>
 						</div>
-					</div>
-					<!-- end of #matchRecord -->
-
+					</div> <!-- end of #matchRecord -->
+					
 					<!-- 2016-04-11~12 작업: 서우철 -->
 					<!-- 랭크 -->
 					<div id="rank" class="ui-body-d ui-content">
 						<!-- 간단한 rank 보여주기 part -->
-						<div>
-							<img src="../lib/images/home/goldTrophy.png" id="trophyImg" />
+						<div style="position: absolute; right:47%; width: 53%;">
+							<img src="../lib/images/home/goldTrophy.png" id="trophyImg"/>
 						</div>
-						<div>
-							<span class="rankInfo">3구 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 456위 1승 1패 (50%)</span><br/>
-							<span class="rankInfo">4구 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1234위 0승 0패 (%)</span><br/>
-							<span class="rankInfo" style="right:9%;">포켓볼 &nbsp;&nbsp; 232승 0패 (100%)</span><br/>
+						<div style="float: right;">
+							<span class="rankInfo"><span>3구</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="3ballScore">456위 1승 1패 (50%)</span></span><br/>
+							<span class="rankInfo"><span>4구</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span id="4ballScore">1234위 0승 0패 (%)</span></span><br/>
+							<span class="rankInfo" style="right:9%;"><span>포켓볼</span> &nbsp;&nbsp; <span id="poolScore">232승 0패 (100%)</span></span><br/>
 							<input type="button" data-inline="true" value="공유" />
 						</div>
-
+						
 						<!-- 3구, 4구, 포켓볼 radio button part -->
-						<div>
+						<div style="position: absolute; top:108%; left:0%;">
 							<form>
-								<fieldset data-role="controlgroup" data-type="horizontal">
+								<fieldset id="evetTypeRadio" data-role="controlgroup" data-type="horizontal">
 									<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" checked="checked">
-									<label for="radio-choice-h-2a">3구</label>
+									<label for="radio-choice-h-2a" id="evet3ball">3구</label>
 									<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b">
-									<label for="radio-choice-h-2b">4구</label>
+									<label for="radio-choice-h-2b" id="evet4ball">4구</label>
 									<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c">
-									<label for="radio-choice-h-2c">포켓볼</label>
+									<label for="radio-choice-h-2c" id="evetPool">포켓볼</label>
 								</fieldset>
 							</form>
 						</div>
 						
 						<!-- 2016-04-12 작성자 : 서우철 -->
 						<!-- 랭킹 상세 list -->
-						<div>
-							<ol data-role="listview">
-								<li><img src="../lib/images/home/goldTrophy.png" class="rankTrophy">당구신</li>
+						<div style="position: absolute; top:137%; left:0%;">
+							<ul id="rankList" data-role="listview">
+								<!-- <li><img src="../lib/images/home/goldTrophy.png" class="rankTrophy">당구신</li>
 								<li><img src="../lib/images/home/silverTrophy.png" class="rankTrophy">타이피스트</li>
 								<li><img src="../lib/images/home/bronzeTrophy.png" class="rankTrophy">닉넴</li>
-								<li>서우철</li>
-							</ol>
+								<li><span>4. 서우철</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>53승 1무 1패(98%)</span></li> -->
+							</ul>
 						</div>
-						
+							
+					</div> <!-- end of #rank -->
+				</div> <!-- end of #tabs -->
+        	</div><!-- swiper-slide -->
 
-					</div>
-					<!-- end of #rank -->
-				</div>
-				<!-- end of #tabs -->
-			</div>
-			<!-- swiper-slide -->
-
-			<!-- 홈화면 -->
-			<div class="swiper-slide" id="homePage">
+			<!-- 홈화면 -->        	
+        	<div class="swiper-slide"  id="homePage">
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
 						<a class="ui-shadow ui-btn ui-corner-all" href="userInfo.html">
@@ -163,7 +142,7 @@ body {
 						<font id="userNik_text"  style="font-size: 15pt"></font></a>
 					</div>
 					<div class="ui-block-b">
-						<a class="ui-shadow ui-btn ui-corner-all" href="#">
+						<a class="ui-shadow ui-btn ui-corner-all" href="#moveRanking">
 						<img alt="rank" src="../lib/images/home/trophy.png" width="50%"><br>
 						<font style="font-size: 15pt">Rank</font></a>
 					</div>
@@ -188,17 +167,18 @@ body {
 						</a>
 					</div>
 				</div>
-
-				<a class="ui-btn ui-shadow" onclick="dupCheckBT()" data-ajax="false">
+				
+				<a class="ui-btn ui-shadow"	onclick="dupCheckBT()" data-ajax="false">
 					<font style="font-size: 12pt">대전 등록!</font>
-				</a> <a class="ui-btn ui-shadow" href="#"> <font
-					style="font-size: 12pt">빠른 대전!</font>
 				</a>
-			</div>
-			<!-- swiper-slide -->
-
-			<!-- match 페이지 -->
-			<div class="swiper-slide">
+				
+				<a class="ui-btn ui-shadow" href="#">
+					<font style="font-size: 12pt">빠른 대전!</font>
+				</a> 
+			</div> <!-- swiper-slide -->
+			
+			<!-- matching 페이지 -->
+			<div class="swiper-slide" id="matchingPage">
 				<div data-role="tabs" id="tabs">
 					<div data-role="navbar">
 						<ul>
@@ -405,67 +385,57 @@ body {
 		
 		<!-- 하단에 네비게이션바 -->
 		<div class="swiper-pagination"></div>
+		
+	</div> <!-- swiper-container -->
+<script src="../lib/jquery/jquery.js"></script>
+<script src="../lib/swiper/js/swiper.js"></script>
+<script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
+<!-- 스와이프시 dupcheck event -->
+<script src="../lib/js/dupCheckSwipe.js"></script>
+<script src="../lib/js/dupCheckBT.js"></script>
+<!-- 공통 필드 모아놓은 js -->
+<script src="../lib/js/common.js"></script>
+<!-- view화면이 바뀔때마다 ajax 요청 모아놓은 js -->
+<script src="../lib/js/changeView.js"></script>
+<!-- swiper 속성 수정한 js -->
+<script src="../lib/js/home_swiper.js"></script>
+<script type="text/javascript" src="../lib/js/jquery.toast.js"></script>
 
-	</div>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=6b3b4d0c9762531403442ab0ac98dd84&libraries=services"></script><!-- 다음 로그인 조민호 -->
+<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=35281aceab086c0a7cccadc0b4963623&libraries=services"></script> --> <!-- 카카오톡 로그인 서우철 -->
+<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=5e4670f48de878e5bf6bd8cddfddb40a&libraries=services"></script> --><!-- 다음 로그인 임현우 -->
+<!-- <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=9080e1a934aab4b455f480ca93a0c7f5&libraries=services"></script> --> <!--다음 로그인 정승택 -->
+
+<script type="text/javascript">
 	
+	<!--  loacl storage 에 저장된 userseq  -->
+	var userseq = localStorage.getItem('userseq');
+	console.log('userseq : '+userseq);
+	var evetType = 'THREE';
 	
-	
-	<!-- jQuery -->
-	<script src="../lib/jquery/jquery.js"></script>
-	<!-- jQuery Mobile -->
-	<script src="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.js"></script>
-	<!-- Swiper -->
-	<script src="../lib/swiper/js/swiper.js"></script>
-	
-	<!-- dupCheckSwipe 에서 위경도 -> 주소 로 변경하기 위한 키값 -->
-	<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=a12c9a4987262c14944666d449d68e5c&libraries=services"></script>
-	
-	
-	<!-- 스와이프시 dupcheck event -->
-	<script src="../lib/js/dupCheckSwipe.js"></script>
-	<script src="../lib/js/dupCheckBT.js"></script>
-	<!-- 공통 필드 모아놓은 js -->
-	<script src="../lib/js/common.js"></script>
-	<!-- swiper 속성 수정한 js -->
-	<script src="../lib/js/home_swiper.js"></script>
-	<!-- dupCheckBT 시 toast -->
-	<script type="text/javascript" src="../lib/js/jquery.toast.js"></script>
-	
-	
-	
-	<script>
 	// 내 정보보기 클릭 시 이동.
 	function moveMyInfo() {
 		location.href="userInfo.html";
 	}
+
+	// 수정하기 클릭 시 이동.
+	function moveMatchingInfo() {
+		location.href="../matchlist/updateMatch.html";
+	}
 	
+	// url뒤에 view 값이 있다면 처음 페이지 로딩 시 보여줄 화면이 달라짐.
 	if(location.href.split('?')[1] != undefined) {
 		console.log('view :: ' + location.href.split('?')[1].split('&')[0].split('=')[1]);
 		view = location.href.split('?')[1].split('&')[0].split('=')[1];
 	}
 	
-	<!--  loacl storage 에 저장된 userseq  -->
-	var userseq = localStorage.getItem('userseq');
-	console.log('userseq : '+userseq);
-	
 	// view(home.html을 리로딩시 처음 보여주는 화면아이디)를 뭐 보여주냐에 따라 ajax 요청.
 	if(view == 1) {
 		
 	} else if(view == 2) {
-		$.ajax({
-			url			: baseUrl + '/userInfo.do/' + userseq,
-			type		: 'get',
-			dataType	: 'json',
-			headers		: { 
-					"Accept" : "application/json",
-					"Content-Type" : "application/json"
-				},
-			success		: function(result) {
-				console.log("home userInfo : " + result.nickname);
-				$('#userNik_text').append(result.nickname);
-			}
-		});
+		searchUserNickName();
 	} else if(view == 3) {
+		dupCheckSwipe();
 		if(location.href.split('?')[1].split('&')[1] != undefined) {
 			console.log('toastBoolean :: ' + location.href.split('?')[1].split('&')[1].split('=')[1]);
 			$.toast({
@@ -479,21 +449,61 @@ body {
 		}
 	}
 	
-	// home 에서 -> 스와이프시 
-	$('#homePage').on("swipeleft swiperight",function(){
+	// home 에서 -> 왼쪽스와이프시 
+	$('#homePage').bind("swipeleft",function(){
 		dupCheckSwipe();
 	});
-	// more 에서 <- 스와이프시 
+	// home 에서 -> 왼쪽스와이프시 
+	$('#homePage').bind("swiperight",function(){
+		matchResultView();
+		rankListView();
+	});
+	
+	// matching page에서 <- 오른쪽스와이프시 
+	$('#matchingPage').bind("swiperight",function(){
+		searchUserNickName();
+	});
+	
+	// more page에서 <- 오른쪽스와이프시 
 	$('#morePage').bind("swiperight",function(){
 		dupCheckSwipe();
 	});
+	
+	// 대전기록 tab 클릭시 ajax 요청
+	$('#moveMatchResult').bind('click', function(){
+		$('#rankList').empty();
+		matchResultView();
+	});
+	
+	// record 페이지에서 왼쪽 스와이프시
+	$('#record').bind('swipeleft', function(){
+		searchUserNickName();
+	});
+	
+	/* 랭킹 tab 클릭시 ajax 요청 */
+	$('#moveRanking').bind('click', function(){
+		evetType = 'THREE';
+		rankListView();
+	});
+	
+	$('#evet3ball').bind('click', function(){
+		evetType = 'THREE';
+		rankListView();
+	});
+	$('#evet4ball').bind('click', function(){
+		evetType = 'FOUR';
+		rankListView();
+	});
+	$('#evetPool').bind('click', function(){
+		evetType = 'POOL';
+		rankListView();
+	});
+	/////////////////////////////////////
+	
+		
+	
+	
+	
 </script>
-
-<!-- matchPage -> (ALREADY_REGISTERED)대전 취소 bt click event -->
-<script>
-
-</script>
-
-
 </body>
 </html>
