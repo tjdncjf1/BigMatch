@@ -11,7 +11,6 @@
 
 
 function home_matchInfo(){
-
 	$.ajax({
 		url : baseUrl + '/match.do/' + userseq,
 		type : 'get',
@@ -23,7 +22,7 @@ function home_matchInfo(){
 		success : function(result) {
 			// button클릭시 전송할 matchingInfoSeq 저장
 			matchingInfoSeq = result.rows[0].matchingInfoSeq;
-			console.log("!!!!!!!!!!!!!!!!!!dfsajkhakf"+ matchingInfoSeq);
+			console.log("진행중인 matchingInfoSeq  :  "+ matchingInfoSeq);
 	
 			// m_nickName
 			// console.log("닉넴 :: " +
@@ -143,7 +142,9 @@ function home_matchInfo(){
 				});
 			});
 			
-			
+			$('#m_updateMatch').bind('click',function(){
+				location.href='../matchlist/updateMatch.html?matchingInfoSeq='+matchingInfoSeq;
+			});
 		}
 	});
 }
