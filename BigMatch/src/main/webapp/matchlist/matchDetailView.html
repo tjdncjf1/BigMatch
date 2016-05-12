@@ -71,13 +71,13 @@ div {margin-left:2%;margin-right:2%}
 <script type="text/javascript" src="../lib/js/jquery.toast.js"></script>
 <script type="text/javascript">
 	
-	var machingSeq = Number(location.href.split('?')[1].split('=')[1]);
-	console.log("machingSeq :: " + machingSeq);
+	var matchingSeq = Number(location.href.split('?')[1].split('=')[1]);
+	console.log("matchingSeq :: " + matchingSeq);
 	var userseq = localStorage.getItem('userseq');
 	console.log("userseq :: " + userseq);
 	
 	$.ajax({
-		url		  : baseUrl + '/matchDetail.do/' + machingSeq,
+		url		  : baseUrl + '/matchDetail.do/' + matchingSeq,
 		//url		  : baseUrl + '/matchDetail.do/38',
 		type	  : 'GET',
 		dataType  :'json',
@@ -176,7 +176,7 @@ div {margin-left:2%;margin-right:2%}
    	   			"Content-Type" : "application/json"
    	   		},
    	   		data 	  : JSON.stringify({
-       			matchingInfoSeq   : machingSeq,
+       			matchingInfoSeq   : matchingSeq,
        			appenderOrder	  : 1,
        			//appenderUserSeq   : 294,  // 추후 로컬 스토리지에 있는 userSeq 넣어야됨.
        			appenderUserSeq   : userseq,  // 추후 로컬 스토리지에 있는 userSeq 넣어야됨.
