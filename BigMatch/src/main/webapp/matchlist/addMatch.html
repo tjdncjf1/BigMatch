@@ -170,6 +170,8 @@ table {
 	var addLat = ''; // 위도  
 	var addLng = ''; // 경도
 	var addLoc = ''; // 주소
+	var userseq = localStorage.getItem('userseq');
+	console.log('userseq : '+userseq);
 	
 	//popup창 close function()
 	function popupClose(lat, lng, loc) {
@@ -185,8 +187,6 @@ table {
 		$('#regAddr').val(addLoc);		// 주소 등록. 
 		$('#popupMap').popup('close');	// 팝업창 close
 	}
-	
-	var userseq = localStorage.getItem("userseq");
 	
 	$('form').bind('submit', function(event) {
 		event.preventDefault(); // 디폴트 이벤트 제거
@@ -204,7 +204,6 @@ table {
 		var matchDay ='';
 		var now = new Date();
 		var tomorrow = new Date(now.valueOf() + (24*60*60*1000));
-		
 		
 		if (($('select[name="selectDay"]').val())=='1') {
 			console.log('1');
