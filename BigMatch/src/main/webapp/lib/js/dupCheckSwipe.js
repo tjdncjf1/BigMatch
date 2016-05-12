@@ -7,7 +7,6 @@
  * 
  */
 
-
 function dupCheckSwipe() {
 	$('#matchResultList').empty();
 	$.ajax({
@@ -31,21 +30,32 @@ function dupCheckSwipe() {
 
 			if (data == "POSSIBLE_ACTION") { // 매치등록 가능상태
 				document.getElementById("POSSIBLE_div").style.display = "block";
-				document.getElementById("REGISTERED_div").style.display = "none";
-				document.getElementById("EXISTENCE_div").style.display = "none";
+				document.getElementById("BASE_div").style.display = "none";
 			} else if (data == "ALREADY_REGISTERED") { // 이미 매치를 등록한 상태
 				document.getElementById("POSSIBLE_div").style.display = "none";
+				document.getElementById("BASE_div").style.display = "block";
 				document.getElementById("REGISTERED_div").style.display = "block";
 				document.getElementById("EXISTENCE_div").style.display = "none";
-			} else if (data == "ALREADY_APPENDED") { // 이미 다른 매치에 신청한 상태
-                  document.getElementById("POSSIBLE_div").style.display = "none";
-                  document.getElementById("REGISTERED_div").style.display = "none";
-                  document.getElementById("EXISTENCE_div").style.display = "block";
-            } else if (data == "APPENDER_EXISTENCE") { // 내가 등록한 매치에 신청자가 있는 상태
-                  document.getElementById("POSSIBLE_div").style.display = "none";
-                  document.getElementById("REGISTERED_div").style.display = "none";
-                  document.getElementById("EXISTENCE_div").style.display = "block";
-           }
+
+				// 뿌려질 대전정보 요청
+				home_matchInfo();
+			} else if (data == "ALREADY_APPENDED") { // 이미 다른 매치에 신청한상태
+				document.getElementById("POSSIBLE_div").style.display = "none";
+				document.getElementById("BASE_div").style.display = "block";
+				document.getElementById("REGISTERED_div").style.display = "none";
+				document.getElementById("EXISTENCE_div").style.display = "block";
+				
+				// 뿌려질 대전정보 요청
+				home_matchInfo();
+			} else if (data == "APPENDER_EXISTENCE") { // 내가 등록한 매치에 신청자가 있는 상태
+				document.getElementById("POSSIBLE_div").style.display = "none";
+				document.getElementById("BASE_div").style.display = "block";
+				document.getElementById("REGISTERED_div").style.display = "none";
+				document.getElementById("EXISTENCE_div").style.display = "block";
+				
+				// 뿌려질 대전정보 요청
+				home_matchInfo();
+			}
 		}
 	});
 }
