@@ -11,6 +11,7 @@
 
 
 function home_matchInfo(){
+
 	$.ajax({
 		url : baseUrl + '/match.do/' + userseq,
 		type : 'get',
