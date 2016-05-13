@@ -23,6 +23,12 @@ function rankListView() {
 			var threeballInfo = data.ptPointRank3b + '위 ';
 			var fourballInfo = data.ptPointRank4b + '위 ';
 			var poketInfo = data.ptPointRankp + '위 ';
+			console.log('userRecordList :: ' + data.userRecordList.length);
+			if(data.userRecordList.length == 0) {
+				threeballInfo = '0위 0승 0무 0패(0%)';
+				fourballInfo = '0위 0승 0무 0패(0%)';
+				poketInfo = '0위 0승 0무 0패(0%)';
+			}
 			$(data.userRecordList).each(function(i){
 				if(data.userRecordList[i].eventTypeCd == 'THREE') {
 					threeballInfo += data.userRecordList[i].wonCount + '승 ' +
