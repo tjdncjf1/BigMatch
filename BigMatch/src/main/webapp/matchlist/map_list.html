@@ -73,7 +73,6 @@ History     : - 2016-04-08 작성자 : 조민호
 	var swLon = parseURL.split('&')[2].split('=')[1];
 	var neLat = parseURL.split('&')[3].split('=')[1];
 	var neLon = parseURL.split('&')[4].split('=')[1];
-	var contents;
 	
 	searchMatchList();
 	
@@ -111,11 +110,11 @@ History     : - 2016-04-08 작성자 : 조민호
 				neLongitude 	: neLon
 			},
 			success : function(result) {
-				//$('#jb-tab-1').empty();
+				$('#jb-tab-1').empty();
 
 				console.log('result :: ' + result); 
 				console.log('result 갯수 :: ' + result.length);
-				contents = '';
+				var contents = '';
 				var rankPoint;
 				var creditPoint;
 				
@@ -126,7 +125,7 @@ History     : - 2016-04-08 작성자 : 조민호
 		   			var callback = function(status, addr) {
 		   			    if (status === daum.maps.services.Status.OK) {
 		   			        console.log('지번 주소 : ' + addr[0].jibunAddress.name);
-				   			$('#address'+i).html(addr[0].jibunAddress.name);
+				   			$('.address:eq('+i+')').html(addr[0].jibunAddress.name);
 		   			    }
 		   			};
 		   			geocoder.coord2detailaddr(coord, callback);
@@ -141,6 +140,9 @@ History     : - 2016-04-08 작성자 : 조민호
 							}
 						});
 					}
+		   			//console.log('시간 :: ' + result[i].timeCd);
+		   			//console.log('시간 :: ' + (result[i].timeCd == 'LATE_AFTERNOON'));
+		   			
 					//console.log(result[i]);
 					contents += '<table style="display:block; border:4px solid #E3E3E3; cellspacing:0; cellpadding:0; width:100%;">' +
 					'				<tr>' +
@@ -153,19 +155,19 @@ History     : - 2016-04-08 작성자 : 조민호
 					'								<td width=15% valign=middle><img src="../lib/images/home/my.png" width="30%" /></td>' +
 					'								<td width=45% valign=middle>' +
 					'									<font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">' +
-															result[i].hostUser.name + //닉네임 
+															result[i].hostUser.nickname + //닉네임 
 					'									</font>' +
 					'								</td>' +
-					'								<td width=15% valign=middle>' +
+					/* '								<td width=15% valign=middle>' +
 					'									<img src="../lib/images/home/pin.png" width="30%">' +
 					'								</td>' +
 					'								<td width=25% valign=middle>' +
 					'									<font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">' +
 															creditPoint + // 신뢰점수 
 					'									</font>' +
-					'								</td>' +
+					'								</td>' + */
 					'							</tr>' +
-					'							<tr>' +
+/* 					'							<tr>' +
 					'								<td align=left valign=middle>' +
 					'									<img src="../lib/images/home/trophy.png" width="30%" />' +
 					'								</td>' +
@@ -174,13 +176,13 @@ History     : - 2016-04-08 작성자 : 조민호
 															rankPoint + '(승률  50% : 승/무/패)' +// 랭크점수			
 					'									</font>' +
 					'								</td>' +
-					'							</tr>' +
+					'							</tr>' + */
 					'							<tr>' +
 					'								<td align=left valign=middle>' +
 					'									<img src="../lib/images/home/pin.png" width="30%" />' +
 					'								</td>' +
 					'								<td align=left valign=middle>' +
-					'									<font id="address'+i+'" style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">' +
+					'									<font class="address" style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">' +
 																		// 주소
 					'									</font>' +
 					'								</td>' +
@@ -190,8 +192,8 @@ History     : - 2016-04-08 작성자 : 조민호
 					'									<img src="../lib/images/home/watch.png" width="30%" />' +
 					'								</td>' +
 					'								<td align=left valign=middle>' +
-					'									<font style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">' +
-															'11:30~14:00'	 + // 매칭 희망시간 
+					'									<font class="hopeTime" style="font-family:맑은 고딕, tahoma, Vrinda, 굴림, arial; font-size:9pt; color:#8E8E8E; line-height:120%">' +
+															 // 매칭 희망시간 
 					'									</font>' +
 					'								</td>' +
 					'							</tr>' +
@@ -209,8 +211,35 @@ History     : - 2016-04-08 작성자 : 조민호
 					'					</td>' +
 					'				</tr>' +
 					'			</table>';
+					$('#jb-tab-1').append(contents);
+					switch(result[i].timeCd) {
+					case 'MID_NIGHT' :
+						$('.hopeTime:eq('+i+')').html('00시 ~ 03시');
+						break;
+					case 'DAWN' :
+						$('.hopeTime:eq('+i+')').html('03시 ~ 06시');
+						break;
+					case 'EARLY_MORNING' :
+						$('.hopeTime:eq('+i+')').html('06시 ~ 09시');
+						break;
+					case 'MORNING' :
+						$('.hopeTime:eq('+i+')').html('09시 ~ 12시');
+						break;
+					case 'AFTERNOON' :
+						$('.hopeTime:eq('+i+')').html('12시 ~ 15시');
+						break;
+					case 'LATE_AFTERNOON' :
+						//console.log('들어옴 !!');
+						$('.hopeTime:eq('+i+')').html('15시 ~ 18시');
+						break;
+					case 'EVENING' :
+						$('.hopeTime:eq('+i+')').html('18시 ~ 21시');
+						break;
+					case 'NIGHT' :
+						$('.hopeTime:eq('+i+')').html('21시 ~ 24시');
+						break;
+					}
 				});
-				$('#jb-tab-1').html(contents);
 				
 			}
 		});
