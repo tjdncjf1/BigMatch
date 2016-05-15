@@ -131,7 +131,7 @@
 				'           </div>' + 
 				'            <div class="desc">' + 
 				'                <div class="matchTitle">매칭 제목 : ' + result[i].matchingTitle + '</div>' + 
-				'                <div class="name matchTitle">이름 : ' + result[i].hostUser.name + '</div>' + 
+				'                <div class="name matchTitle">이름 : ' + result[i].hostUser.nickname + '</div>' + 
 				'                <div class="level matchTitle">희망실력 : ' + result[i].targetStartLevel + '</div>' + 
 				'            </div>' + 
 				'        </div>';
@@ -161,7 +161,7 @@
 			'           </div>' + 
 			'            <div class="desc">' + 
 			'                <div class="matchTitle">매칭 제목 : ' + result.matchingTitle + '</div>' + 
-			'                <div class="name matchTitle">이름 : ' + result.hostUser.name + '</div>' + 
+			'                <div class="name matchTitle">이름 : ' + result.hostUser.nickname + '</div>' + 
 			'                <div class="level matchTitle">희망실력 : ' + result.targetStartLevel + '</div>' + 
 			'            </div>' + 
 			'        </div>';
