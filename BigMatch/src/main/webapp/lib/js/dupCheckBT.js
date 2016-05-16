@@ -8,7 +8,6 @@
  */
 
 function dupCheckBT(){
-	
 	 $.ajax({
 		url: baseUrl + '/matchDupCheck.do/' +userseq,
 		method:'GET',
@@ -39,8 +38,16 @@ function dupCheckBT(){
 	   	   		  	textAlign: 'center'
 	   			}); 
 			} else if (data == "APPENDER_EXISTENCE") { // 내가 등록한 매치에 신청자가 있는 상태
-				view=3;
-	   			location.href='../main/home.html?viewNum=' + view + '&toastBoolean=0';				
+				//view=3;
+	   			//location.href='../main/home.html?viewNum=' + view + '&toastBoolean=0';
+				swiper.slideTo(3);
+				$.toast({
+	   	   		    //heading: 'Error',
+	   	   		    text: '결과를 입력해주세요.',
+	   	   			position: 'bottom-left',
+	   	   		    icon: 'error',
+	   	   		  	textAlign: 'center'
+	   			}); 
 			}
 		}
 	}); 

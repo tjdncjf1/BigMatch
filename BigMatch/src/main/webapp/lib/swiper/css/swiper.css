@@ -16,6 +16,7 @@
   margin: 0 auto;
   position: relative;
   /* overflow: hidden; */
+  overflow : visible;
   /* Fix of Webkit flickering */
   z-index: 1;
 }
@@ -187,8 +188,8 @@
 /*   bottom: 10px;
   left: 0;
   width: 100%;
+  	top: 160%;
  */  
-	top: 160%;
 	left: -5%;
 	width: 111%;
 }

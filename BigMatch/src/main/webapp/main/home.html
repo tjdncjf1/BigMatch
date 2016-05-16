@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, height=device-height, user-scalable=no">
 <title>home</title>
 <!-- <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"> -->
 <link rel="stylesheet" href="../lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.css">
@@ -138,11 +138,11 @@ body {
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
 						<a class="ui-shadow ui-btn ui-corner-all" href="userInfo.html">
-						<img alt="user" src="../lib/images/home/smile.png" width="50%"><br>
+						<img alt="user" src="../lib/images/home/human.png" width="50%"><br>
 						<font id="userNik_text"  style="font-size: 15pt"></font></a>
 					</div>
-					<div class="ui-block-b">
-						<a class="ui-shadow ui-btn ui-corner-all" href="#moveRanking">
+					<div class="ui-block-b" id="rankBT">
+						<a class="ui-shadow ui-btn ui-corner-all" href="#">
 						<img alt="rank" src="../lib/images/home/trophy.png" width="50%"><br>
 						<font style="font-size: 15pt">Rank</font></a>
 					</div>
@@ -172,9 +172,9 @@ body {
 					<font style="font-size: 12pt">대전 등록!</font>
 				</a>
 				
-				<a class="ui-btn ui-shadow" href="#">
+				<!-- <a class="ui-btn ui-shadow" href="#">
 					<font style="font-size: 12pt">빠른 대전!</font>
-				</a> 
+				</a>  -->
 			</div> <!-- swiper-slide -->
 			
 			<!-- matching 페이지 -->
@@ -258,7 +258,7 @@ body {
                      
                      <div id="EXISTENCE_div" align="center">
                           <button id="m_cancleMatch" style=" width: 30%;">매칭 거절하기</button>
-                          <button style=" width: 30%;">상대와 대화하기</button>
+                          <button style=" width: 30%;" id="chatJoin">상대와 대화하기</button>
                           <p>결과입력하기</p>
                           <button data-role="none">승 리</button>
                           <button data-role="none">무승부</button>
@@ -336,6 +336,16 @@ body {
 	console.log('userseq : '+userseq);
 	var evetType = 'THREE';
 	
+	$('#chatJoin').bind('click', function(){
+		console.log('채팅방닉넴 :: ' + encodeURI(chatNickName,'UTF-8'));
+		location.href='chat.html?nickname=' + encodeURI(chatNickName,'UTF-8') + '&matchSeq=' + chatRoomNum;
+	});
+	
+	$('#rankBT').bind('click', function(){
+		moveRankingPage();
+	});
+	
+	
 	// 내 정보보기 클릭 시 이동.
 	function moveMyInfo() {
 		location.href="userInfo.html";
@@ -353,11 +363,7 @@ body {
 	}
 	
 	// view(home.html을 리로딩시 처음 보여주는 화면아이디)를 뭐 보여주냐에 따라 ajax 요청.
-	if(view == 1) {
-		
-	} else if(view == 2) {
-		searchUserNickName();
-	} else if(view == 3) {
+	if(view == 3) {
 		searchUserNickName();
 		dupCheckSwipe();
 		if(location.href.split('?')[1].split('&')[1] != undefined) {
@@ -372,26 +378,6 @@ body {
 			//view = 2;
 		}
 	}
-	
-	// home 에서 -> 왼쪽스와이프시 
-	$('#homePage').bind("swipeleft",function(){
-		dupCheckSwipe();
-	});
-	// home 에서 -> 왼쪽스와이프시 
-	$('#homePage').bind("swiperight",function(){
-		matchResultView();
-		rankListView();
-	});
-	
-	// matching page에서 <- 오른쪽스와이프시 
-	$('#matchingPage').bind("swiperight",function(){
-		searchUserNickName();
-	});
-	
-	// more page에서 <- 오른쪽스와이프시 
-	$('#morePage').bind("swiperight",function(){
-		dupCheckSwipe();
-	});
 	
 	// 대전기록 tab 클릭시 ajax 요청
 	$('#moveMatchResult').bind('click', function(){

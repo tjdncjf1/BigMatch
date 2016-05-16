@@ -9,7 +9,8 @@
 
 // 뿌려질 대전정보 요청
 
-
+var chatRoomNum;
+var chatNickName;
 function home_matchInfo(){
 
 	$.ajax({
@@ -23,14 +24,15 @@ function home_matchInfo(){
 		success : function(result) {
 			// button클릭시 전송할 matchingInfoSeq 저장
 			matchingInfoSeq = result.rows[0].matchingInfoSeq;
-			console.log("진행중인 matchingInfoSeq  :  "+ matchingInfoSeq);
+			chatRoomNum = result.rows[0].matchingInfoSeq;
+			console.log("진행중인 matchingInfoSeq  :  "+ result);
 	
 			// m_nickName
 			// console.log("닉넴 :: " +
 			// result.rows[0].hostUser.nickname);
-			$('#m_nickName').empty();
-			$('#m_nickName').append(result.rows[0].hostUser.nickname);
-			
+			//$('#m_nickName').empty();
+			$('#m_nickName').html(result.rows[0].hostUser.nickname);
+			chatNickName = result.rows[0].hostUser.nickname;
 	
 			// m_location
 			var loctionAddr = null;
@@ -42,8 +44,8 @@ function home_matchInfo(){
 					loctionAddr = addr[0].jibunAddress.name;
 	
 					// console.log("loctionAddr : "+ loctionAddr);
-					$('#m_location').empty();
-					$('#m_location').append(loctionAddr);
+					//$('#m_location').empty();
+					$('#m_location').html(loctionAddr);
 				}
 			};
 			geocoder.coord2detailaddr(coord,callback);
@@ -87,20 +89,20 @@ function home_matchInfo(){
 			// m_dama
 			// console.log('다마수 : '+
 			// result.rows[0].targetStartLevel);
-			$('#m_dama').empty();
-			$('#m_dama').append(result.rows[0].targetStartLevel);
+			//$('#m_dama').empty();
+			$('#m_dama').html(result.rows[0].targetStartLevel);
 	
 			// m_title
 			// console.log('타이틀 : '+
 			// result.rows[0].matchingTitle);
-			$('#m_title').empty();
-			$('#m_title').append(result.rows[0].matchingTitle);
+//			$('#m_title').empty();
+			$('#m_title').html(result.rows[0].matchingTitle);
 	
 			// m_title
 			// console.log('desc : '+
 			// result.rows[0].matchingDesc);
-			$('#m_desc').empty();
-			$('#m_desc').append(result.rows[0].matchingDesc);
+//			$('#m_desc').empty();
+			$('#m_desc').html(result.rows[0].matchingDesc);
 	
 			
 			//대전 삭제
