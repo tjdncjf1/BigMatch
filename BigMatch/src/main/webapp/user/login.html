@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<!-- 
+   Program    : login.html
+   Date       : 2016-04-14
+   Description: 로그인.
+   Modify     : 서우철
+   History    :   - 2016-04-14 작성자 : 서우철
+                   * 로그인 기능 추가. 
+                  - 2016-04-18 작성자 : 조민호
+                   * pw 암호화 후 로그인 기능 추가. 
+                   
+                  - 2016-05-02 작성자 : 조민호
+                   * DB에서 받아온 useresq loacl storage에 저장. 
+-->
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+<!-- maximum-scale=1, user-scalable=no 확대/축소 기능을 추가 -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>가입</title>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet"	href="../lib/bootstrap/css/bootstrap.css">
+<!-- 부가적인 테마 -->
+<link rel="stylesheet"	href="../lib/bootstrap/css/bootstrap-theme.css">
+<style type="text/css">
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+.form-group {
+	max-width: 300px;
+	padding: 15px;
+	margin: 0 auto;
+}
+</style>
+</head>
+<body>
+	<div align="center">
+		<h1>
+			Big Match
+		</h1>
+	</div>
+	<br>
+	<br>
+	<form>
+		<div class="form-group">
+			<label for="email">이메일</label> 
+			<input type="email"
+				class="form-control" id="userId" placeholder="이메일을 입력하세요">
+		</div>
+		<div class="form-group">
+			<label for="password">비밀번호</label> 
+			<input type="password"
+				class="form-control" id="password" placeholder="비밀번호를 입력하세요">
+		</div>
+		<div class="form-group">
+			<!-- <a href="../main/home.html"> -->
+			<button type="button" class="btn btn-primary btn-lg btn-block" id="login">로그인</button><!-- </a> -->
+			<div align="center">
+				<a href="signUp.html">회원가입</a>
+			</div>
+		</div>
+	</form>
+<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+<script src="../lib/jquery/jquery.js"></script>
+<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+<script	src="../lib/bootstrap/js/bootstrap.js"></script>
+<!-- 공통 자바스크립트 -->
+<script src="../lib/js/common.js" ></script> 
+<!-- pw 암호화 -->
+<script src="../lib/js/sha-256.js" ></script> 
+<script type="text/javascript">
+$('#login').click(function(){
+	//암호화 과정
+	var rawData = $('#password').val();			// -> 입력받은 암호값
+	console.log(rawData);
+	var resultData = sha256(rawData);			// -> 변환된 암호값
+	console.log(resultData);
+	$.ajax({
+		url: baseUrl + '/login.do',
+		method:'POST',
+		dataType:'JSON',
+		headers: { 
+			"Accept" : "application/json",
+			"Content-Type" : "application/json"
+		},
+		data : JSON.stringify({
+			userId   : $('#userId').val(),
+			password : resultData
+		}),
+		success : function(data) {
+			console.log("받아온 data값 : "+data);
+			if(data == "FAILURE") {
+				alert('로그인 실패!');
+			} else {
+				alert('로그인 성공!');
+				// 로그인 성공시 로컬 스토리지에 저장  key /value -> usserseq / 각각 seq 값
+				localStorage.setItem('userseq', data);
+				console.log("local에 저장된 값 : "+localStorage.getItem('userseq'));
+				location.href = "../main/home.html";
+			} 
+		}
+	});
+});
+</script>
+</body>
+</html>
